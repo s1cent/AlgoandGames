@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="center" hgap="6.0" vgap="9.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="algo.src.menuController">
+
+    <!-- Add Header Label -->
+    <Label text="Dots and Boxes" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="0" GridPane.rowSpan="1">
+        <font>
+            <Font name="Arial" size="30" />
+        </font>
+        <GridPane.margin>
+            <Insets bottom="40.0" top="10.0" />
+        </GridPane.margin>
+    </Label>
+
+
+    <Label text="How big should it be?" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowSpan="2">
+        <font>
+            <Font name="Arial" size="17" />
+        </font>
+    </Label>
+    <!-- Add Name Label -->
+    <Label text="Breite: "  GridPane.columnIndex="0" GridPane.rowIndex="1">
+    </Label>
+    <ChoiceBox  fx:id="widthBox"  prefWidth="100" value="3" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="3" />
+                <String fx:value="4" />
+                <String fx:value="5" />
+            </FXCollections>
+        </items>
+    </ChoiceBox>
+
+    <!-- Add Name Label -->
+    <Label text="Höhe: " GridPane.columnIndex="2" GridPane.rowIndex="1">
+    </Label>
+    <ChoiceBox fx:id="heightBox" prefWidth="100" value="3" GridPane.columnIndex="4" GridPane.rowIndex="1">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="3" />
+                <String fx:value="4" />
+                <String fx:value="5" />
+            </FXCollections>
+        </items>
+    </ChoiceBox>
+
+
+
+    <!-- Add Submit Button -->
+    <Button fx:id="submitButton" defaultButton="true" prefHeight="40" prefWidth="100" text="Start Game"
+            GridPane.columnIndex="1" GridPane.columnSpan="4" onAction="#getsClicked" GridPane.rowIndex="2">
+        <GridPane.margin>
+            <Insets left="52.0" />
+        </GridPane.margin>
+    </Button>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <padding>
+      <Insets bottom="-22.0" left="10.0" />
+   </padding>
+</GridPane>

@@ -1,0 +1,12 @@
+Teilklausuren: 
+19.11 10 - 12
+28.01 10 - 12
+------------------------
+Nim-Spiel: 
+	- Mehrere Stapel (Münzen) haben gewisse höhe
+	- Zug besteht darin einen oder mehrere Münzen wegnehmen
+	- Wer die letzte Münze nimmt hat gewonnen, da man danach keinen Zug mehr machen kann
+	- Mit Binär und XOR kann man immer sagen das man sicher gewinnt. ( Stapel zählen - Binär 		  umwandeln - XOR setzten und schaun das es 0 ergibt)
+
+Triangulation Coloring:
+	- 
