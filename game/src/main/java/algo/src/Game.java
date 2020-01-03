@@ -6,14 +6,14 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
 
-
-public class Game extends Application{
+public class Game {
 
         public static void main(String[] args) {
 
-            launch(args);
+            System.out.println("Test");
         }
 
+        /*
         @Override
         public void start(Stage stage) throws Exception {
 
@@ -23,5 +23,7 @@ public class Game extends Application{
             stage.show();
 
         }
+
+         */
 
 }

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="64a4f965-8dea-470e-9ab3-509a9052dd7b" name="Default Changelist" comment="Adds protobuf integration&#10;Disabled javafx for now">
+      <change afterPath="$PROJECT_DIR$/.idea/AlgoandGames.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/run_game" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/src/main/java/algo/src/NetworkManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/src/main/proto/dots-and-boxes.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/src/main/proto/netcode.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/src/main/proto/nim.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/target/generated-sources/protobuf/java/dab/DotsAndBoxes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/target/generated-sources/protobuf/java/netcode/Netcode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game/target/generated-sources/protobuf/java/nim/Nim.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/src/main/java/algo/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/game/src/main/java/algo/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/target/maven-status/maven-compiler-plugin/compile/null/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1VtDeWPPC6iuywGwQTk20hdQMvJ" />
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.completion" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="64a4f965-8dea-470e-9ab3-509a9052dd7b" name="Default Changelist" comment="" />
+      <created>1578063592228</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578063592228</updated>
+      <workItem from="1578063594465" duration="4410000" />
+      <workItem from="1578068548571" duration="1052000" />
+      <workItem from="1578069859705" duration="3986000" />
+      <workItem from="1578075796583" duration="6858000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

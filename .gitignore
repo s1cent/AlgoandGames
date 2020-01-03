@@ -1,2 +1,8 @@
-.idea/*
-.idea/
+.idea/libraries/
+*.class
+*.jar
+/game/target/**/*.proto
+/game/target/maven-archiver/pom.properties
+/game/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/game/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/game/target/*
