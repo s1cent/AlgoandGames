@@ -1,26 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="64a4f965-8dea-470e-9ab3-509a9052dd7b" name="Default Changelist" comment="Adds protobuf integration&#10;Disabled javafx for now">
-      <change afterPath="$PROJECT_DIR$/.idea/AlgoandGames.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/run_game" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/src/main/java/algo/src/NetworkManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/src/main/proto/dots-and-boxes.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/src/main/proto/netcode.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/src/main/proto/nim.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/target/generated-sources/protobuf/java/dab/DotsAndBoxes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/target/generated-sources/protobuf/java/netcode/Netcode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game/target/generated-sources/protobuf/java/nim/Nim.java" afterDir="false" />
+    <list default="true" id="64a4f965-8dea-470e-9ab3-509a9052dd7b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/src/main/java/algo/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/game/src/main/java/algo/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/target/maven-status/maven-compiler-plugin/compile/null/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +29,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/TEST/AlgoandGames" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -84,8 +66,16 @@
       <workItem from="1578063594465" duration="4410000" />
       <workItem from="1578068548571" duration="1052000" />
       <workItem from="1578069859705" duration="3986000" />
-      <workItem from="1578075796583" duration="6858000" />
+      <workItem from="1578075796583" duration="7180000" />
     </task>
+    <task id="LOCAL-00001" summary="Adds protobuf integration&#10;Disabled javafx for now">
+      <created>1578085099064</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1578085099065</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,5 +93,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Adds protobuf integration&#10;Disabled javafx for now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adds protobuf integration&#10;Disabled javafx for now" />
   </component>
 </project>

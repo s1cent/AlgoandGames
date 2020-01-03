@@ -1,4 +1,3 @@
-.idea/libraries/
 *.class
 *.jar
 /game/target/**/*.proto

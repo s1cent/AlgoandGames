@@ -7,4 +7,6 @@ Vorzeitig deaktiviert
 
 http://www.ist.tugraz.at/as19.html
 
-Kompilieren mit "mvn clean install" und zum Ausführen kann "./run_game" verwendet werden
+IDE: IntelliJ
+
+Im game Odner: Kompilieren mit "mvn clean install" und zum Ausführen kann "./run_game" verwendet werden
