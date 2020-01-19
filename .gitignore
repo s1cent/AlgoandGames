@@ -7,3 +7,6 @@
 /game/target/*
 !/game/target/generated-sources/
 .idea/workspace.xml
+/.idea/libraries/*
+/.idea/libraries/
+/.idea/codeStyles/*

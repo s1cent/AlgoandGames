@@ -9,4 +9,7 @@ http://www.ist.tugraz.at/as19.html
 
 IDE: IntelliJ
 
-Im game Odner: Kompilieren mit "mvn clean install" und zum Ausführen kann "./run_game" verwendet werden
+Falls in GameComGrpc.java @javax.annotation.Generated nicht erkannt/gefunden wird kann man dies auf @javax.annotation.processing.Generated ändern.
+
+Im game Odner: Kompilieren mit "mvn clean install" und zum ausführen können "./run_game" oder die IntelliJ Konfigurationen verwendet werden.
+

@@ -12,8 +12,12 @@ import java.util.Vector;
 // Only userRegistration and getUserToken are important for you
 public class Registration {
 
+    public static void main(String[] args) {
+        userRegistration();
+    }
+
     //
-    public void userRegistration() {
+    public static void userRegistration() {
         System.out.println("userRegistration called!");
 
         String url = "129.27.202.46";
@@ -62,7 +66,7 @@ public class Registration {
     }
 
 
-    public void getUserToken() {
+    public static void getUserToken() {
         System.out.println("getUserToken called!");
 
         String url = "129.27.202.46";
@@ -105,7 +109,7 @@ public class Registration {
     }
 
     // DO NOT RUN THIS. I ALREADY DID IT
-    public void groupRegistration() {
+    public static void groupRegistration() {
         System.out.println("groupRegistration called!");
 
         String url = "129.27.202.46";
@@ -158,7 +162,7 @@ public class Registration {
     }
 
     // DO NOT RUN THIS. I ALREADY DID IT
-    public void setGroupPseudonym() {
+    public static void setGroupPseudonym() {
         System.out.println("setGroupPseudonym called!");
 
         String url = "129.27.202.46";
