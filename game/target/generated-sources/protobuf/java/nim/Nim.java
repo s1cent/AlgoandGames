@@ -19,12 +19,12 @@ public final class Nim {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional uint32 number_of_columns = 1;</code>
+     * <code>uint32 number_of_columns = 1;</code>
      */
     int getNumberOfColumns();
 
     /**
-     * <code>optional uint32 number_of_stones = 2;</code>
+     * <code>uint32 number_of_stones = 2;</code>
      */
     int getNumberOfStones();
   }
@@ -35,6 +35,7 @@ public final class Nim {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:nim.GameParameter)
       GameParameterOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GameParameter.newBuilder() to construct.
     private GameParameter(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -47,7 +48,7 @@ public final class Nim {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GameParameter(
         com.google.protobuf.CodedInputStream input,
@@ -55,6 +56,8 @@ public final class Nim {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -64,7 +67,8 @@ public final class Nim {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -87,6 +91,7 @@ public final class Nim {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -105,7 +110,7 @@ public final class Nim {
     public static final int NUMBER_OF_COLUMNS_FIELD_NUMBER = 1;
     private int numberOfColumns_;
     /**
-     * <code>optional uint32 number_of_columns = 1;</code>
+     * <code>uint32 number_of_columns = 1;</code>
      */
     public int getNumberOfColumns() {
       return numberOfColumns_;
@@ -114,7 +119,7 @@ public final class Nim {
     public static final int NUMBER_OF_STONES_FIELD_NUMBER = 2;
     private int numberOfStones_;
     /**
-     * <code>optional uint32 number_of_stones = 2;</code>
+     * <code>uint32 number_of_stones = 2;</code>
      */
     public int getNumberOfStones() {
       return numberOfStones_;
@@ -138,6 +143,7 @@ public final class Nim {
       if (numberOfStones_ != 0) {
         output.writeUInt32(2, numberOfStones_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -153,11 +159,11 @@ public final class Nim {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, numberOfStones_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -173,6 +179,7 @@ public final class Nim {
           == other.getNumberOfColumns());
       result = result && (getNumberOfStones()
           == other.getNumberOfStones());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -182,7 +189,7 @@ public final class Nim {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NUMBER_OF_COLUMNS_FIELD_NUMBER;
       hash = (53 * hash) + getNumberOfColumns();
       hash = (37 * hash) + NUMBER_OF_STONES_FIELD_NUMBER;
@@ -192,6 +199,17 @@ public final class Nim {
       return hash;
     }
 
+    public static nim.Nim.GameParameter parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static nim.Nim.GameParameter parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static nim.Nim.GameParameter parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -342,7 +360,7 @@ public final class Nim {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -355,12 +373,12 @@ public final class Nim {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -380,6 +398,7 @@ public final class Nim {
         if (other.getNumberOfStones() != 0) {
           setNumberOfStones(other.getNumberOfStones());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -408,13 +427,13 @@ public final class Nim {
 
       private int numberOfColumns_ ;
       /**
-       * <code>optional uint32 number_of_columns = 1;</code>
+       * <code>uint32 number_of_columns = 1;</code>
        */
       public int getNumberOfColumns() {
         return numberOfColumns_;
       }
       /**
-       * <code>optional uint32 number_of_columns = 1;</code>
+       * <code>uint32 number_of_columns = 1;</code>
        */
       public Builder setNumberOfColumns(int value) {
         
@@ -423,7 +442,7 @@ public final class Nim {
         return this;
       }
       /**
-       * <code>optional uint32 number_of_columns = 1;</code>
+       * <code>uint32 number_of_columns = 1;</code>
        */
       public Builder clearNumberOfColumns() {
         
@@ -434,13 +453,13 @@ public final class Nim {
 
       private int numberOfStones_ ;
       /**
-       * <code>optional uint32 number_of_stones = 2;</code>
+       * <code>uint32 number_of_stones = 2;</code>
        */
       public int getNumberOfStones() {
         return numberOfStones_;
       }
       /**
-       * <code>optional uint32 number_of_stones = 2;</code>
+       * <code>uint32 number_of_stones = 2;</code>
        */
       public Builder setNumberOfStones(int value) {
         
@@ -449,7 +468,7 @@ public final class Nim {
         return this;
       }
       /**
-       * <code>optional uint32 number_of_stones = 2;</code>
+       * <code>uint32 number_of_stones = 2;</code>
        */
       public Builder clearNumberOfStones() {
         
@@ -459,12 +478,12 @@ public final class Nim {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -511,12 +530,12 @@ public final class Nim {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional uint32 target_column = 1;</code>
+     * <code>uint32 target_column = 1;</code>
      */
     int getTargetColumn();
 
     /**
-     * <code>optional uint32 number_to_take = 2;</code>
+     * <code>uint32 number_to_take = 2;</code>
      */
     int getNumberToTake();
   }
@@ -527,6 +546,7 @@ public final class Nim {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:nim.GameTurn)
       GameTurnOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GameTurn.newBuilder() to construct.
     private GameTurn(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -539,7 +559,7 @@ public final class Nim {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GameTurn(
         com.google.protobuf.CodedInputStream input,
@@ -547,6 +567,8 @@ public final class Nim {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -556,7 +578,8 @@ public final class Nim {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -579,6 +602,7 @@ public final class Nim {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -597,7 +621,7 @@ public final class Nim {
     public static final int TARGET_COLUMN_FIELD_NUMBER = 1;
     private int targetColumn_;
     /**
-     * <code>optional uint32 target_column = 1;</code>
+     * <code>uint32 target_column = 1;</code>
      */
     public int getTargetColumn() {
       return targetColumn_;
@@ -606,7 +630,7 @@ public final class Nim {
     public static final int NUMBER_TO_TAKE_FIELD_NUMBER = 2;
     private int numberToTake_;
     /**
-     * <code>optional uint32 number_to_take = 2;</code>
+     * <code>uint32 number_to_take = 2;</code>
      */
     public int getNumberToTake() {
       return numberToTake_;
@@ -630,6 +654,7 @@ public final class Nim {
       if (numberToTake_ != 0) {
         output.writeUInt32(2, numberToTake_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -645,11 +670,11 @@ public final class Nim {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, numberToTake_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -665,6 +690,7 @@ public final class Nim {
           == other.getTargetColumn());
       result = result && (getNumberToTake()
           == other.getNumberToTake());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -674,7 +700,7 @@ public final class Nim {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TARGET_COLUMN_FIELD_NUMBER;
       hash = (53 * hash) + getTargetColumn();
       hash = (37 * hash) + NUMBER_TO_TAKE_FIELD_NUMBER;
@@ -684,6 +710,17 @@ public final class Nim {
       return hash;
     }
 
+    public static nim.Nim.GameTurn parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static nim.Nim.GameTurn parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static nim.Nim.GameTurn parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -834,7 +871,7 @@ public final class Nim {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -847,12 +884,12 @@ public final class Nim {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -872,6 +909,7 @@ public final class Nim {
         if (other.getNumberToTake() != 0) {
           setNumberToTake(other.getNumberToTake());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -900,13 +938,13 @@ public final class Nim {
 
       private int targetColumn_ ;
       /**
-       * <code>optional uint32 target_column = 1;</code>
+       * <code>uint32 target_column = 1;</code>
        */
       public int getTargetColumn() {
         return targetColumn_;
       }
       /**
-       * <code>optional uint32 target_column = 1;</code>
+       * <code>uint32 target_column = 1;</code>
        */
       public Builder setTargetColumn(int value) {
         
@@ -915,7 +953,7 @@ public final class Nim {
         return this;
       }
       /**
-       * <code>optional uint32 target_column = 1;</code>
+       * <code>uint32 target_column = 1;</code>
        */
       public Builder clearTargetColumn() {
         
@@ -926,13 +964,13 @@ public final class Nim {
 
       private int numberToTake_ ;
       /**
-       * <code>optional uint32 number_to_take = 2;</code>
+       * <code>uint32 number_to_take = 2;</code>
        */
       public int getNumberToTake() {
         return numberToTake_;
       }
       /**
-       * <code>optional uint32 number_to_take = 2;</code>
+       * <code>uint32 number_to_take = 2;</code>
        */
       public Builder setNumberToTake(int value) {
         
@@ -941,7 +979,7 @@ public final class Nim {
         return this;
       }
       /**
-       * <code>optional uint32 number_to_take = 2;</code>
+       * <code>uint32 number_to_take = 2;</code>
        */
       public Builder clearNumberToTake() {
         
@@ -951,12 +989,12 @@ public final class Nim {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1007,7 +1045,7 @@ public final class Nim {
      * height of columns, whitespace separated
      * </pre>
      *
-     * <code>optional string columns = 1;</code>
+     * <code>string columns = 1;</code>
      */
     java.lang.String getColumns();
     /**
@@ -1015,7 +1053,7 @@ public final class Nim {
      * height of columns, whitespace separated
      * </pre>
      *
-     * <code>optional string columns = 1;</code>
+     * <code>string columns = 1;</code>
      */
     com.google.protobuf.ByteString
         getColumnsBytes();
@@ -1027,6 +1065,7 @@ public final class Nim {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:nim.GameState)
       GameStateOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GameState.newBuilder() to construct.
     private GameState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1038,7 +1077,7 @@ public final class Nim {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GameState(
         com.google.protobuf.CodedInputStream input,
@@ -1046,6 +1085,8 @@ public final class Nim {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1055,7 +1096,8 @@ public final class Nim {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1074,6 +1116,7 @@ public final class Nim {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1096,7 +1139,7 @@ public final class Nim {
      * height of columns, whitespace separated
      * </pre>
      *
-     * <code>optional string columns = 1;</code>
+     * <code>string columns = 1;</code>
      */
     public java.lang.String getColumns() {
       java.lang.Object ref = columns_;
@@ -1115,7 +1158,7 @@ public final class Nim {
      * height of columns, whitespace separated
      * </pre>
      *
-     * <code>optional string columns = 1;</code>
+     * <code>string columns = 1;</code>
      */
     public com.google.protobuf.ByteString
         getColumnsBytes() {
@@ -1146,6 +1189,7 @@ public final class Nim {
       if (!getColumnsBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, columns_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1156,11 +1200,11 @@ public final class Nim {
       if (!getColumnsBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, columns_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1174,6 +1218,7 @@ public final class Nim {
       boolean result = true;
       result = result && getColumns()
           .equals(other.getColumns());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1183,7 +1228,7 @@ public final class Nim {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + COLUMNS_FIELD_NUMBER;
       hash = (53 * hash) + getColumns().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -1191,6 +1236,17 @@ public final class Nim {
       return hash;
     }
 
+    public static nim.Nim.GameState parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static nim.Nim.GameState parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static nim.Nim.GameState parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1338,7 +1394,7 @@ public final class Nim {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1351,12 +1407,12 @@ public final class Nim {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1374,6 +1430,7 @@ public final class Nim {
           columns_ = other.columns_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1406,7 +1463,7 @@ public final class Nim {
        * height of columns, whitespace separated
        * </pre>
        *
-       * <code>optional string columns = 1;</code>
+       * <code>string columns = 1;</code>
        */
       public java.lang.String getColumns() {
         java.lang.Object ref = columns_;
@@ -1425,7 +1482,7 @@ public final class Nim {
        * height of columns, whitespace separated
        * </pre>
        *
-       * <code>optional string columns = 1;</code>
+       * <code>string columns = 1;</code>
        */
       public com.google.protobuf.ByteString
           getColumnsBytes() {
@@ -1445,7 +1502,7 @@ public final class Nim {
        * height of columns, whitespace separated
        * </pre>
        *
-       * <code>optional string columns = 1;</code>
+       * <code>string columns = 1;</code>
        */
       public Builder setColumns(
           java.lang.String value) {
@@ -1462,7 +1519,7 @@ public final class Nim {
        * height of columns, whitespace separated
        * </pre>
        *
-       * <code>optional string columns = 1;</code>
+       * <code>string columns = 1;</code>
        */
       public Builder clearColumns() {
         
@@ -1475,7 +1532,7 @@ public final class Nim {
        * height of columns, whitespace separated
        * </pre>
        *
-       * <code>optional string columns = 1;</code>
+       * <code>string columns = 1;</code>
        */
       public Builder setColumnsBytes(
           com.google.protobuf.ByteString value) {
@@ -1490,12 +1547,12 @@ public final class Nim {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 

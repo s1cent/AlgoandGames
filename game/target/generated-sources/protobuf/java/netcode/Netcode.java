@@ -278,21 +278,21 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string matr_number = 1;</code>
+     * <code>string matr_number = 1;</code>
      */
     java.lang.String getMatrNumber();
     /**
-     * <code>optional string matr_number = 1;</code>
+     * <code>string matr_number = 1;</code>
      */
     com.google.protobuf.ByteString
         getMatrNumberBytes();
 
     /**
-     * <code>optional string secret = 2;</code>
+     * <code>string secret = 2;</code>
      */
     java.lang.String getSecret();
     /**
-     * <code>optional string secret = 2;</code>
+     * <code>string secret = 2;</code>
      */
     com.google.protobuf.ByteString
         getSecretBytes();
@@ -304,6 +304,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.AuthPacket)
       AuthPacketOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use AuthPacket.newBuilder() to construct.
     private AuthPacket(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -316,7 +317,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private AuthPacket(
         com.google.protobuf.CodedInputStream input,
@@ -324,6 +325,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -333,7 +336,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -358,6 +362,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -376,7 +381,7 @@ public final class Netcode {
     public static final int MATR_NUMBER_FIELD_NUMBER = 1;
     private volatile java.lang.Object matrNumber_;
     /**
-     * <code>optional string matr_number = 1;</code>
+     * <code>string matr_number = 1;</code>
      */
     public java.lang.String getMatrNumber() {
       java.lang.Object ref = matrNumber_;
@@ -391,7 +396,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string matr_number = 1;</code>
+     * <code>string matr_number = 1;</code>
      */
     public com.google.protobuf.ByteString
         getMatrNumberBytes() {
@@ -410,7 +415,7 @@ public final class Netcode {
     public static final int SECRET_FIELD_NUMBER = 2;
     private volatile java.lang.Object secret_;
     /**
-     * <code>optional string secret = 2;</code>
+     * <code>string secret = 2;</code>
      */
     public java.lang.String getSecret() {
       java.lang.Object ref = secret_;
@@ -425,7 +430,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string secret = 2;</code>
+     * <code>string secret = 2;</code>
      */
     public com.google.protobuf.ByteString
         getSecretBytes() {
@@ -459,6 +464,7 @@ public final class Netcode {
       if (!getSecretBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, secret_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -472,11 +478,11 @@ public final class Netcode {
       if (!getSecretBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, secret_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -492,6 +498,7 @@ public final class Netcode {
           .equals(other.getMatrNumber());
       result = result && getSecret()
           .equals(other.getSecret());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -501,7 +508,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + MATR_NUMBER_FIELD_NUMBER;
       hash = (53 * hash) + getMatrNumber().hashCode();
       hash = (37 * hash) + SECRET_FIELD_NUMBER;
@@ -511,6 +518,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.AuthPacket parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.AuthPacket parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.AuthPacket parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -661,7 +679,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -674,12 +692,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -701,6 +719,7 @@ public final class Netcode {
           secret_ = other.secret_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -729,7 +748,7 @@ public final class Netcode {
 
       private java.lang.Object matrNumber_ = "";
       /**
-       * <code>optional string matr_number = 1;</code>
+       * <code>string matr_number = 1;</code>
        */
       public java.lang.String getMatrNumber() {
         java.lang.Object ref = matrNumber_;
@@ -744,7 +763,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string matr_number = 1;</code>
+       * <code>string matr_number = 1;</code>
        */
       public com.google.protobuf.ByteString
           getMatrNumberBytes() {
@@ -760,7 +779,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string matr_number = 1;</code>
+       * <code>string matr_number = 1;</code>
        */
       public Builder setMatrNumber(
           java.lang.String value) {
@@ -773,7 +792,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string matr_number = 1;</code>
+       * <code>string matr_number = 1;</code>
        */
       public Builder clearMatrNumber() {
         
@@ -782,7 +801,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string matr_number = 1;</code>
+       * <code>string matr_number = 1;</code>
        */
       public Builder setMatrNumberBytes(
           com.google.protobuf.ByteString value) {
@@ -798,7 +817,7 @@ public final class Netcode {
 
       private java.lang.Object secret_ = "";
       /**
-       * <code>optional string secret = 2;</code>
+       * <code>string secret = 2;</code>
        */
       public java.lang.String getSecret() {
         java.lang.Object ref = secret_;
@@ -813,7 +832,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string secret = 2;</code>
+       * <code>string secret = 2;</code>
        */
       public com.google.protobuf.ByteString
           getSecretBytes() {
@@ -829,7 +848,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string secret = 2;</code>
+       * <code>string secret = 2;</code>
        */
       public Builder setSecret(
           java.lang.String value) {
@@ -842,7 +861,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string secret = 2;</code>
+       * <code>string secret = 2;</code>
        */
       public Builder clearSecret() {
         
@@ -851,7 +870,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string secret = 2;</code>
+       * <code>string secret = 2;</code>
        */
       public Builder setSecretBytes(
           com.google.protobuf.ByteString value) {
@@ -866,12 +885,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -918,24 +937,24 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .netcode.AuthPacket auth = 1;</code>
+     * <code>.netcode.AuthPacket auth = 1;</code>
      */
     boolean hasAuth();
     /**
-     * <code>optional .netcode.AuthPacket auth = 1;</code>
+     * <code>.netcode.AuthPacket auth = 1;</code>
      */
     netcode.Netcode.AuthPacket getAuth();
     /**
-     * <code>optional .netcode.AuthPacket auth = 1;</code>
+     * <code>.netcode.AuthPacket auth = 1;</code>
      */
     netcode.Netcode.AuthPacketOrBuilder getAuthOrBuilder();
 
     /**
-     * <code>optional string pseudonym = 2;</code>
+     * <code>string pseudonym = 2;</code>
      */
     java.lang.String getPseudonym();
     /**
-     * <code>optional string pseudonym = 2;</code>
+     * <code>string pseudonym = 2;</code>
      */
     com.google.protobuf.ByteString
         getPseudonymBytes();
@@ -947,6 +966,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.SetPseudonymRequest)
       SetPseudonymRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SetPseudonymRequest.newBuilder() to construct.
     private SetPseudonymRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -958,7 +978,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SetPseudonymRequest(
         com.google.protobuf.CodedInputStream input,
@@ -966,6 +986,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -975,7 +997,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1007,6 +1030,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1025,19 +1049,19 @@ public final class Netcode {
     public static final int AUTH_FIELD_NUMBER = 1;
     private netcode.Netcode.AuthPacket auth_;
     /**
-     * <code>optional .netcode.AuthPacket auth = 1;</code>
+     * <code>.netcode.AuthPacket auth = 1;</code>
      */
     public boolean hasAuth() {
       return auth_ != null;
     }
     /**
-     * <code>optional .netcode.AuthPacket auth = 1;</code>
+     * <code>.netcode.AuthPacket auth = 1;</code>
      */
     public netcode.Netcode.AuthPacket getAuth() {
       return auth_ == null ? netcode.Netcode.AuthPacket.getDefaultInstance() : auth_;
     }
     /**
-     * <code>optional .netcode.AuthPacket auth = 1;</code>
+     * <code>.netcode.AuthPacket auth = 1;</code>
      */
     public netcode.Netcode.AuthPacketOrBuilder getAuthOrBuilder() {
       return getAuth();
@@ -1046,7 +1070,7 @@ public final class Netcode {
     public static final int PSEUDONYM_FIELD_NUMBER = 2;
     private volatile java.lang.Object pseudonym_;
     /**
-     * <code>optional string pseudonym = 2;</code>
+     * <code>string pseudonym = 2;</code>
      */
     public java.lang.String getPseudonym() {
       java.lang.Object ref = pseudonym_;
@@ -1061,7 +1085,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string pseudonym = 2;</code>
+     * <code>string pseudonym = 2;</code>
      */
     public com.google.protobuf.ByteString
         getPseudonymBytes() {
@@ -1095,6 +1119,7 @@ public final class Netcode {
       if (!getPseudonymBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, pseudonym_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1109,11 +1134,11 @@ public final class Netcode {
       if (!getPseudonymBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, pseudonym_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1132,6 +1157,7 @@ public final class Netcode {
       }
       result = result && getPseudonym()
           .equals(other.getPseudonym());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1141,7 +1167,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasAuth()) {
         hash = (37 * hash) + AUTH_FIELD_NUMBER;
         hash = (53 * hash) + getAuth().hashCode();
@@ -1153,6 +1179,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.SetPseudonymRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.SetPseudonymRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.SetPseudonymRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1311,7 +1348,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1324,12 +1361,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1350,6 +1387,7 @@ public final class Netcode {
           pseudonym_ = other.pseudonym_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1380,13 +1418,13 @@ public final class Netcode {
       private com.google.protobuf.SingleFieldBuilderV3<
           netcode.Netcode.AuthPacket, netcode.Netcode.AuthPacket.Builder, netcode.Netcode.AuthPacketOrBuilder> authBuilder_;
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public boolean hasAuth() {
         return authBuilder_ != null || auth_ != null;
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public netcode.Netcode.AuthPacket getAuth() {
         if (authBuilder_ == null) {
@@ -1396,7 +1434,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public Builder setAuth(netcode.Netcode.AuthPacket value) {
         if (authBuilder_ == null) {
@@ -1412,7 +1450,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public Builder setAuth(
           netcode.Netcode.AuthPacket.Builder builderForValue) {
@@ -1426,7 +1464,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public Builder mergeAuth(netcode.Netcode.AuthPacket value) {
         if (authBuilder_ == null) {
@@ -1444,7 +1482,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public Builder clearAuth() {
         if (authBuilder_ == null) {
@@ -1458,7 +1496,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public netcode.Netcode.AuthPacket.Builder getAuthBuilder() {
         
@@ -1466,7 +1504,7 @@ public final class Netcode {
         return getAuthFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public netcode.Netcode.AuthPacketOrBuilder getAuthOrBuilder() {
         if (authBuilder_ != null) {
@@ -1477,7 +1515,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           netcode.Netcode.AuthPacket, netcode.Netcode.AuthPacket.Builder, netcode.Netcode.AuthPacketOrBuilder> 
@@ -1495,7 +1533,7 @@ public final class Netcode {
 
       private java.lang.Object pseudonym_ = "";
       /**
-       * <code>optional string pseudonym = 2;</code>
+       * <code>string pseudonym = 2;</code>
        */
       public java.lang.String getPseudonym() {
         java.lang.Object ref = pseudonym_;
@@ -1510,7 +1548,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string pseudonym = 2;</code>
+       * <code>string pseudonym = 2;</code>
        */
       public com.google.protobuf.ByteString
           getPseudonymBytes() {
@@ -1526,7 +1564,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string pseudonym = 2;</code>
+       * <code>string pseudonym = 2;</code>
        */
       public Builder setPseudonym(
           java.lang.String value) {
@@ -1539,7 +1577,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string pseudonym = 2;</code>
+       * <code>string pseudonym = 2;</code>
        */
       public Builder clearPseudonym() {
         
@@ -1548,7 +1586,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string pseudonym = 2;</code>
+       * <code>string pseudonym = 2;</code>
        */
       public Builder setPseudonymBytes(
           com.google.protobuf.ByteString value) {
@@ -1563,12 +1601,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1615,11 +1653,11 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
+     * <code>.netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
      */
     int getErrorCodeValue();
     /**
-     * <code>optional .netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
+     * <code>.netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
      */
     netcode.Netcode.SetPseudonymResponse.ErrorCode getErrorCode();
   }
@@ -1630,6 +1668,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.SetPseudonymResponse)
       SetPseudonymResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use SetPseudonymResponse.newBuilder() to construct.
     private SetPseudonymResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1641,7 +1680,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private SetPseudonymResponse(
         com.google.protobuf.CodedInputStream input,
@@ -1649,6 +1688,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1658,7 +1699,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1677,6 +1719,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1829,13 +1872,13 @@ public final class Netcode {
     public static final int ERROR_CODE_FIELD_NUMBER = 1;
     private int errorCode_;
     /**
-     * <code>optional .netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
+     * <code>.netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
      */
     public int getErrorCodeValue() {
       return errorCode_;
     }
     /**
-     * <code>optional .netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
+     * <code>.netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
      */
     public netcode.Netcode.SetPseudonymResponse.ErrorCode getErrorCode() {
       netcode.Netcode.SetPseudonymResponse.ErrorCode result = netcode.Netcode.SetPseudonymResponse.ErrorCode.valueOf(errorCode_);
@@ -1857,6 +1900,7 @@ public final class Netcode {
       if (errorCode_ != netcode.Netcode.SetPseudonymResponse.ErrorCode.UNDEFINED_ERROR.getNumber()) {
         output.writeEnum(1, errorCode_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1868,11 +1912,11 @@ public final class Netcode {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, errorCode_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1885,6 +1929,7 @@ public final class Netcode {
 
       boolean result = true;
       result = result && errorCode_ == other.errorCode_;
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1894,7 +1939,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ERROR_CODE_FIELD_NUMBER;
       hash = (53 * hash) + errorCode_;
       hash = (29 * hash) + unknownFields.hashCode();
@@ -1902,6 +1947,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.SetPseudonymResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.SetPseudonymResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.SetPseudonymResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2049,7 +2105,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2062,12 +2118,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2084,6 +2140,7 @@ public final class Netcode {
         if (other.errorCode_ != 0) {
           setErrorCodeValue(other.getErrorCodeValue());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2112,13 +2169,13 @@ public final class Netcode {
 
       private int errorCode_ = 0;
       /**
-       * <code>optional .netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
        */
       public int getErrorCodeValue() {
         return errorCode_;
       }
       /**
-       * <code>optional .netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
        */
       public Builder setErrorCodeValue(int value) {
         errorCode_ = value;
@@ -2126,14 +2183,14 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
        */
       public netcode.Netcode.SetPseudonymResponse.ErrorCode getErrorCode() {
         netcode.Netcode.SetPseudonymResponse.ErrorCode result = netcode.Netcode.SetPseudonymResponse.ErrorCode.valueOf(errorCode_);
         return result == null ? netcode.Netcode.SetPseudonymResponse.ErrorCode.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
        */
       public Builder setErrorCode(netcode.Netcode.SetPseudonymResponse.ErrorCode value) {
         if (value == null) {
@@ -2145,7 +2202,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.SetPseudonymResponse.ErrorCode error_code = 1;</code>
        */
       public Builder clearErrorCode() {
         
@@ -2155,12 +2212,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2207,11 +2264,11 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     java.lang.String getUserToken();
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     com.google.protobuf.ByteString
         getUserTokenBytes();
@@ -2223,6 +2280,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.GetUserTokenResponse)
       GetUserTokenResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GetUserTokenResponse.newBuilder() to construct.
     private GetUserTokenResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2234,7 +2292,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GetUserTokenResponse(
         com.google.protobuf.CodedInputStream input,
@@ -2242,6 +2300,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2251,7 +2311,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2270,6 +2331,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2288,7 +2350,7 @@ public final class Netcode {
     public static final int USER_TOKEN_FIELD_NUMBER = 1;
     private volatile java.lang.Object userToken_;
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     public java.lang.String getUserToken() {
       java.lang.Object ref = userToken_;
@@ -2303,7 +2365,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     public com.google.protobuf.ByteString
         getUserTokenBytes() {
@@ -2334,6 +2396,7 @@ public final class Netcode {
       if (!getUserTokenBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userToken_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2344,11 +2407,11 @@ public final class Netcode {
       if (!getUserTokenBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userToken_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2362,6 +2425,7 @@ public final class Netcode {
       boolean result = true;
       result = result && getUserToken()
           .equals(other.getUserToken());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2371,7 +2435,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + USER_TOKEN_FIELD_NUMBER;
       hash = (53 * hash) + getUserToken().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -2379,6 +2443,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.GetUserTokenResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.GetUserTokenResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.GetUserTokenResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2526,7 +2601,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -2539,12 +2614,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2562,6 +2637,7 @@ public final class Netcode {
           userToken_ = other.userToken_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -2590,7 +2666,7 @@ public final class Netcode {
 
       private java.lang.Object userToken_ = "";
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public java.lang.String getUserToken() {
         java.lang.Object ref = userToken_;
@@ -2605,7 +2681,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public com.google.protobuf.ByteString
           getUserTokenBytes() {
@@ -2621,7 +2697,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder setUserToken(
           java.lang.String value) {
@@ -2634,7 +2710,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder clearUserToken() {
         
@@ -2643,7 +2719,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder setUserTokenBytes(
           com.google.protobuf.ByteString value) {
@@ -2658,12 +2734,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2710,41 +2786,41 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string fullname = 1;</code>
+     * <code>string fullname = 1;</code>
      */
     java.lang.String getFullname();
     /**
-     * <code>optional string fullname = 1;</code>
+     * <code>string fullname = 1;</code>
      */
     com.google.protobuf.ByteString
         getFullnameBytes();
 
     /**
-     * <code>optional string email = 2;</code>
+     * <code>string email = 2;</code>
      */
     java.lang.String getEmail();
     /**
-     * <code>optional string email = 2;</code>
+     * <code>string email = 2;</code>
      */
     com.google.protobuf.ByteString
         getEmailBytes();
 
     /**
-     * <code>optional string matr_number = 3;</code>
+     * <code>string matr_number = 3;</code>
      */
     java.lang.String getMatrNumber();
     /**
-     * <code>optional string matr_number = 3;</code>
+     * <code>string matr_number = 3;</code>
      */
     com.google.protobuf.ByteString
         getMatrNumberBytes();
 
     /**
-     * <code>optional string secret = 4;</code>
+     * <code>string secret = 4;</code>
      */
     java.lang.String getSecret();
     /**
-     * <code>optional string secret = 4;</code>
+     * <code>string secret = 4;</code>
      */
     com.google.protobuf.ByteString
         getSecretBytes();
@@ -2756,6 +2832,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.UserRegistrationRequest)
       UserRegistrationRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use UserRegistrationRequest.newBuilder() to construct.
     private UserRegistrationRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2770,7 +2847,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private UserRegistrationRequest(
         com.google.protobuf.CodedInputStream input,
@@ -2778,6 +2855,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2787,7 +2866,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2824,6 +2904,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2842,7 +2923,7 @@ public final class Netcode {
     public static final int FULLNAME_FIELD_NUMBER = 1;
     private volatile java.lang.Object fullname_;
     /**
-     * <code>optional string fullname = 1;</code>
+     * <code>string fullname = 1;</code>
      */
     public java.lang.String getFullname() {
       java.lang.Object ref = fullname_;
@@ -2857,7 +2938,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string fullname = 1;</code>
+     * <code>string fullname = 1;</code>
      */
     public com.google.protobuf.ByteString
         getFullnameBytes() {
@@ -2876,7 +2957,7 @@ public final class Netcode {
     public static final int EMAIL_FIELD_NUMBER = 2;
     private volatile java.lang.Object email_;
     /**
-     * <code>optional string email = 2;</code>
+     * <code>string email = 2;</code>
      */
     public java.lang.String getEmail() {
       java.lang.Object ref = email_;
@@ -2891,7 +2972,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string email = 2;</code>
+     * <code>string email = 2;</code>
      */
     public com.google.protobuf.ByteString
         getEmailBytes() {
@@ -2910,7 +2991,7 @@ public final class Netcode {
     public static final int MATR_NUMBER_FIELD_NUMBER = 3;
     private volatile java.lang.Object matrNumber_;
     /**
-     * <code>optional string matr_number = 3;</code>
+     * <code>string matr_number = 3;</code>
      */
     public java.lang.String getMatrNumber() {
       java.lang.Object ref = matrNumber_;
@@ -2925,7 +3006,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string matr_number = 3;</code>
+     * <code>string matr_number = 3;</code>
      */
     public com.google.protobuf.ByteString
         getMatrNumberBytes() {
@@ -2944,7 +3025,7 @@ public final class Netcode {
     public static final int SECRET_FIELD_NUMBER = 4;
     private volatile java.lang.Object secret_;
     /**
-     * <code>optional string secret = 4;</code>
+     * <code>string secret = 4;</code>
      */
     public java.lang.String getSecret() {
       java.lang.Object ref = secret_;
@@ -2959,7 +3040,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string secret = 4;</code>
+     * <code>string secret = 4;</code>
      */
     public com.google.protobuf.ByteString
         getSecretBytes() {
@@ -2999,6 +3080,7 @@ public final class Netcode {
       if (!getSecretBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, secret_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -3018,11 +3100,11 @@ public final class Netcode {
       if (!getSecretBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, secret_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3042,6 +3124,7 @@ public final class Netcode {
           .equals(other.getMatrNumber());
       result = result && getSecret()
           .equals(other.getSecret());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3051,7 +3134,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + FULLNAME_FIELD_NUMBER;
       hash = (53 * hash) + getFullname().hashCode();
       hash = (37 * hash) + EMAIL_FIELD_NUMBER;
@@ -3065,6 +3148,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.UserRegistrationRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.UserRegistrationRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.UserRegistrationRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3221,7 +3315,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -3234,12 +3328,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3269,6 +3363,7 @@ public final class Netcode {
           secret_ = other.secret_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -3297,7 +3392,7 @@ public final class Netcode {
 
       private java.lang.Object fullname_ = "";
       /**
-       * <code>optional string fullname = 1;</code>
+       * <code>string fullname = 1;</code>
        */
       public java.lang.String getFullname() {
         java.lang.Object ref = fullname_;
@@ -3312,7 +3407,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string fullname = 1;</code>
+       * <code>string fullname = 1;</code>
        */
       public com.google.protobuf.ByteString
           getFullnameBytes() {
@@ -3328,7 +3423,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string fullname = 1;</code>
+       * <code>string fullname = 1;</code>
        */
       public Builder setFullname(
           java.lang.String value) {
@@ -3341,7 +3436,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string fullname = 1;</code>
+       * <code>string fullname = 1;</code>
        */
       public Builder clearFullname() {
         
@@ -3350,7 +3445,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string fullname = 1;</code>
+       * <code>string fullname = 1;</code>
        */
       public Builder setFullnameBytes(
           com.google.protobuf.ByteString value) {
@@ -3366,7 +3461,7 @@ public final class Netcode {
 
       private java.lang.Object email_ = "";
       /**
-       * <code>optional string email = 2;</code>
+       * <code>string email = 2;</code>
        */
       public java.lang.String getEmail() {
         java.lang.Object ref = email_;
@@ -3381,7 +3476,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string email = 2;</code>
+       * <code>string email = 2;</code>
        */
       public com.google.protobuf.ByteString
           getEmailBytes() {
@@ -3397,7 +3492,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string email = 2;</code>
+       * <code>string email = 2;</code>
        */
       public Builder setEmail(
           java.lang.String value) {
@@ -3410,7 +3505,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string email = 2;</code>
+       * <code>string email = 2;</code>
        */
       public Builder clearEmail() {
         
@@ -3419,7 +3514,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string email = 2;</code>
+       * <code>string email = 2;</code>
        */
       public Builder setEmailBytes(
           com.google.protobuf.ByteString value) {
@@ -3435,7 +3530,7 @@ public final class Netcode {
 
       private java.lang.Object matrNumber_ = "";
       /**
-       * <code>optional string matr_number = 3;</code>
+       * <code>string matr_number = 3;</code>
        */
       public java.lang.String getMatrNumber() {
         java.lang.Object ref = matrNumber_;
@@ -3450,7 +3545,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string matr_number = 3;</code>
+       * <code>string matr_number = 3;</code>
        */
       public com.google.protobuf.ByteString
           getMatrNumberBytes() {
@@ -3466,7 +3561,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string matr_number = 3;</code>
+       * <code>string matr_number = 3;</code>
        */
       public Builder setMatrNumber(
           java.lang.String value) {
@@ -3479,7 +3574,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string matr_number = 3;</code>
+       * <code>string matr_number = 3;</code>
        */
       public Builder clearMatrNumber() {
         
@@ -3488,7 +3583,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string matr_number = 3;</code>
+       * <code>string matr_number = 3;</code>
        */
       public Builder setMatrNumberBytes(
           com.google.protobuf.ByteString value) {
@@ -3504,7 +3599,7 @@ public final class Netcode {
 
       private java.lang.Object secret_ = "";
       /**
-       * <code>optional string secret = 4;</code>
+       * <code>string secret = 4;</code>
        */
       public java.lang.String getSecret() {
         java.lang.Object ref = secret_;
@@ -3519,7 +3614,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string secret = 4;</code>
+       * <code>string secret = 4;</code>
        */
       public com.google.protobuf.ByteString
           getSecretBytes() {
@@ -3535,7 +3630,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string secret = 4;</code>
+       * <code>string secret = 4;</code>
        */
       public Builder setSecret(
           java.lang.String value) {
@@ -3548,7 +3643,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string secret = 4;</code>
+       * <code>string secret = 4;</code>
        */
       public Builder clearSecret() {
         
@@ -3557,7 +3652,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string secret = 4;</code>
+       * <code>string secret = 4;</code>
        */
       public Builder setSecretBytes(
           com.google.protobuf.ByteString value) {
@@ -3572,12 +3667,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3624,11 +3719,11 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
+     * <code>.netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
      */
     int getErrorCodeValue();
     /**
-     * <code>optional .netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
+     * <code>.netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
      */
     netcode.Netcode.UserRegistrationResponse.ErrorCode getErrorCode();
   }
@@ -3639,6 +3734,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.UserRegistrationResponse)
       UserRegistrationResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use UserRegistrationResponse.newBuilder() to construct.
     private UserRegistrationResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3650,7 +3746,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private UserRegistrationResponse(
         com.google.protobuf.CodedInputStream input,
@@ -3658,6 +3754,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3667,7 +3765,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3686,6 +3785,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3829,13 +3929,13 @@ public final class Netcode {
     public static final int ERROR_CODE_FIELD_NUMBER = 1;
     private int errorCode_;
     /**
-     * <code>optional .netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
+     * <code>.netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
      */
     public int getErrorCodeValue() {
       return errorCode_;
     }
     /**
-     * <code>optional .netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
+     * <code>.netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
      */
     public netcode.Netcode.UserRegistrationResponse.ErrorCode getErrorCode() {
       netcode.Netcode.UserRegistrationResponse.ErrorCode result = netcode.Netcode.UserRegistrationResponse.ErrorCode.valueOf(errorCode_);
@@ -3857,6 +3957,7 @@ public final class Netcode {
       if (errorCode_ != netcode.Netcode.UserRegistrationResponse.ErrorCode.UNDEFINED_ERROR.getNumber()) {
         output.writeEnum(1, errorCode_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -3868,11 +3969,11 @@ public final class Netcode {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, errorCode_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3885,6 +3986,7 @@ public final class Netcode {
 
       boolean result = true;
       result = result && errorCode_ == other.errorCode_;
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3894,7 +3996,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ERROR_CODE_FIELD_NUMBER;
       hash = (53 * hash) + errorCode_;
       hash = (29 * hash) + unknownFields.hashCode();
@@ -3902,6 +4004,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.UserRegistrationResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.UserRegistrationResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.UserRegistrationResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4049,7 +4162,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -4062,12 +4175,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -4084,6 +4197,7 @@ public final class Netcode {
         if (other.errorCode_ != 0) {
           setErrorCodeValue(other.getErrorCodeValue());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -4112,13 +4226,13 @@ public final class Netcode {
 
       private int errorCode_ = 0;
       /**
-       * <code>optional .netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
        */
       public int getErrorCodeValue() {
         return errorCode_;
       }
       /**
-       * <code>optional .netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
        */
       public Builder setErrorCodeValue(int value) {
         errorCode_ = value;
@@ -4126,14 +4240,14 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
        */
       public netcode.Netcode.UserRegistrationResponse.ErrorCode getErrorCode() {
         netcode.Netcode.UserRegistrationResponse.ErrorCode result = netcode.Netcode.UserRegistrationResponse.ErrorCode.valueOf(errorCode_);
         return result == null ? netcode.Netcode.UserRegistrationResponse.ErrorCode.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
        */
       public Builder setErrorCode(netcode.Netcode.UserRegistrationResponse.ErrorCode value) {
         if (value == null) {
@@ -4145,7 +4259,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.UserRegistrationResponse.ErrorCode error_code = 1;</code>
        */
       public Builder clearErrorCode() {
         
@@ -4155,12 +4269,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -4207,15 +4321,15 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .netcode.AuthPacket auth = 1;</code>
+     * <code>.netcode.AuthPacket auth = 1;</code>
      */
     boolean hasAuth();
     /**
-     * <code>optional .netcode.AuthPacket auth = 1;</code>
+     * <code>.netcode.AuthPacket auth = 1;</code>
      */
     netcode.Netcode.AuthPacket getAuth();
     /**
-     * <code>optional .netcode.AuthPacket auth = 1;</code>
+     * <code>.netcode.AuthPacket auth = 1;</code>
      */
     netcode.Netcode.AuthPacketOrBuilder getAuthOrBuilder();
 
@@ -4245,6 +4359,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.GroupRegistrationRequest)
       GroupRegistrationRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GroupRegistrationRequest.newBuilder() to construct.
     private GroupRegistrationRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -4256,7 +4371,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GroupRegistrationRequest(
         com.google.protobuf.CodedInputStream input,
@@ -4264,6 +4379,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -4273,7 +4390,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -4311,6 +4429,7 @@ public final class Netcode {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           matrNumber_ = matrNumber_.getUnmodifiableView();
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -4330,19 +4449,19 @@ public final class Netcode {
     public static final int AUTH_FIELD_NUMBER = 1;
     private netcode.Netcode.AuthPacket auth_;
     /**
-     * <code>optional .netcode.AuthPacket auth = 1;</code>
+     * <code>.netcode.AuthPacket auth = 1;</code>
      */
     public boolean hasAuth() {
       return auth_ != null;
     }
     /**
-     * <code>optional .netcode.AuthPacket auth = 1;</code>
+     * <code>.netcode.AuthPacket auth = 1;</code>
      */
     public netcode.Netcode.AuthPacket getAuth() {
       return auth_ == null ? netcode.Netcode.AuthPacket.getDefaultInstance() : auth_;
     }
     /**
-     * <code>optional .netcode.AuthPacket auth = 1;</code>
+     * <code>.netcode.AuthPacket auth = 1;</code>
      */
     public netcode.Netcode.AuthPacketOrBuilder getAuthOrBuilder() {
       return getAuth();
@@ -4395,6 +4514,7 @@ public final class Netcode {
       for (int i = 0; i < matrNumber_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, matrNumber_.getRaw(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -4414,11 +4534,11 @@ public final class Netcode {
         size += dataSize;
         size += 1 * getMatrNumberList().size();
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -4437,6 +4557,7 @@ public final class Netcode {
       }
       result = result && getMatrNumberList()
           .equals(other.getMatrNumberList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -4446,7 +4567,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasAuth()) {
         hash = (37 * hash) + AUTH_FIELD_NUMBER;
         hash = (53 * hash) + getAuth().hashCode();
@@ -4460,6 +4581,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.GroupRegistrationRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.GroupRegistrationRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.GroupRegistrationRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4625,7 +4757,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -4638,12 +4770,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -4670,6 +4802,7 @@ public final class Netcode {
           }
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -4701,13 +4834,13 @@ public final class Netcode {
       private com.google.protobuf.SingleFieldBuilderV3<
           netcode.Netcode.AuthPacket, netcode.Netcode.AuthPacket.Builder, netcode.Netcode.AuthPacketOrBuilder> authBuilder_;
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public boolean hasAuth() {
         return authBuilder_ != null || auth_ != null;
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public netcode.Netcode.AuthPacket getAuth() {
         if (authBuilder_ == null) {
@@ -4717,7 +4850,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public Builder setAuth(netcode.Netcode.AuthPacket value) {
         if (authBuilder_ == null) {
@@ -4733,7 +4866,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public Builder setAuth(
           netcode.Netcode.AuthPacket.Builder builderForValue) {
@@ -4747,7 +4880,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public Builder mergeAuth(netcode.Netcode.AuthPacket value) {
         if (authBuilder_ == null) {
@@ -4765,7 +4898,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public Builder clearAuth() {
         if (authBuilder_ == null) {
@@ -4779,7 +4912,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public netcode.Netcode.AuthPacket.Builder getAuthBuilder() {
         
@@ -4787,7 +4920,7 @@ public final class Netcode {
         return getAuthFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       public netcode.Netcode.AuthPacketOrBuilder getAuthOrBuilder() {
         if (authBuilder_ != null) {
@@ -4798,7 +4931,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .netcode.AuthPacket auth = 1;</code>
+       * <code>.netcode.AuthPacket auth = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           netcode.Netcode.AuthPacket, netcode.Netcode.AuthPacket.Builder, netcode.Netcode.AuthPacketOrBuilder> 
@@ -4909,12 +5042,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -4961,11 +5094,11 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
+     * <code>.netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
      */
     int getErrorCodeValue();
     /**
-     * <code>optional .netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
+     * <code>.netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
      */
     netcode.Netcode.GroupRegistrationResponse.ErrorCode getErrorCode();
   }
@@ -4976,6 +5109,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.GroupRegistrationResponse)
       GroupRegistrationResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GroupRegistrationResponse.newBuilder() to construct.
     private GroupRegistrationResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -4987,7 +5121,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GroupRegistrationResponse(
         com.google.protobuf.CodedInputStream input,
@@ -4995,6 +5129,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -5004,7 +5140,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -5023,6 +5160,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -5175,13 +5313,13 @@ public final class Netcode {
     public static final int ERROR_CODE_FIELD_NUMBER = 1;
     private int errorCode_;
     /**
-     * <code>optional .netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
+     * <code>.netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
      */
     public int getErrorCodeValue() {
       return errorCode_;
     }
     /**
-     * <code>optional .netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
+     * <code>.netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
      */
     public netcode.Netcode.GroupRegistrationResponse.ErrorCode getErrorCode() {
       netcode.Netcode.GroupRegistrationResponse.ErrorCode result = netcode.Netcode.GroupRegistrationResponse.ErrorCode.valueOf(errorCode_);
@@ -5203,6 +5341,7 @@ public final class Netcode {
       if (errorCode_ != netcode.Netcode.GroupRegistrationResponse.ErrorCode.UNDEFINED_ERROR.getNumber()) {
         output.writeEnum(1, errorCode_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -5214,11 +5353,11 @@ public final class Netcode {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, errorCode_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -5231,6 +5370,7 @@ public final class Netcode {
 
       boolean result = true;
       result = result && errorCode_ == other.errorCode_;
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -5240,7 +5380,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ERROR_CODE_FIELD_NUMBER;
       hash = (53 * hash) + errorCode_;
       hash = (29 * hash) + unknownFields.hashCode();
@@ -5248,6 +5388,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.GroupRegistrationResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.GroupRegistrationResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.GroupRegistrationResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5395,7 +5546,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -5408,12 +5559,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -5430,6 +5581,7 @@ public final class Netcode {
         if (other.errorCode_ != 0) {
           setErrorCodeValue(other.getErrorCodeValue());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -5458,13 +5610,13 @@ public final class Netcode {
 
       private int errorCode_ = 0;
       /**
-       * <code>optional .netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
        */
       public int getErrorCodeValue() {
         return errorCode_;
       }
       /**
-       * <code>optional .netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
        */
       public Builder setErrorCodeValue(int value) {
         errorCode_ = value;
@@ -5472,14 +5624,14 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
        */
       public netcode.Netcode.GroupRegistrationResponse.ErrorCode getErrorCode() {
         netcode.Netcode.GroupRegistrationResponse.ErrorCode result = netcode.Netcode.GroupRegistrationResponse.ErrorCode.valueOf(errorCode_);
         return result == null ? netcode.Netcode.GroupRegistrationResponse.ErrorCode.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
        */
       public Builder setErrorCode(netcode.Netcode.GroupRegistrationResponse.ErrorCode value) {
         if (value == null) {
@@ -5491,7 +5643,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
+       * <code>.netcode.GroupRegistrationResponse.ErrorCode error_code = 1;</code>
        */
       public Builder clearErrorCode() {
         
@@ -5501,12 +5653,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -5553,50 +5705,58 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     java.lang.String getUserToken();
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     com.google.protobuf.ByteString
         getUserTokenBytes();
 
     /**
-     * <code>optional string game_token = 2;</code>
+     * <code>string game_token = 2;</code>
      */
     java.lang.String getGameToken();
     /**
-     * <code>optional string game_token = 2;</code>
+     * <code>string game_token = 2;</code>
      */
     com.google.protobuf.ByteString
         getGameTokenBytes();
 
     /**
-     * <code>optional string matchmaking_parameters = 3;</code>
+     * <code>string matchmaking_parameters = 3;</code>
      */
     java.lang.String getMatchmakingParameters();
     /**
-     * <code>optional string matchmaking_parameters = 3;</code>
+     * <code>string matchmaking_parameters = 3;</code>
      */
     com.google.protobuf.ByteString
         getMatchmakingParametersBytes();
 
     /**
-     * <code>optional .nim.GameParameter nim_game_parameters = 4;</code>
+     * <code>.nim.GameParameter nim_game_parameters = 4;</code>
+     */
+    boolean hasNimGameParameters();
+    /**
+     * <code>.nim.GameParameter nim_game_parameters = 4;</code>
      */
     nim.Nim.GameParameter getNimGameParameters();
     /**
-     * <code>optional .nim.GameParameter nim_game_parameters = 4;</code>
+     * <code>.nim.GameParameter nim_game_parameters = 4;</code>
      */
     nim.Nim.GameParameterOrBuilder getNimGameParametersOrBuilder();
 
     /**
-     * <code>optional .dab.GameParameter dab_game_parameters = 5;</code>
+     * <code>.dab.GameParameter dab_game_parameters = 5;</code>
+     */
+    boolean hasDabGameParameters();
+    /**
+     * <code>.dab.GameParameter dab_game_parameters = 5;</code>
      */
     dab.DotsAndBoxes.GameParameter getDabGameParameters();
     /**
-     * <code>optional .dab.GameParameter dab_game_parameters = 5;</code>
+     * <code>.dab.GameParameter dab_game_parameters = 5;</code>
      */
     dab.DotsAndBoxes.GameParameterOrBuilder getDabGameParametersOrBuilder();
 
@@ -5609,6 +5769,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.MatchRequest)
       MatchRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use MatchRequest.newBuilder() to construct.
     private MatchRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -5622,7 +5783,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private MatchRequest(
         com.google.protobuf.CodedInputStream input,
@@ -5630,6 +5791,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -5639,7 +5802,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -5698,6 +5862,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -5754,7 +5919,7 @@ public final class Netcode {
     public static final int USER_TOKEN_FIELD_NUMBER = 1;
     private volatile java.lang.Object userToken_;
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     public java.lang.String getUserToken() {
       java.lang.Object ref = userToken_;
@@ -5769,7 +5934,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     public com.google.protobuf.ByteString
         getUserTokenBytes() {
@@ -5788,7 +5953,7 @@ public final class Netcode {
     public static final int GAME_TOKEN_FIELD_NUMBER = 2;
     private volatile java.lang.Object gameToken_;
     /**
-     * <code>optional string game_token = 2;</code>
+     * <code>string game_token = 2;</code>
      */
     public java.lang.String getGameToken() {
       java.lang.Object ref = gameToken_;
@@ -5803,7 +5968,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string game_token = 2;</code>
+     * <code>string game_token = 2;</code>
      */
     public com.google.protobuf.ByteString
         getGameTokenBytes() {
@@ -5822,7 +5987,7 @@ public final class Netcode {
     public static final int MATCHMAKING_PARAMETERS_FIELD_NUMBER = 3;
     private volatile java.lang.Object matchmakingParameters_;
     /**
-     * <code>optional string matchmaking_parameters = 3;</code>
+     * <code>string matchmaking_parameters = 3;</code>
      */
     public java.lang.String getMatchmakingParameters() {
       java.lang.Object ref = matchmakingParameters_;
@@ -5837,7 +6002,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string matchmaking_parameters = 3;</code>
+     * <code>string matchmaking_parameters = 3;</code>
      */
     public com.google.protobuf.ByteString
         getMatchmakingParametersBytes() {
@@ -5855,7 +6020,13 @@ public final class Netcode {
 
     public static final int NIM_GAME_PARAMETERS_FIELD_NUMBER = 4;
     /**
-     * <code>optional .nim.GameParameter nim_game_parameters = 4;</code>
+     * <code>.nim.GameParameter nim_game_parameters = 4;</code>
+     */
+    public boolean hasNimGameParameters() {
+      return gameParametersCase_ == 4;
+    }
+    /**
+     * <code>.nim.GameParameter nim_game_parameters = 4;</code>
      */
     public nim.Nim.GameParameter getNimGameParameters() {
       if (gameParametersCase_ == 4) {
@@ -5864,7 +6035,7 @@ public final class Netcode {
       return nim.Nim.GameParameter.getDefaultInstance();
     }
     /**
-     * <code>optional .nim.GameParameter nim_game_parameters = 4;</code>
+     * <code>.nim.GameParameter nim_game_parameters = 4;</code>
      */
     public nim.Nim.GameParameterOrBuilder getNimGameParametersOrBuilder() {
       if (gameParametersCase_ == 4) {
@@ -5875,7 +6046,13 @@ public final class Netcode {
 
     public static final int DAB_GAME_PARAMETERS_FIELD_NUMBER = 5;
     /**
-     * <code>optional .dab.GameParameter dab_game_parameters = 5;</code>
+     * <code>.dab.GameParameter dab_game_parameters = 5;</code>
+     */
+    public boolean hasDabGameParameters() {
+      return gameParametersCase_ == 5;
+    }
+    /**
+     * <code>.dab.GameParameter dab_game_parameters = 5;</code>
      */
     public dab.DotsAndBoxes.GameParameter getDabGameParameters() {
       if (gameParametersCase_ == 5) {
@@ -5884,7 +6061,7 @@ public final class Netcode {
       return dab.DotsAndBoxes.GameParameter.getDefaultInstance();
     }
     /**
-     * <code>optional .dab.GameParameter dab_game_parameters = 5;</code>
+     * <code>.dab.GameParameter dab_game_parameters = 5;</code>
      */
     public dab.DotsAndBoxes.GameParameterOrBuilder getDabGameParametersOrBuilder() {
       if (gameParametersCase_ == 5) {
@@ -5920,6 +6097,7 @@ public final class Netcode {
       if (gameParametersCase_ == 5) {
         output.writeMessage(5, (dab.DotsAndBoxes.GameParameter) gameParameters_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -5944,11 +6122,11 @@ public final class Netcode {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, (dab.DotsAndBoxes.GameParameter) gameParameters_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -5981,6 +6159,7 @@ public final class Netcode {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -5990,7 +6169,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + USER_TOKEN_FIELD_NUMBER;
       hash = (53 * hash) + getUserToken().hashCode();
       hash = (37 * hash) + GAME_TOKEN_FIELD_NUMBER;
@@ -6014,6 +6193,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.MatchRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.MatchRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.MatchRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -6184,7 +6374,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -6197,12 +6387,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -6241,6 +6431,7 @@ public final class Netcode {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -6284,7 +6475,7 @@ public final class Netcode {
 
       private java.lang.Object userToken_ = "";
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public java.lang.String getUserToken() {
         java.lang.Object ref = userToken_;
@@ -6299,7 +6490,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public com.google.protobuf.ByteString
           getUserTokenBytes() {
@@ -6315,7 +6506,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder setUserToken(
           java.lang.String value) {
@@ -6328,7 +6519,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder clearUserToken() {
         
@@ -6337,7 +6528,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder setUserTokenBytes(
           com.google.protobuf.ByteString value) {
@@ -6353,7 +6544,7 @@ public final class Netcode {
 
       private java.lang.Object gameToken_ = "";
       /**
-       * <code>optional string game_token = 2;</code>
+       * <code>string game_token = 2;</code>
        */
       public java.lang.String getGameToken() {
         java.lang.Object ref = gameToken_;
@@ -6368,7 +6559,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string game_token = 2;</code>
+       * <code>string game_token = 2;</code>
        */
       public com.google.protobuf.ByteString
           getGameTokenBytes() {
@@ -6384,7 +6575,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string game_token = 2;</code>
+       * <code>string game_token = 2;</code>
        */
       public Builder setGameToken(
           java.lang.String value) {
@@ -6397,7 +6588,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string game_token = 2;</code>
+       * <code>string game_token = 2;</code>
        */
       public Builder clearGameToken() {
         
@@ -6406,7 +6597,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string game_token = 2;</code>
+       * <code>string game_token = 2;</code>
        */
       public Builder setGameTokenBytes(
           com.google.protobuf.ByteString value) {
@@ -6422,7 +6613,7 @@ public final class Netcode {
 
       private java.lang.Object matchmakingParameters_ = "";
       /**
-       * <code>optional string matchmaking_parameters = 3;</code>
+       * <code>string matchmaking_parameters = 3;</code>
        */
       public java.lang.String getMatchmakingParameters() {
         java.lang.Object ref = matchmakingParameters_;
@@ -6437,7 +6628,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string matchmaking_parameters = 3;</code>
+       * <code>string matchmaking_parameters = 3;</code>
        */
       public com.google.protobuf.ByteString
           getMatchmakingParametersBytes() {
@@ -6453,7 +6644,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string matchmaking_parameters = 3;</code>
+       * <code>string matchmaking_parameters = 3;</code>
        */
       public Builder setMatchmakingParameters(
           java.lang.String value) {
@@ -6466,7 +6657,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string matchmaking_parameters = 3;</code>
+       * <code>string matchmaking_parameters = 3;</code>
        */
       public Builder clearMatchmakingParameters() {
         
@@ -6475,7 +6666,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string matchmaking_parameters = 3;</code>
+       * <code>string matchmaking_parameters = 3;</code>
        */
       public Builder setMatchmakingParametersBytes(
           com.google.protobuf.ByteString value) {
@@ -6492,7 +6683,13 @@ public final class Netcode {
       private com.google.protobuf.SingleFieldBuilderV3<
           nim.Nim.GameParameter, nim.Nim.GameParameter.Builder, nim.Nim.GameParameterOrBuilder> nimGameParametersBuilder_;
       /**
-       * <code>optional .nim.GameParameter nim_game_parameters = 4;</code>
+       * <code>.nim.GameParameter nim_game_parameters = 4;</code>
+       */
+      public boolean hasNimGameParameters() {
+        return gameParametersCase_ == 4;
+      }
+      /**
+       * <code>.nim.GameParameter nim_game_parameters = 4;</code>
        */
       public nim.Nim.GameParameter getNimGameParameters() {
         if (nimGameParametersBuilder_ == null) {
@@ -6508,7 +6705,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .nim.GameParameter nim_game_parameters = 4;</code>
+       * <code>.nim.GameParameter nim_game_parameters = 4;</code>
        */
       public Builder setNimGameParameters(nim.Nim.GameParameter value) {
         if (nimGameParametersBuilder_ == null) {
@@ -6524,7 +6721,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameParameter nim_game_parameters = 4;</code>
+       * <code>.nim.GameParameter nim_game_parameters = 4;</code>
        */
       public Builder setNimGameParameters(
           nim.Nim.GameParameter.Builder builderForValue) {
@@ -6538,7 +6735,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameParameter nim_game_parameters = 4;</code>
+       * <code>.nim.GameParameter nim_game_parameters = 4;</code>
        */
       public Builder mergeNimGameParameters(nim.Nim.GameParameter value) {
         if (nimGameParametersBuilder_ == null) {
@@ -6560,7 +6757,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameParameter nim_game_parameters = 4;</code>
+       * <code>.nim.GameParameter nim_game_parameters = 4;</code>
        */
       public Builder clearNimGameParameters() {
         if (nimGameParametersBuilder_ == null) {
@@ -6579,13 +6776,13 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameParameter nim_game_parameters = 4;</code>
+       * <code>.nim.GameParameter nim_game_parameters = 4;</code>
        */
       public nim.Nim.GameParameter.Builder getNimGameParametersBuilder() {
         return getNimGameParametersFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .nim.GameParameter nim_game_parameters = 4;</code>
+       * <code>.nim.GameParameter nim_game_parameters = 4;</code>
        */
       public nim.Nim.GameParameterOrBuilder getNimGameParametersOrBuilder() {
         if ((gameParametersCase_ == 4) && (nimGameParametersBuilder_ != null)) {
@@ -6598,7 +6795,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .nim.GameParameter nim_game_parameters = 4;</code>
+       * <code>.nim.GameParameter nim_game_parameters = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           nim.Nim.GameParameter, nim.Nim.GameParameter.Builder, nim.Nim.GameParameterOrBuilder> 
@@ -6622,7 +6819,13 @@ public final class Netcode {
       private com.google.protobuf.SingleFieldBuilderV3<
           dab.DotsAndBoxes.GameParameter, dab.DotsAndBoxes.GameParameter.Builder, dab.DotsAndBoxes.GameParameterOrBuilder> dabGameParametersBuilder_;
       /**
-       * <code>optional .dab.GameParameter dab_game_parameters = 5;</code>
+       * <code>.dab.GameParameter dab_game_parameters = 5;</code>
+       */
+      public boolean hasDabGameParameters() {
+        return gameParametersCase_ == 5;
+      }
+      /**
+       * <code>.dab.GameParameter dab_game_parameters = 5;</code>
        */
       public dab.DotsAndBoxes.GameParameter getDabGameParameters() {
         if (dabGameParametersBuilder_ == null) {
@@ -6638,7 +6841,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .dab.GameParameter dab_game_parameters = 5;</code>
+       * <code>.dab.GameParameter dab_game_parameters = 5;</code>
        */
       public Builder setDabGameParameters(dab.DotsAndBoxes.GameParameter value) {
         if (dabGameParametersBuilder_ == null) {
@@ -6654,7 +6857,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameParameter dab_game_parameters = 5;</code>
+       * <code>.dab.GameParameter dab_game_parameters = 5;</code>
        */
       public Builder setDabGameParameters(
           dab.DotsAndBoxes.GameParameter.Builder builderForValue) {
@@ -6668,7 +6871,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameParameter dab_game_parameters = 5;</code>
+       * <code>.dab.GameParameter dab_game_parameters = 5;</code>
        */
       public Builder mergeDabGameParameters(dab.DotsAndBoxes.GameParameter value) {
         if (dabGameParametersBuilder_ == null) {
@@ -6690,7 +6893,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameParameter dab_game_parameters = 5;</code>
+       * <code>.dab.GameParameter dab_game_parameters = 5;</code>
        */
       public Builder clearDabGameParameters() {
         if (dabGameParametersBuilder_ == null) {
@@ -6709,13 +6912,13 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameParameter dab_game_parameters = 5;</code>
+       * <code>.dab.GameParameter dab_game_parameters = 5;</code>
        */
       public dab.DotsAndBoxes.GameParameter.Builder getDabGameParametersBuilder() {
         return getDabGameParametersFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .dab.GameParameter dab_game_parameters = 5;</code>
+       * <code>.dab.GameParameter dab_game_parameters = 5;</code>
        */
       public dab.DotsAndBoxes.GameParameterOrBuilder getDabGameParametersOrBuilder() {
         if ((gameParametersCase_ == 5) && (dabGameParametersBuilder_ != null)) {
@@ -6728,7 +6931,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .dab.GameParameter dab_game_parameters = 5;</code>
+       * <code>.dab.GameParameter dab_game_parameters = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dab.DotsAndBoxes.GameParameter, dab.DotsAndBoxes.GameParameter.Builder, dab.DotsAndBoxes.GameParameterOrBuilder> 
@@ -6750,12 +6953,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -6802,17 +7005,17 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string match_token = 1;</code>
+     * <code>string match_token = 1;</code>
      */
     java.lang.String getMatchToken();
     /**
-     * <code>optional string match_token = 1;</code>
+     * <code>string match_token = 1;</code>
      */
     com.google.protobuf.ByteString
         getMatchTokenBytes();
 
     /**
-     * <code>optional bool beginning_player = 2;</code>
+     * <code>bool beginning_player = 2;</code>
      */
     boolean getBeginningPlayer();
   }
@@ -6823,6 +7026,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.MatchResponse)
       MatchResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use MatchResponse.newBuilder() to construct.
     private MatchResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -6835,7 +7039,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private MatchResponse(
         com.google.protobuf.CodedInputStream input,
@@ -6843,6 +7047,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -6852,7 +7058,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -6876,6 +7083,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -6894,7 +7102,7 @@ public final class Netcode {
     public static final int MATCH_TOKEN_FIELD_NUMBER = 1;
     private volatile java.lang.Object matchToken_;
     /**
-     * <code>optional string match_token = 1;</code>
+     * <code>string match_token = 1;</code>
      */
     public java.lang.String getMatchToken() {
       java.lang.Object ref = matchToken_;
@@ -6909,7 +7117,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string match_token = 1;</code>
+     * <code>string match_token = 1;</code>
      */
     public com.google.protobuf.ByteString
         getMatchTokenBytes() {
@@ -6928,7 +7136,7 @@ public final class Netcode {
     public static final int BEGINNING_PLAYER_FIELD_NUMBER = 2;
     private boolean beginningPlayer_;
     /**
-     * <code>optional bool beginning_player = 2;</code>
+     * <code>bool beginning_player = 2;</code>
      */
     public boolean getBeginningPlayer() {
       return beginningPlayer_;
@@ -6952,6 +7160,7 @@ public final class Netcode {
       if (beginningPlayer_ != false) {
         output.writeBool(2, beginningPlayer_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -6966,11 +7175,11 @@ public final class Netcode {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(2, beginningPlayer_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -6986,6 +7195,7 @@ public final class Netcode {
           .equals(other.getMatchToken());
       result = result && (getBeginningPlayer()
           == other.getBeginningPlayer());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -6995,7 +7205,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + MATCH_TOKEN_FIELD_NUMBER;
       hash = (53 * hash) + getMatchToken().hashCode();
       hash = (37 * hash) + BEGINNING_PLAYER_FIELD_NUMBER;
@@ -7006,6 +7216,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.MatchResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.MatchResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.MatchResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -7156,7 +7377,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -7169,12 +7390,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -7195,6 +7416,7 @@ public final class Netcode {
         if (other.getBeginningPlayer() != false) {
           setBeginningPlayer(other.getBeginningPlayer());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -7223,7 +7445,7 @@ public final class Netcode {
 
       private java.lang.Object matchToken_ = "";
       /**
-       * <code>optional string match_token = 1;</code>
+       * <code>string match_token = 1;</code>
        */
       public java.lang.String getMatchToken() {
         java.lang.Object ref = matchToken_;
@@ -7238,7 +7460,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string match_token = 1;</code>
+       * <code>string match_token = 1;</code>
        */
       public com.google.protobuf.ByteString
           getMatchTokenBytes() {
@@ -7254,7 +7476,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string match_token = 1;</code>
+       * <code>string match_token = 1;</code>
        */
       public Builder setMatchToken(
           java.lang.String value) {
@@ -7267,7 +7489,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string match_token = 1;</code>
+       * <code>string match_token = 1;</code>
        */
       public Builder clearMatchToken() {
         
@@ -7276,7 +7498,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string match_token = 1;</code>
+       * <code>string match_token = 1;</code>
        */
       public Builder setMatchTokenBytes(
           com.google.protobuf.ByteString value) {
@@ -7292,13 +7514,13 @@ public final class Netcode {
 
       private boolean beginningPlayer_ ;
       /**
-       * <code>optional bool beginning_player = 2;</code>
+       * <code>bool beginning_player = 2;</code>
        */
       public boolean getBeginningPlayer() {
         return beginningPlayer_;
       }
       /**
-       * <code>optional bool beginning_player = 2;</code>
+       * <code>bool beginning_player = 2;</code>
        */
       public Builder setBeginningPlayer(boolean value) {
         
@@ -7307,7 +7529,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional bool beginning_player = 2;</code>
+       * <code>bool beginning_player = 2;</code>
        */
       public Builder clearBeginningPlayer() {
         
@@ -7317,12 +7539,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -7369,40 +7591,48 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     java.lang.String getUserToken();
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     com.google.protobuf.ByteString
         getUserTokenBytes();
 
     /**
-     * <code>optional string match_token = 2;</code>
+     * <code>string match_token = 2;</code>
      */
     java.lang.String getMatchToken();
     /**
-     * <code>optional string match_token = 2;</code>
+     * <code>string match_token = 2;</code>
      */
     com.google.protobuf.ByteString
         getMatchTokenBytes();
 
     /**
-     * <code>optional .nim.GameTurn nim_game_turn = 3;</code>
+     * <code>.nim.GameTurn nim_game_turn = 3;</code>
+     */
+    boolean hasNimGameTurn();
+    /**
+     * <code>.nim.GameTurn nim_game_turn = 3;</code>
      */
     nim.Nim.GameTurn getNimGameTurn();
     /**
-     * <code>optional .nim.GameTurn nim_game_turn = 3;</code>
+     * <code>.nim.GameTurn nim_game_turn = 3;</code>
      */
     nim.Nim.GameTurnOrBuilder getNimGameTurnOrBuilder();
 
     /**
-     * <code>optional .dab.GameTurn dab_game_turn = 4;</code>
+     * <code>.dab.GameTurn dab_game_turn = 4;</code>
+     */
+    boolean hasDabGameTurn();
+    /**
+     * <code>.dab.GameTurn dab_game_turn = 4;</code>
      */
     dab.DotsAndBoxes.GameTurn getDabGameTurn();
     /**
-     * <code>optional .dab.GameTurn dab_game_turn = 4;</code>
+     * <code>.dab.GameTurn dab_game_turn = 4;</code>
      */
     dab.DotsAndBoxes.GameTurnOrBuilder getDabGameTurnOrBuilder();
 
@@ -7415,6 +7645,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.TurnRequest)
       TurnRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use TurnRequest.newBuilder() to construct.
     private TurnRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -7427,7 +7658,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private TurnRequest(
         com.google.protobuf.CodedInputStream input,
@@ -7435,6 +7666,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -7444,7 +7677,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -7497,6 +7731,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -7553,7 +7788,7 @@ public final class Netcode {
     public static final int USER_TOKEN_FIELD_NUMBER = 1;
     private volatile java.lang.Object userToken_;
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     public java.lang.String getUserToken() {
       java.lang.Object ref = userToken_;
@@ -7568,7 +7803,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     public com.google.protobuf.ByteString
         getUserTokenBytes() {
@@ -7587,7 +7822,7 @@ public final class Netcode {
     public static final int MATCH_TOKEN_FIELD_NUMBER = 2;
     private volatile java.lang.Object matchToken_;
     /**
-     * <code>optional string match_token = 2;</code>
+     * <code>string match_token = 2;</code>
      */
     public java.lang.String getMatchToken() {
       java.lang.Object ref = matchToken_;
@@ -7602,7 +7837,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string match_token = 2;</code>
+     * <code>string match_token = 2;</code>
      */
     public com.google.protobuf.ByteString
         getMatchTokenBytes() {
@@ -7620,7 +7855,13 @@ public final class Netcode {
 
     public static final int NIM_GAME_TURN_FIELD_NUMBER = 3;
     /**
-     * <code>optional .nim.GameTurn nim_game_turn = 3;</code>
+     * <code>.nim.GameTurn nim_game_turn = 3;</code>
+     */
+    public boolean hasNimGameTurn() {
+      return gameTurnCase_ == 3;
+    }
+    /**
+     * <code>.nim.GameTurn nim_game_turn = 3;</code>
      */
     public nim.Nim.GameTurn getNimGameTurn() {
       if (gameTurnCase_ == 3) {
@@ -7629,7 +7870,7 @@ public final class Netcode {
       return nim.Nim.GameTurn.getDefaultInstance();
     }
     /**
-     * <code>optional .nim.GameTurn nim_game_turn = 3;</code>
+     * <code>.nim.GameTurn nim_game_turn = 3;</code>
      */
     public nim.Nim.GameTurnOrBuilder getNimGameTurnOrBuilder() {
       if (gameTurnCase_ == 3) {
@@ -7640,7 +7881,13 @@ public final class Netcode {
 
     public static final int DAB_GAME_TURN_FIELD_NUMBER = 4;
     /**
-     * <code>optional .dab.GameTurn dab_game_turn = 4;</code>
+     * <code>.dab.GameTurn dab_game_turn = 4;</code>
+     */
+    public boolean hasDabGameTurn() {
+      return gameTurnCase_ == 4;
+    }
+    /**
+     * <code>.dab.GameTurn dab_game_turn = 4;</code>
      */
     public dab.DotsAndBoxes.GameTurn getDabGameTurn() {
       if (gameTurnCase_ == 4) {
@@ -7649,7 +7896,7 @@ public final class Netcode {
       return dab.DotsAndBoxes.GameTurn.getDefaultInstance();
     }
     /**
-     * <code>optional .dab.GameTurn dab_game_turn = 4;</code>
+     * <code>.dab.GameTurn dab_game_turn = 4;</code>
      */
     public dab.DotsAndBoxes.GameTurnOrBuilder getDabGameTurnOrBuilder() {
       if (gameTurnCase_ == 4) {
@@ -7682,6 +7929,7 @@ public final class Netcode {
       if (gameTurnCase_ == 4) {
         output.writeMessage(4, (dab.DotsAndBoxes.GameTurn) gameTurn_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -7703,11 +7951,11 @@ public final class Netcode {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, (dab.DotsAndBoxes.GameTurn) gameTurn_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -7738,6 +7986,7 @@ public final class Netcode {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -7747,7 +7996,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + USER_TOKEN_FIELD_NUMBER;
       hash = (53 * hash) + getUserToken().hashCode();
       hash = (37 * hash) + MATCH_TOKEN_FIELD_NUMBER;
@@ -7769,6 +8018,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.TurnRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.TurnRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.TurnRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -7936,7 +8196,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -7949,12 +8209,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -7989,6 +8249,7 @@ public final class Netcode {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -8032,7 +8293,7 @@ public final class Netcode {
 
       private java.lang.Object userToken_ = "";
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public java.lang.String getUserToken() {
         java.lang.Object ref = userToken_;
@@ -8047,7 +8308,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public com.google.protobuf.ByteString
           getUserTokenBytes() {
@@ -8063,7 +8324,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder setUserToken(
           java.lang.String value) {
@@ -8076,7 +8337,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder clearUserToken() {
         
@@ -8085,7 +8346,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder setUserTokenBytes(
           com.google.protobuf.ByteString value) {
@@ -8101,7 +8362,7 @@ public final class Netcode {
 
       private java.lang.Object matchToken_ = "";
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public java.lang.String getMatchToken() {
         java.lang.Object ref = matchToken_;
@@ -8116,7 +8377,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public com.google.protobuf.ByteString
           getMatchTokenBytes() {
@@ -8132,7 +8393,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public Builder setMatchToken(
           java.lang.String value) {
@@ -8145,7 +8406,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public Builder clearMatchToken() {
         
@@ -8154,7 +8415,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public Builder setMatchTokenBytes(
           com.google.protobuf.ByteString value) {
@@ -8171,7 +8432,13 @@ public final class Netcode {
       private com.google.protobuf.SingleFieldBuilderV3<
           nim.Nim.GameTurn, nim.Nim.GameTurn.Builder, nim.Nim.GameTurnOrBuilder> nimGameTurnBuilder_;
       /**
-       * <code>optional .nim.GameTurn nim_game_turn = 3;</code>
+       * <code>.nim.GameTurn nim_game_turn = 3;</code>
+       */
+      public boolean hasNimGameTurn() {
+        return gameTurnCase_ == 3;
+      }
+      /**
+       * <code>.nim.GameTurn nim_game_turn = 3;</code>
        */
       public nim.Nim.GameTurn getNimGameTurn() {
         if (nimGameTurnBuilder_ == null) {
@@ -8187,7 +8454,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .nim.GameTurn nim_game_turn = 3;</code>
+       * <code>.nim.GameTurn nim_game_turn = 3;</code>
        */
       public Builder setNimGameTurn(nim.Nim.GameTurn value) {
         if (nimGameTurnBuilder_ == null) {
@@ -8203,7 +8470,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameTurn nim_game_turn = 3;</code>
+       * <code>.nim.GameTurn nim_game_turn = 3;</code>
        */
       public Builder setNimGameTurn(
           nim.Nim.GameTurn.Builder builderForValue) {
@@ -8217,7 +8484,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameTurn nim_game_turn = 3;</code>
+       * <code>.nim.GameTurn nim_game_turn = 3;</code>
        */
       public Builder mergeNimGameTurn(nim.Nim.GameTurn value) {
         if (nimGameTurnBuilder_ == null) {
@@ -8239,7 +8506,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameTurn nim_game_turn = 3;</code>
+       * <code>.nim.GameTurn nim_game_turn = 3;</code>
        */
       public Builder clearNimGameTurn() {
         if (nimGameTurnBuilder_ == null) {
@@ -8258,13 +8525,13 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameTurn nim_game_turn = 3;</code>
+       * <code>.nim.GameTurn nim_game_turn = 3;</code>
        */
       public nim.Nim.GameTurn.Builder getNimGameTurnBuilder() {
         return getNimGameTurnFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .nim.GameTurn nim_game_turn = 3;</code>
+       * <code>.nim.GameTurn nim_game_turn = 3;</code>
        */
       public nim.Nim.GameTurnOrBuilder getNimGameTurnOrBuilder() {
         if ((gameTurnCase_ == 3) && (nimGameTurnBuilder_ != null)) {
@@ -8277,7 +8544,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .nim.GameTurn nim_game_turn = 3;</code>
+       * <code>.nim.GameTurn nim_game_turn = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           nim.Nim.GameTurn, nim.Nim.GameTurn.Builder, nim.Nim.GameTurnOrBuilder> 
@@ -8301,7 +8568,13 @@ public final class Netcode {
       private com.google.protobuf.SingleFieldBuilderV3<
           dab.DotsAndBoxes.GameTurn, dab.DotsAndBoxes.GameTurn.Builder, dab.DotsAndBoxes.GameTurnOrBuilder> dabGameTurnBuilder_;
       /**
-       * <code>optional .dab.GameTurn dab_game_turn = 4;</code>
+       * <code>.dab.GameTurn dab_game_turn = 4;</code>
+       */
+      public boolean hasDabGameTurn() {
+        return gameTurnCase_ == 4;
+      }
+      /**
+       * <code>.dab.GameTurn dab_game_turn = 4;</code>
        */
       public dab.DotsAndBoxes.GameTurn getDabGameTurn() {
         if (dabGameTurnBuilder_ == null) {
@@ -8317,7 +8590,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .dab.GameTurn dab_game_turn = 4;</code>
+       * <code>.dab.GameTurn dab_game_turn = 4;</code>
        */
       public Builder setDabGameTurn(dab.DotsAndBoxes.GameTurn value) {
         if (dabGameTurnBuilder_ == null) {
@@ -8333,7 +8606,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameTurn dab_game_turn = 4;</code>
+       * <code>.dab.GameTurn dab_game_turn = 4;</code>
        */
       public Builder setDabGameTurn(
           dab.DotsAndBoxes.GameTurn.Builder builderForValue) {
@@ -8347,7 +8620,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameTurn dab_game_turn = 4;</code>
+       * <code>.dab.GameTurn dab_game_turn = 4;</code>
        */
       public Builder mergeDabGameTurn(dab.DotsAndBoxes.GameTurn value) {
         if (dabGameTurnBuilder_ == null) {
@@ -8369,7 +8642,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameTurn dab_game_turn = 4;</code>
+       * <code>.dab.GameTurn dab_game_turn = 4;</code>
        */
       public Builder clearDabGameTurn() {
         if (dabGameTurnBuilder_ == null) {
@@ -8388,13 +8661,13 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameTurn dab_game_turn = 4;</code>
+       * <code>.dab.GameTurn dab_game_turn = 4;</code>
        */
       public dab.DotsAndBoxes.GameTurn.Builder getDabGameTurnBuilder() {
         return getDabGameTurnFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .dab.GameTurn dab_game_turn = 4;</code>
+       * <code>.dab.GameTurn dab_game_turn = 4;</code>
        */
       public dab.DotsAndBoxes.GameTurnOrBuilder getDabGameTurnOrBuilder() {
         if ((gameTurnCase_ == 4) && (dabGameTurnBuilder_ != null)) {
@@ -8407,7 +8680,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .dab.GameTurn dab_game_turn = 4;</code>
+       * <code>.dab.GameTurn dab_game_turn = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dab.DotsAndBoxes.GameTurn, dab.DotsAndBoxes.GameTurn.Builder, dab.DotsAndBoxes.GameTurnOrBuilder> 
@@ -8429,12 +8702,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -8481,29 +8754,37 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .netcode.TurnStatus turn_status = 1;</code>
+     * <code>.netcode.TurnStatus turn_status = 1;</code>
      */
     int getTurnStatusValue();
     /**
-     * <code>optional .netcode.TurnStatus turn_status = 1;</code>
+     * <code>.netcode.TurnStatus turn_status = 1;</code>
      */
     netcode.Netcode.TurnStatus getTurnStatus();
 
     /**
-     * <code>optional .nim.GameState nim_game_state = 2;</code>
+     * <code>.nim.GameState nim_game_state = 2;</code>
+     */
+    boolean hasNimGameState();
+    /**
+     * <code>.nim.GameState nim_game_state = 2;</code>
      */
     nim.Nim.GameState getNimGameState();
     /**
-     * <code>optional .nim.GameState nim_game_state = 2;</code>
+     * <code>.nim.GameState nim_game_state = 2;</code>
      */
     nim.Nim.GameStateOrBuilder getNimGameStateOrBuilder();
 
     /**
-     * <code>optional .dab.GameState dab_game_state = 3;</code>
+     * <code>.dab.GameState dab_game_state = 3;</code>
+     */
+    boolean hasDabGameState();
+    /**
+     * <code>.dab.GameState dab_game_state = 3;</code>
      */
     dab.DotsAndBoxes.GameState getDabGameState();
     /**
-     * <code>optional .dab.GameState dab_game_state = 3;</code>
+     * <code>.dab.GameState dab_game_state = 3;</code>
      */
     dab.DotsAndBoxes.GameStateOrBuilder getDabGameStateOrBuilder();
 
@@ -8516,6 +8797,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.TurnResponse)
       TurnResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use TurnResponse.newBuilder() to construct.
     private TurnResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -8527,7 +8809,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private TurnResponse(
         com.google.protobuf.CodedInputStream input,
@@ -8535,6 +8817,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -8544,7 +8828,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -8591,6 +8876,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -8647,13 +8933,13 @@ public final class Netcode {
     public static final int TURN_STATUS_FIELD_NUMBER = 1;
     private int turnStatus_;
     /**
-     * <code>optional .netcode.TurnStatus turn_status = 1;</code>
+     * <code>.netcode.TurnStatus turn_status = 1;</code>
      */
     public int getTurnStatusValue() {
       return turnStatus_;
     }
     /**
-     * <code>optional .netcode.TurnStatus turn_status = 1;</code>
+     * <code>.netcode.TurnStatus turn_status = 1;</code>
      */
     public netcode.Netcode.TurnStatus getTurnStatus() {
       netcode.Netcode.TurnStatus result = netcode.Netcode.TurnStatus.valueOf(turnStatus_);
@@ -8662,7 +8948,13 @@ public final class Netcode {
 
     public static final int NIM_GAME_STATE_FIELD_NUMBER = 2;
     /**
-     * <code>optional .nim.GameState nim_game_state = 2;</code>
+     * <code>.nim.GameState nim_game_state = 2;</code>
+     */
+    public boolean hasNimGameState() {
+      return gameStateCase_ == 2;
+    }
+    /**
+     * <code>.nim.GameState nim_game_state = 2;</code>
      */
     public nim.Nim.GameState getNimGameState() {
       if (gameStateCase_ == 2) {
@@ -8671,7 +8963,7 @@ public final class Netcode {
       return nim.Nim.GameState.getDefaultInstance();
     }
     /**
-     * <code>optional .nim.GameState nim_game_state = 2;</code>
+     * <code>.nim.GameState nim_game_state = 2;</code>
      */
     public nim.Nim.GameStateOrBuilder getNimGameStateOrBuilder() {
       if (gameStateCase_ == 2) {
@@ -8682,7 +8974,13 @@ public final class Netcode {
 
     public static final int DAB_GAME_STATE_FIELD_NUMBER = 3;
     /**
-     * <code>optional .dab.GameState dab_game_state = 3;</code>
+     * <code>.dab.GameState dab_game_state = 3;</code>
+     */
+    public boolean hasDabGameState() {
+      return gameStateCase_ == 3;
+    }
+    /**
+     * <code>.dab.GameState dab_game_state = 3;</code>
      */
     public dab.DotsAndBoxes.GameState getDabGameState() {
       if (gameStateCase_ == 3) {
@@ -8691,7 +8989,7 @@ public final class Netcode {
       return dab.DotsAndBoxes.GameState.getDefaultInstance();
     }
     /**
-     * <code>optional .dab.GameState dab_game_state = 3;</code>
+     * <code>.dab.GameState dab_game_state = 3;</code>
      */
     public dab.DotsAndBoxes.GameStateOrBuilder getDabGameStateOrBuilder() {
       if (gameStateCase_ == 3) {
@@ -8721,6 +9019,7 @@ public final class Netcode {
       if (gameStateCase_ == 3) {
         output.writeMessage(3, (dab.DotsAndBoxes.GameState) gameState_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -8740,11 +9039,11 @@ public final class Netcode {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, (dab.DotsAndBoxes.GameState) gameState_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -8772,6 +9071,7 @@ public final class Netcode {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -8781,7 +9081,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TURN_STATUS_FIELD_NUMBER;
       hash = (53 * hash) + turnStatus_;
       switch (gameStateCase_) {
@@ -8801,6 +9101,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.TurnResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.TurnResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.TurnResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -8965,7 +9276,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -8978,12 +9289,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -9013,6 +9324,7 @@ public final class Netcode {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -9056,13 +9368,13 @@ public final class Netcode {
 
       private int turnStatus_ = 0;
       /**
-       * <code>optional .netcode.TurnStatus turn_status = 1;</code>
+       * <code>.netcode.TurnStatus turn_status = 1;</code>
        */
       public int getTurnStatusValue() {
         return turnStatus_;
       }
       /**
-       * <code>optional .netcode.TurnStatus turn_status = 1;</code>
+       * <code>.netcode.TurnStatus turn_status = 1;</code>
        */
       public Builder setTurnStatusValue(int value) {
         turnStatus_ = value;
@@ -9070,14 +9382,14 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.TurnStatus turn_status = 1;</code>
+       * <code>.netcode.TurnStatus turn_status = 1;</code>
        */
       public netcode.Netcode.TurnStatus getTurnStatus() {
         netcode.Netcode.TurnStatus result = netcode.Netcode.TurnStatus.valueOf(turnStatus_);
         return result == null ? netcode.Netcode.TurnStatus.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .netcode.TurnStatus turn_status = 1;</code>
+       * <code>.netcode.TurnStatus turn_status = 1;</code>
        */
       public Builder setTurnStatus(netcode.Netcode.TurnStatus value) {
         if (value == null) {
@@ -9089,7 +9401,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.TurnStatus turn_status = 1;</code>
+       * <code>.netcode.TurnStatus turn_status = 1;</code>
        */
       public Builder clearTurnStatus() {
         
@@ -9101,7 +9413,13 @@ public final class Netcode {
       private com.google.protobuf.SingleFieldBuilderV3<
           nim.Nim.GameState, nim.Nim.GameState.Builder, nim.Nim.GameStateOrBuilder> nimGameStateBuilder_;
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
+       */
+      public boolean hasNimGameState() {
+        return gameStateCase_ == 2;
+      }
+      /**
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public nim.Nim.GameState getNimGameState() {
         if (nimGameStateBuilder_ == null) {
@@ -9117,7 +9435,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public Builder setNimGameState(nim.Nim.GameState value) {
         if (nimGameStateBuilder_ == null) {
@@ -9133,7 +9451,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public Builder setNimGameState(
           nim.Nim.GameState.Builder builderForValue) {
@@ -9147,7 +9465,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public Builder mergeNimGameState(nim.Nim.GameState value) {
         if (nimGameStateBuilder_ == null) {
@@ -9169,7 +9487,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public Builder clearNimGameState() {
         if (nimGameStateBuilder_ == null) {
@@ -9188,13 +9506,13 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public nim.Nim.GameState.Builder getNimGameStateBuilder() {
         return getNimGameStateFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public nim.Nim.GameStateOrBuilder getNimGameStateOrBuilder() {
         if ((gameStateCase_ == 2) && (nimGameStateBuilder_ != null)) {
@@ -9207,7 +9525,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           nim.Nim.GameState, nim.Nim.GameState.Builder, nim.Nim.GameStateOrBuilder> 
@@ -9231,7 +9549,13 @@ public final class Netcode {
       private com.google.protobuf.SingleFieldBuilderV3<
           dab.DotsAndBoxes.GameState, dab.DotsAndBoxes.GameState.Builder, dab.DotsAndBoxes.GameStateOrBuilder> dabGameStateBuilder_;
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
+       */
+      public boolean hasDabGameState() {
+        return gameStateCase_ == 3;
+      }
+      /**
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public dab.DotsAndBoxes.GameState getDabGameState() {
         if (dabGameStateBuilder_ == null) {
@@ -9247,7 +9571,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public Builder setDabGameState(dab.DotsAndBoxes.GameState value) {
         if (dabGameStateBuilder_ == null) {
@@ -9263,7 +9587,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public Builder setDabGameState(
           dab.DotsAndBoxes.GameState.Builder builderForValue) {
@@ -9277,7 +9601,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public Builder mergeDabGameState(dab.DotsAndBoxes.GameState value) {
         if (dabGameStateBuilder_ == null) {
@@ -9299,7 +9623,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public Builder clearDabGameState() {
         if (dabGameStateBuilder_ == null) {
@@ -9318,13 +9642,13 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public dab.DotsAndBoxes.GameState.Builder getDabGameStateBuilder() {
         return getDabGameStateFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public dab.DotsAndBoxes.GameStateOrBuilder getDabGameStateOrBuilder() {
         if ((gameStateCase_ == 3) && (dabGameStateBuilder_ != null)) {
@@ -9337,7 +9661,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dab.DotsAndBoxes.GameState, dab.DotsAndBoxes.GameState.Builder, dab.DotsAndBoxes.GameStateOrBuilder> 
@@ -9359,12 +9683,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -9411,21 +9735,21 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     java.lang.String getUserToken();
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     com.google.protobuf.ByteString
         getUserTokenBytes();
 
     /**
-     * <code>optional string match_token = 2;</code>
+     * <code>string match_token = 2;</code>
      */
     java.lang.String getMatchToken();
     /**
-     * <code>optional string match_token = 2;</code>
+     * <code>string match_token = 2;</code>
      */
     com.google.protobuf.ByteString
         getMatchTokenBytes();
@@ -9437,6 +9761,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.GameStateRequest)
       GameStateRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GameStateRequest.newBuilder() to construct.
     private GameStateRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -9449,7 +9774,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GameStateRequest(
         com.google.protobuf.CodedInputStream input,
@@ -9457,6 +9782,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -9466,7 +9793,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -9491,6 +9819,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -9509,7 +9838,7 @@ public final class Netcode {
     public static final int USER_TOKEN_FIELD_NUMBER = 1;
     private volatile java.lang.Object userToken_;
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     public java.lang.String getUserToken() {
       java.lang.Object ref = userToken_;
@@ -9524,7 +9853,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     public com.google.protobuf.ByteString
         getUserTokenBytes() {
@@ -9543,7 +9872,7 @@ public final class Netcode {
     public static final int MATCH_TOKEN_FIELD_NUMBER = 2;
     private volatile java.lang.Object matchToken_;
     /**
-     * <code>optional string match_token = 2;</code>
+     * <code>string match_token = 2;</code>
      */
     public java.lang.String getMatchToken() {
       java.lang.Object ref = matchToken_;
@@ -9558,7 +9887,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string match_token = 2;</code>
+     * <code>string match_token = 2;</code>
      */
     public com.google.protobuf.ByteString
         getMatchTokenBytes() {
@@ -9592,6 +9921,7 @@ public final class Netcode {
       if (!getMatchTokenBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, matchToken_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -9605,11 +9935,11 @@ public final class Netcode {
       if (!getMatchTokenBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, matchToken_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -9625,6 +9955,7 @@ public final class Netcode {
           .equals(other.getUserToken());
       result = result && getMatchToken()
           .equals(other.getMatchToken());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -9634,7 +9965,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + USER_TOKEN_FIELD_NUMBER;
       hash = (53 * hash) + getUserToken().hashCode();
       hash = (37 * hash) + MATCH_TOKEN_FIELD_NUMBER;
@@ -9644,6 +9975,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.GameStateRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.GameStateRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.GameStateRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -9794,7 +10136,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -9807,12 +10149,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -9834,6 +10176,7 @@ public final class Netcode {
           matchToken_ = other.matchToken_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -9862,7 +10205,7 @@ public final class Netcode {
 
       private java.lang.Object userToken_ = "";
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public java.lang.String getUserToken() {
         java.lang.Object ref = userToken_;
@@ -9877,7 +10220,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public com.google.protobuf.ByteString
           getUserTokenBytes() {
@@ -9893,7 +10236,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder setUserToken(
           java.lang.String value) {
@@ -9906,7 +10249,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder clearUserToken() {
         
@@ -9915,7 +10258,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder setUserTokenBytes(
           com.google.protobuf.ByteString value) {
@@ -9931,7 +10274,7 @@ public final class Netcode {
 
       private java.lang.Object matchToken_ = "";
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public java.lang.String getMatchToken() {
         java.lang.Object ref = matchToken_;
@@ -9946,7 +10289,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public com.google.protobuf.ByteString
           getMatchTokenBytes() {
@@ -9962,7 +10305,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public Builder setMatchToken(
           java.lang.String value) {
@@ -9975,7 +10318,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public Builder clearMatchToken() {
         
@@ -9984,7 +10327,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public Builder setMatchTokenBytes(
           com.google.protobuf.ByteString value) {
@@ -9999,12 +10342,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -10051,34 +10394,42 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .netcode.GameStatus game_status = 1;</code>
+     * <code>.netcode.GameStatus game_status = 1;</code>
      */
     int getGameStatusValue();
     /**
-     * <code>optional .netcode.GameStatus game_status = 1;</code>
+     * <code>.netcode.GameStatus game_status = 1;</code>
      */
     netcode.Netcode.GameStatus getGameStatus();
 
     /**
-     * <code>optional .nim.GameState nim_game_state = 2;</code>
+     * <code>.nim.GameState nim_game_state = 2;</code>
+     */
+    boolean hasNimGameState();
+    /**
+     * <code>.nim.GameState nim_game_state = 2;</code>
      */
     nim.Nim.GameState getNimGameState();
     /**
-     * <code>optional .nim.GameState nim_game_state = 2;</code>
+     * <code>.nim.GameState nim_game_state = 2;</code>
      */
     nim.Nim.GameStateOrBuilder getNimGameStateOrBuilder();
 
     /**
-     * <code>optional .dab.GameState dab_game_state = 3;</code>
+     * <code>.dab.GameState dab_game_state = 3;</code>
+     */
+    boolean hasDabGameState();
+    /**
+     * <code>.dab.GameState dab_game_state = 3;</code>
      */
     dab.DotsAndBoxes.GameState getDabGameState();
     /**
-     * <code>optional .dab.GameState dab_game_state = 3;</code>
+     * <code>.dab.GameState dab_game_state = 3;</code>
      */
     dab.DotsAndBoxes.GameStateOrBuilder getDabGameStateOrBuilder();
 
     /**
-     * <code>optional bool beginning_player = 4;</code>
+     * <code>bool beginning_player = 4;</code>
      */
     boolean getBeginningPlayer();
 
@@ -10091,6 +10442,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.GameStateResponse)
       GameStateResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GameStateResponse.newBuilder() to construct.
     private GameStateResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -10103,7 +10455,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GameStateResponse(
         com.google.protobuf.CodedInputStream input,
@@ -10111,6 +10463,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -10120,7 +10474,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -10172,6 +10527,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -10228,13 +10584,13 @@ public final class Netcode {
     public static final int GAME_STATUS_FIELD_NUMBER = 1;
     private int gameStatus_;
     /**
-     * <code>optional .netcode.GameStatus game_status = 1;</code>
+     * <code>.netcode.GameStatus game_status = 1;</code>
      */
     public int getGameStatusValue() {
       return gameStatus_;
     }
     /**
-     * <code>optional .netcode.GameStatus game_status = 1;</code>
+     * <code>.netcode.GameStatus game_status = 1;</code>
      */
     public netcode.Netcode.GameStatus getGameStatus() {
       netcode.Netcode.GameStatus result = netcode.Netcode.GameStatus.valueOf(gameStatus_);
@@ -10243,7 +10599,13 @@ public final class Netcode {
 
     public static final int NIM_GAME_STATE_FIELD_NUMBER = 2;
     /**
-     * <code>optional .nim.GameState nim_game_state = 2;</code>
+     * <code>.nim.GameState nim_game_state = 2;</code>
+     */
+    public boolean hasNimGameState() {
+      return gameStateCase_ == 2;
+    }
+    /**
+     * <code>.nim.GameState nim_game_state = 2;</code>
      */
     public nim.Nim.GameState getNimGameState() {
       if (gameStateCase_ == 2) {
@@ -10252,7 +10614,7 @@ public final class Netcode {
       return nim.Nim.GameState.getDefaultInstance();
     }
     /**
-     * <code>optional .nim.GameState nim_game_state = 2;</code>
+     * <code>.nim.GameState nim_game_state = 2;</code>
      */
     public nim.Nim.GameStateOrBuilder getNimGameStateOrBuilder() {
       if (gameStateCase_ == 2) {
@@ -10263,7 +10625,13 @@ public final class Netcode {
 
     public static final int DAB_GAME_STATE_FIELD_NUMBER = 3;
     /**
-     * <code>optional .dab.GameState dab_game_state = 3;</code>
+     * <code>.dab.GameState dab_game_state = 3;</code>
+     */
+    public boolean hasDabGameState() {
+      return gameStateCase_ == 3;
+    }
+    /**
+     * <code>.dab.GameState dab_game_state = 3;</code>
      */
     public dab.DotsAndBoxes.GameState getDabGameState() {
       if (gameStateCase_ == 3) {
@@ -10272,7 +10640,7 @@ public final class Netcode {
       return dab.DotsAndBoxes.GameState.getDefaultInstance();
     }
     /**
-     * <code>optional .dab.GameState dab_game_state = 3;</code>
+     * <code>.dab.GameState dab_game_state = 3;</code>
      */
     public dab.DotsAndBoxes.GameStateOrBuilder getDabGameStateOrBuilder() {
       if (gameStateCase_ == 3) {
@@ -10284,7 +10652,7 @@ public final class Netcode {
     public static final int BEGINNING_PLAYER_FIELD_NUMBER = 4;
     private boolean beginningPlayer_;
     /**
-     * <code>optional bool beginning_player = 4;</code>
+     * <code>bool beginning_player = 4;</code>
      */
     public boolean getBeginningPlayer() {
       return beginningPlayer_;
@@ -10314,6 +10682,7 @@ public final class Netcode {
       if (beginningPlayer_ != false) {
         output.writeBool(4, beginningPlayer_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -10337,11 +10706,11 @@ public final class Netcode {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(4, beginningPlayer_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -10371,6 +10740,7 @@ public final class Netcode {
         case 0:
         default:
       }
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -10380,7 +10750,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + GAME_STATUS_FIELD_NUMBER;
       hash = (53 * hash) + gameStatus_;
       hash = (37 * hash) + BEGINNING_PLAYER_FIELD_NUMBER;
@@ -10403,6 +10773,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.GameStateResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.GameStateResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.GameStateResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -10570,7 +10951,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -10583,12 +10964,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -10621,6 +11002,7 @@ public final class Netcode {
             break;
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -10664,13 +11046,13 @@ public final class Netcode {
 
       private int gameStatus_ = 0;
       /**
-       * <code>optional .netcode.GameStatus game_status = 1;</code>
+       * <code>.netcode.GameStatus game_status = 1;</code>
        */
       public int getGameStatusValue() {
         return gameStatus_;
       }
       /**
-       * <code>optional .netcode.GameStatus game_status = 1;</code>
+       * <code>.netcode.GameStatus game_status = 1;</code>
        */
       public Builder setGameStatusValue(int value) {
         gameStatus_ = value;
@@ -10678,14 +11060,14 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.GameStatus game_status = 1;</code>
+       * <code>.netcode.GameStatus game_status = 1;</code>
        */
       public netcode.Netcode.GameStatus getGameStatus() {
         netcode.Netcode.GameStatus result = netcode.Netcode.GameStatus.valueOf(gameStatus_);
         return result == null ? netcode.Netcode.GameStatus.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .netcode.GameStatus game_status = 1;</code>
+       * <code>.netcode.GameStatus game_status = 1;</code>
        */
       public Builder setGameStatus(netcode.Netcode.GameStatus value) {
         if (value == null) {
@@ -10697,7 +11079,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .netcode.GameStatus game_status = 1;</code>
+       * <code>.netcode.GameStatus game_status = 1;</code>
        */
       public Builder clearGameStatus() {
         
@@ -10709,7 +11091,13 @@ public final class Netcode {
       private com.google.protobuf.SingleFieldBuilderV3<
           nim.Nim.GameState, nim.Nim.GameState.Builder, nim.Nim.GameStateOrBuilder> nimGameStateBuilder_;
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
+       */
+      public boolean hasNimGameState() {
+        return gameStateCase_ == 2;
+      }
+      /**
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public nim.Nim.GameState getNimGameState() {
         if (nimGameStateBuilder_ == null) {
@@ -10725,7 +11113,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public Builder setNimGameState(nim.Nim.GameState value) {
         if (nimGameStateBuilder_ == null) {
@@ -10741,7 +11129,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public Builder setNimGameState(
           nim.Nim.GameState.Builder builderForValue) {
@@ -10755,7 +11143,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public Builder mergeNimGameState(nim.Nim.GameState value) {
         if (nimGameStateBuilder_ == null) {
@@ -10777,7 +11165,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public Builder clearNimGameState() {
         if (nimGameStateBuilder_ == null) {
@@ -10796,13 +11184,13 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public nim.Nim.GameState.Builder getNimGameStateBuilder() {
         return getNimGameStateFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       public nim.Nim.GameStateOrBuilder getNimGameStateOrBuilder() {
         if ((gameStateCase_ == 2) && (nimGameStateBuilder_ != null)) {
@@ -10815,7 +11203,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .nim.GameState nim_game_state = 2;</code>
+       * <code>.nim.GameState nim_game_state = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           nim.Nim.GameState, nim.Nim.GameState.Builder, nim.Nim.GameStateOrBuilder> 
@@ -10839,7 +11227,13 @@ public final class Netcode {
       private com.google.protobuf.SingleFieldBuilderV3<
           dab.DotsAndBoxes.GameState, dab.DotsAndBoxes.GameState.Builder, dab.DotsAndBoxes.GameStateOrBuilder> dabGameStateBuilder_;
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
+       */
+      public boolean hasDabGameState() {
+        return gameStateCase_ == 3;
+      }
+      /**
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public dab.DotsAndBoxes.GameState getDabGameState() {
         if (dabGameStateBuilder_ == null) {
@@ -10855,7 +11249,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public Builder setDabGameState(dab.DotsAndBoxes.GameState value) {
         if (dabGameStateBuilder_ == null) {
@@ -10871,7 +11265,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public Builder setDabGameState(
           dab.DotsAndBoxes.GameState.Builder builderForValue) {
@@ -10885,7 +11279,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public Builder mergeDabGameState(dab.DotsAndBoxes.GameState value) {
         if (dabGameStateBuilder_ == null) {
@@ -10907,7 +11301,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public Builder clearDabGameState() {
         if (dabGameStateBuilder_ == null) {
@@ -10926,13 +11320,13 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public dab.DotsAndBoxes.GameState.Builder getDabGameStateBuilder() {
         return getDabGameStateFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       public dab.DotsAndBoxes.GameStateOrBuilder getDabGameStateOrBuilder() {
         if ((gameStateCase_ == 3) && (dabGameStateBuilder_ != null)) {
@@ -10945,7 +11339,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional .dab.GameState dab_game_state = 3;</code>
+       * <code>.dab.GameState dab_game_state = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dab.DotsAndBoxes.GameState, dab.DotsAndBoxes.GameState.Builder, dab.DotsAndBoxes.GameStateOrBuilder> 
@@ -10968,13 +11362,13 @@ public final class Netcode {
 
       private boolean beginningPlayer_ ;
       /**
-       * <code>optional bool beginning_player = 4;</code>
+       * <code>bool beginning_player = 4;</code>
        */
       public boolean getBeginningPlayer() {
         return beginningPlayer_;
       }
       /**
-       * <code>optional bool beginning_player = 4;</code>
+       * <code>bool beginning_player = 4;</code>
        */
       public Builder setBeginningPlayer(boolean value) {
         
@@ -10983,7 +11377,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional bool beginning_player = 4;</code>
+       * <code>bool beginning_player = 4;</code>
        */
       public Builder clearBeginningPlayer() {
         
@@ -10993,12 +11387,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -11045,21 +11439,21 @@ public final class Netcode {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     java.lang.String getUserToken();
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     com.google.protobuf.ByteString
         getUserTokenBytes();
 
     /**
-     * <code>optional string match_token = 2;</code>
+     * <code>string match_token = 2;</code>
      */
     java.lang.String getMatchToken();
     /**
-     * <code>optional string match_token = 2;</code>
+     * <code>string match_token = 2;</code>
      */
     com.google.protobuf.ByteString
         getMatchTokenBytes();
@@ -11071,6 +11465,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.AbortMatchRequest)
       AbortMatchRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use AbortMatchRequest.newBuilder() to construct.
     private AbortMatchRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -11083,7 +11478,7 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private AbortMatchRequest(
         com.google.protobuf.CodedInputStream input,
@@ -11091,6 +11486,8 @@ public final class Netcode {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -11100,7 +11497,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -11125,6 +11523,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -11143,7 +11542,7 @@ public final class Netcode {
     public static final int USER_TOKEN_FIELD_NUMBER = 1;
     private volatile java.lang.Object userToken_;
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     public java.lang.String getUserToken() {
       java.lang.Object ref = userToken_;
@@ -11158,7 +11557,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string user_token = 1;</code>
+     * <code>string user_token = 1;</code>
      */
     public com.google.protobuf.ByteString
         getUserTokenBytes() {
@@ -11177,7 +11576,7 @@ public final class Netcode {
     public static final int MATCH_TOKEN_FIELD_NUMBER = 2;
     private volatile java.lang.Object matchToken_;
     /**
-     * <code>optional string match_token = 2;</code>
+     * <code>string match_token = 2;</code>
      */
     public java.lang.String getMatchToken() {
       java.lang.Object ref = matchToken_;
@@ -11192,7 +11591,7 @@ public final class Netcode {
       }
     }
     /**
-     * <code>optional string match_token = 2;</code>
+     * <code>string match_token = 2;</code>
      */
     public com.google.protobuf.ByteString
         getMatchTokenBytes() {
@@ -11226,6 +11625,7 @@ public final class Netcode {
       if (!getMatchTokenBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, matchToken_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -11239,11 +11639,11 @@ public final class Netcode {
       if (!getMatchTokenBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, matchToken_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -11259,6 +11659,7 @@ public final class Netcode {
           .equals(other.getUserToken());
       result = result && getMatchToken()
           .equals(other.getMatchToken());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -11268,7 +11669,7 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + USER_TOKEN_FIELD_NUMBER;
       hash = (53 * hash) + getUserToken().hashCode();
       hash = (37 * hash) + MATCH_TOKEN_FIELD_NUMBER;
@@ -11278,6 +11679,17 @@ public final class Netcode {
       return hash;
     }
 
+    public static netcode.Netcode.AbortMatchRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.AbortMatchRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.AbortMatchRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -11428,7 +11840,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -11441,12 +11853,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -11468,6 +11880,7 @@ public final class Netcode {
           matchToken_ = other.matchToken_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -11496,7 +11909,7 @@ public final class Netcode {
 
       private java.lang.Object userToken_ = "";
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public java.lang.String getUserToken() {
         java.lang.Object ref = userToken_;
@@ -11511,7 +11924,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public com.google.protobuf.ByteString
           getUserTokenBytes() {
@@ -11527,7 +11940,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder setUserToken(
           java.lang.String value) {
@@ -11540,7 +11953,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder clearUserToken() {
         
@@ -11549,7 +11962,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string user_token = 1;</code>
+       * <code>string user_token = 1;</code>
        */
       public Builder setUserTokenBytes(
           com.google.protobuf.ByteString value) {
@@ -11565,7 +11978,7 @@ public final class Netcode {
 
       private java.lang.Object matchToken_ = "";
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public java.lang.String getMatchToken() {
         java.lang.Object ref = matchToken_;
@@ -11580,7 +11993,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public com.google.protobuf.ByteString
           getMatchTokenBytes() {
@@ -11596,7 +12009,7 @@ public final class Netcode {
         }
       }
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public Builder setMatchToken(
           java.lang.String value) {
@@ -11609,7 +12022,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public Builder clearMatchToken() {
         
@@ -11618,7 +12031,7 @@ public final class Netcode {
         return this;
       }
       /**
-       * <code>optional string match_token = 2;</code>
+       * <code>string match_token = 2;</code>
        */
       public Builder setMatchTokenBytes(
           com.google.protobuf.ByteString value) {
@@ -11633,12 +12046,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -11691,6 +12104,7 @@ public final class Netcode {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:netcode.Nothing)
       NothingOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Nothing.newBuilder() to construct.
     private Nothing(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -11701,13 +12115,15 @@ public final class Netcode {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Nothing(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -11717,7 +12133,8 @@ public final class Netcode {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -11730,6 +12147,7 @@ public final class Netcode {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -11757,6 +12175,7 @@ public final class Netcode {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -11764,11 +12183,11 @@ public final class Netcode {
       if (size != -1) return size;
 
       size = 0;
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -11780,6 +12199,7 @@ public final class Netcode {
       netcode.Netcode.Nothing other = (netcode.Netcode.Nothing) obj;
 
       boolean result = true;
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -11789,12 +12209,23 @@ public final class Netcode {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
+    public static netcode.Netcode.Nothing parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static netcode.Netcode.Nothing parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static netcode.Netcode.Nothing parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -11939,7 +12370,7 @@ public final class Netcode {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -11952,12 +12383,12 @@ public final class Netcode {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -11971,6 +12402,7 @@ public final class Netcode {
 
       public Builder mergeFrom(netcode.Netcode.Nothing other) {
         if (other == netcode.Netcode.Nothing.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -11998,12 +12430,12 @@ public final class Netcode {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 

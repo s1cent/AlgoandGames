@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/game/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/game/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/game/target/generated-sources/protobuf/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/game/target/generated-sources/protobuf/grpc-java" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -19,12 +19,12 @@ public final class DotsAndBoxes {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional uint32 number_of_vertical_columns = 1;</code>
+     * <code>uint32 number_of_vertical_columns = 1;</code>
      */
     int getNumberOfVerticalColumns();
 
     /**
-     * <code>optional uint32 number_of_horizontal_columns = 2;</code>
+     * <code>uint32 number_of_horizontal_columns = 2;</code>
      */
     int getNumberOfHorizontalColumns();
   }
@@ -35,6 +35,7 @@ public final class DotsAndBoxes {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:dab.GameParameter)
       GameParameterOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GameParameter.newBuilder() to construct.
     private GameParameter(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -47,7 +48,7 @@ public final class DotsAndBoxes {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GameParameter(
         com.google.protobuf.CodedInputStream input,
@@ -55,6 +56,8 @@ public final class DotsAndBoxes {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -64,7 +67,8 @@ public final class DotsAndBoxes {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -87,6 +91,7 @@ public final class DotsAndBoxes {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -105,7 +110,7 @@ public final class DotsAndBoxes {
     public static final int NUMBER_OF_VERTICAL_COLUMNS_FIELD_NUMBER = 1;
     private int numberOfVerticalColumns_;
     /**
-     * <code>optional uint32 number_of_vertical_columns = 1;</code>
+     * <code>uint32 number_of_vertical_columns = 1;</code>
      */
     public int getNumberOfVerticalColumns() {
       return numberOfVerticalColumns_;
@@ -114,7 +119,7 @@ public final class DotsAndBoxes {
     public static final int NUMBER_OF_HORIZONTAL_COLUMNS_FIELD_NUMBER = 2;
     private int numberOfHorizontalColumns_;
     /**
-     * <code>optional uint32 number_of_horizontal_columns = 2;</code>
+     * <code>uint32 number_of_horizontal_columns = 2;</code>
      */
     public int getNumberOfHorizontalColumns() {
       return numberOfHorizontalColumns_;
@@ -138,6 +143,7 @@ public final class DotsAndBoxes {
       if (numberOfHorizontalColumns_ != 0) {
         output.writeUInt32(2, numberOfHorizontalColumns_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -153,11 +159,11 @@ public final class DotsAndBoxes {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, numberOfHorizontalColumns_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -173,6 +179,7 @@ public final class DotsAndBoxes {
           == other.getNumberOfVerticalColumns());
       result = result && (getNumberOfHorizontalColumns()
           == other.getNumberOfHorizontalColumns());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -182,7 +189,7 @@ public final class DotsAndBoxes {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NUMBER_OF_VERTICAL_COLUMNS_FIELD_NUMBER;
       hash = (53 * hash) + getNumberOfVerticalColumns();
       hash = (37 * hash) + NUMBER_OF_HORIZONTAL_COLUMNS_FIELD_NUMBER;
@@ -192,6 +199,17 @@ public final class DotsAndBoxes {
       return hash;
     }
 
+    public static dab.DotsAndBoxes.GameParameter parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dab.DotsAndBoxes.GameParameter parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static dab.DotsAndBoxes.GameParameter parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -342,7 +360,7 @@ public final class DotsAndBoxes {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -355,12 +373,12 @@ public final class DotsAndBoxes {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -380,6 +398,7 @@ public final class DotsAndBoxes {
         if (other.getNumberOfHorizontalColumns() != 0) {
           setNumberOfHorizontalColumns(other.getNumberOfHorizontalColumns());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -408,13 +427,13 @@ public final class DotsAndBoxes {
 
       private int numberOfVerticalColumns_ ;
       /**
-       * <code>optional uint32 number_of_vertical_columns = 1;</code>
+       * <code>uint32 number_of_vertical_columns = 1;</code>
        */
       public int getNumberOfVerticalColumns() {
         return numberOfVerticalColumns_;
       }
       /**
-       * <code>optional uint32 number_of_vertical_columns = 1;</code>
+       * <code>uint32 number_of_vertical_columns = 1;</code>
        */
       public Builder setNumberOfVerticalColumns(int value) {
         
@@ -423,7 +442,7 @@ public final class DotsAndBoxes {
         return this;
       }
       /**
-       * <code>optional uint32 number_of_vertical_columns = 1;</code>
+       * <code>uint32 number_of_vertical_columns = 1;</code>
        */
       public Builder clearNumberOfVerticalColumns() {
         
@@ -434,13 +453,13 @@ public final class DotsAndBoxes {
 
       private int numberOfHorizontalColumns_ ;
       /**
-       * <code>optional uint32 number_of_horizontal_columns = 2;</code>
+       * <code>uint32 number_of_horizontal_columns = 2;</code>
        */
       public int getNumberOfHorizontalColumns() {
         return numberOfHorizontalColumns_;
       }
       /**
-       * <code>optional uint32 number_of_horizontal_columns = 2;</code>
+       * <code>uint32 number_of_horizontal_columns = 2;</code>
        */
       public Builder setNumberOfHorizontalColumns(int value) {
         
@@ -449,7 +468,7 @@ public final class DotsAndBoxes {
         return this;
       }
       /**
-       * <code>optional uint32 number_of_horizontal_columns = 2;</code>
+       * <code>uint32 number_of_horizontal_columns = 2;</code>
        */
       public Builder clearNumberOfHorizontalColumns() {
         
@@ -459,12 +478,12 @@ public final class DotsAndBoxes {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -511,17 +530,17 @@ public final class DotsAndBoxes {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional bool vertical = 1;</code>
+     * <code>bool vertical = 1;</code>
      */
     boolean getVertical();
 
     /**
-     * <code>optional uint32 target_column = 2;</code>
+     * <code>uint32 target_column = 2;</code>
      */
     int getTargetColumn();
 
     /**
-     * <code>optional uint32 target_gap = 3;</code>
+     * <code>uint32 target_gap = 3;</code>
      */
     int getTargetGap();
   }
@@ -532,6 +551,7 @@ public final class DotsAndBoxes {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:dab.GameTurn)
       GameTurnOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GameTurn.newBuilder() to construct.
     private GameTurn(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -545,7 +565,7 @@ public final class DotsAndBoxes {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GameTurn(
         com.google.protobuf.CodedInputStream input,
@@ -553,6 +573,8 @@ public final class DotsAndBoxes {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -562,7 +584,8 @@ public final class DotsAndBoxes {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -590,6 +613,7 @@ public final class DotsAndBoxes {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -608,7 +632,7 @@ public final class DotsAndBoxes {
     public static final int VERTICAL_FIELD_NUMBER = 1;
     private boolean vertical_;
     /**
-     * <code>optional bool vertical = 1;</code>
+     * <code>bool vertical = 1;</code>
      */
     public boolean getVertical() {
       return vertical_;
@@ -617,7 +641,7 @@ public final class DotsAndBoxes {
     public static final int TARGET_COLUMN_FIELD_NUMBER = 2;
     private int targetColumn_;
     /**
-     * <code>optional uint32 target_column = 2;</code>
+     * <code>uint32 target_column = 2;</code>
      */
     public int getTargetColumn() {
       return targetColumn_;
@@ -626,7 +650,7 @@ public final class DotsAndBoxes {
     public static final int TARGET_GAP_FIELD_NUMBER = 3;
     private int targetGap_;
     /**
-     * <code>optional uint32 target_gap = 3;</code>
+     * <code>uint32 target_gap = 3;</code>
      */
     public int getTargetGap() {
       return targetGap_;
@@ -653,6 +677,7 @@ public final class DotsAndBoxes {
       if (targetGap_ != 0) {
         output.writeUInt32(3, targetGap_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -672,11 +697,11 @@ public final class DotsAndBoxes {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, targetGap_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -694,6 +719,7 @@ public final class DotsAndBoxes {
           == other.getTargetColumn());
       result = result && (getTargetGap()
           == other.getTargetGap());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -703,7 +729,7 @@ public final class DotsAndBoxes {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + VERTICAL_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getVertical());
@@ -716,6 +742,17 @@ public final class DotsAndBoxes {
       return hash;
     }
 
+    public static dab.DotsAndBoxes.GameTurn parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dab.DotsAndBoxes.GameTurn parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static dab.DotsAndBoxes.GameTurn parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -869,7 +906,7 @@ public final class DotsAndBoxes {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -882,12 +919,12 @@ public final class DotsAndBoxes {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -910,6 +947,7 @@ public final class DotsAndBoxes {
         if (other.getTargetGap() != 0) {
           setTargetGap(other.getTargetGap());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -938,13 +976,13 @@ public final class DotsAndBoxes {
 
       private boolean vertical_ ;
       /**
-       * <code>optional bool vertical = 1;</code>
+       * <code>bool vertical = 1;</code>
        */
       public boolean getVertical() {
         return vertical_;
       }
       /**
-       * <code>optional bool vertical = 1;</code>
+       * <code>bool vertical = 1;</code>
        */
       public Builder setVertical(boolean value) {
         
@@ -953,7 +991,7 @@ public final class DotsAndBoxes {
         return this;
       }
       /**
-       * <code>optional bool vertical = 1;</code>
+       * <code>bool vertical = 1;</code>
        */
       public Builder clearVertical() {
         
@@ -964,13 +1002,13 @@ public final class DotsAndBoxes {
 
       private int targetColumn_ ;
       /**
-       * <code>optional uint32 target_column = 2;</code>
+       * <code>uint32 target_column = 2;</code>
        */
       public int getTargetColumn() {
         return targetColumn_;
       }
       /**
-       * <code>optional uint32 target_column = 2;</code>
+       * <code>uint32 target_column = 2;</code>
        */
       public Builder setTargetColumn(int value) {
         
@@ -979,7 +1017,7 @@ public final class DotsAndBoxes {
         return this;
       }
       /**
-       * <code>optional uint32 target_column = 2;</code>
+       * <code>uint32 target_column = 2;</code>
        */
       public Builder clearTargetColumn() {
         
@@ -990,13 +1028,13 @@ public final class DotsAndBoxes {
 
       private int targetGap_ ;
       /**
-       * <code>optional uint32 target_gap = 3;</code>
+       * <code>uint32 target_gap = 3;</code>
        */
       public int getTargetGap() {
         return targetGap_;
       }
       /**
-       * <code>optional uint32 target_gap = 3;</code>
+       * <code>uint32 target_gap = 3;</code>
        */
       public Builder setTargetGap(int value) {
         
@@ -1005,7 +1043,7 @@ public final class DotsAndBoxes {
         return this;
       }
       /**
-       * <code>optional uint32 target_gap = 3;</code>
+       * <code>uint32 target_gap = 3;</code>
        */
       public Builder clearTargetGap() {
         
@@ -1015,12 +1053,12 @@ public final class DotsAndBoxes {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1067,22 +1105,22 @@ public final class DotsAndBoxes {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional uint32 vertical_columns = 1;</code>
+     * <code>uint32 vertical_columns = 1;</code>
      */
     int getVerticalColumns();
 
     /**
-     * <code>optional uint32 horizontal_columns = 2;</code>
+     * <code>uint32 horizontal_columns = 2;</code>
      */
     int getHorizontalColumns();
 
     /**
-     * <code>optional bytes vertical_lines = 3;</code>
+     * <code>bytes vertical_lines = 3;</code>
      */
     com.google.protobuf.ByteString getVerticalLines();
 
     /**
-     * <code>optional bytes horizontal_lines = 4;</code>
+     * <code>bytes horizontal_lines = 4;</code>
      */
     com.google.protobuf.ByteString getHorizontalLines();
   }
@@ -1093,6 +1131,7 @@ public final class DotsAndBoxes {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:dab.GameState)
       GameStateOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GameState.newBuilder() to construct.
     private GameState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1107,7 +1146,7 @@ public final class DotsAndBoxes {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GameState(
         com.google.protobuf.CodedInputStream input,
@@ -1115,6 +1154,8 @@ public final class DotsAndBoxes {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1124,7 +1165,8 @@ public final class DotsAndBoxes {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1157,6 +1199,7 @@ public final class DotsAndBoxes {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1175,7 +1218,7 @@ public final class DotsAndBoxes {
     public static final int VERTICAL_COLUMNS_FIELD_NUMBER = 1;
     private int verticalColumns_;
     /**
-     * <code>optional uint32 vertical_columns = 1;</code>
+     * <code>uint32 vertical_columns = 1;</code>
      */
     public int getVerticalColumns() {
       return verticalColumns_;
@@ -1184,7 +1227,7 @@ public final class DotsAndBoxes {
     public static final int HORIZONTAL_COLUMNS_FIELD_NUMBER = 2;
     private int horizontalColumns_;
     /**
-     * <code>optional uint32 horizontal_columns = 2;</code>
+     * <code>uint32 horizontal_columns = 2;</code>
      */
     public int getHorizontalColumns() {
       return horizontalColumns_;
@@ -1193,7 +1236,7 @@ public final class DotsAndBoxes {
     public static final int VERTICAL_LINES_FIELD_NUMBER = 3;
     private com.google.protobuf.ByteString verticalLines_;
     /**
-     * <code>optional bytes vertical_lines = 3;</code>
+     * <code>bytes vertical_lines = 3;</code>
      */
     public com.google.protobuf.ByteString getVerticalLines() {
       return verticalLines_;
@@ -1202,7 +1245,7 @@ public final class DotsAndBoxes {
     public static final int HORIZONTAL_LINES_FIELD_NUMBER = 4;
     private com.google.protobuf.ByteString horizontalLines_;
     /**
-     * <code>optional bytes horizontal_lines = 4;</code>
+     * <code>bytes horizontal_lines = 4;</code>
      */
     public com.google.protobuf.ByteString getHorizontalLines() {
       return horizontalLines_;
@@ -1232,6 +1275,7 @@ public final class DotsAndBoxes {
       if (!horizontalLines_.isEmpty()) {
         output.writeBytes(4, horizontalLines_);
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1255,11 +1299,11 @@ public final class DotsAndBoxes {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, horizontalLines_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1279,6 +1323,7 @@ public final class DotsAndBoxes {
           .equals(other.getVerticalLines());
       result = result && getHorizontalLines()
           .equals(other.getHorizontalLines());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1288,7 +1333,7 @@ public final class DotsAndBoxes {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + VERTICAL_COLUMNS_FIELD_NUMBER;
       hash = (53 * hash) + getVerticalColumns();
       hash = (37 * hash) + HORIZONTAL_COLUMNS_FIELD_NUMBER;
@@ -1302,6 +1347,17 @@ public final class DotsAndBoxes {
       return hash;
     }
 
+    public static dab.DotsAndBoxes.GameState parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dab.DotsAndBoxes.GameState parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static dab.DotsAndBoxes.GameState parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1458,7 +1514,7 @@ public final class DotsAndBoxes {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1471,12 +1527,12 @@ public final class DotsAndBoxes {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1502,6 +1558,7 @@ public final class DotsAndBoxes {
         if (other.getHorizontalLines() != com.google.protobuf.ByteString.EMPTY) {
           setHorizontalLines(other.getHorizontalLines());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -1530,13 +1587,13 @@ public final class DotsAndBoxes {
 
       private int verticalColumns_ ;
       /**
-       * <code>optional uint32 vertical_columns = 1;</code>
+       * <code>uint32 vertical_columns = 1;</code>
        */
       public int getVerticalColumns() {
         return verticalColumns_;
       }
       /**
-       * <code>optional uint32 vertical_columns = 1;</code>
+       * <code>uint32 vertical_columns = 1;</code>
        */
       public Builder setVerticalColumns(int value) {
         
@@ -1545,7 +1602,7 @@ public final class DotsAndBoxes {
         return this;
       }
       /**
-       * <code>optional uint32 vertical_columns = 1;</code>
+       * <code>uint32 vertical_columns = 1;</code>
        */
       public Builder clearVerticalColumns() {
         
@@ -1556,13 +1613,13 @@ public final class DotsAndBoxes {
 
       private int horizontalColumns_ ;
       /**
-       * <code>optional uint32 horizontal_columns = 2;</code>
+       * <code>uint32 horizontal_columns = 2;</code>
        */
       public int getHorizontalColumns() {
         return horizontalColumns_;
       }
       /**
-       * <code>optional uint32 horizontal_columns = 2;</code>
+       * <code>uint32 horizontal_columns = 2;</code>
        */
       public Builder setHorizontalColumns(int value) {
         
@@ -1571,7 +1628,7 @@ public final class DotsAndBoxes {
         return this;
       }
       /**
-       * <code>optional uint32 horizontal_columns = 2;</code>
+       * <code>uint32 horizontal_columns = 2;</code>
        */
       public Builder clearHorizontalColumns() {
         
@@ -1582,13 +1639,13 @@ public final class DotsAndBoxes {
 
       private com.google.protobuf.ByteString verticalLines_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>optional bytes vertical_lines = 3;</code>
+       * <code>bytes vertical_lines = 3;</code>
        */
       public com.google.protobuf.ByteString getVerticalLines() {
         return verticalLines_;
       }
       /**
-       * <code>optional bytes vertical_lines = 3;</code>
+       * <code>bytes vertical_lines = 3;</code>
        */
       public Builder setVerticalLines(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -1600,7 +1657,7 @@ public final class DotsAndBoxes {
         return this;
       }
       /**
-       * <code>optional bytes vertical_lines = 3;</code>
+       * <code>bytes vertical_lines = 3;</code>
        */
       public Builder clearVerticalLines() {
         
@@ -1611,13 +1668,13 @@ public final class DotsAndBoxes {
 
       private com.google.protobuf.ByteString horizontalLines_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>optional bytes horizontal_lines = 4;</code>
+       * <code>bytes horizontal_lines = 4;</code>
        */
       public com.google.protobuf.ByteString getHorizontalLines() {
         return horizontalLines_;
       }
       /**
-       * <code>optional bytes horizontal_lines = 4;</code>
+       * <code>bytes horizontal_lines = 4;</code>
        */
       public Builder setHorizontalLines(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -1629,7 +1686,7 @@ public final class DotsAndBoxes {
         return this;
       }
       /**
-       * <code>optional bytes horizontal_lines = 4;</code>
+       * <code>bytes horizontal_lines = 4;</code>
        */
       public Builder clearHorizontalLines() {
         
@@ -1639,12 +1696,12 @@ public final class DotsAndBoxes {
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
