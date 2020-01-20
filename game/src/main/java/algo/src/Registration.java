@@ -76,6 +76,11 @@ public class Registration {
         String url = "129.27.202.46";
         int port = 80;
 
+        if(UserRegistrationSettings.matrNr.isEmpty()) {
+            System.out.println("You fucked up. Read the readme again.");
+            return;
+        }
+
         String matrNr = UserRegistrationSettings.matrNr;
         String secret = UserRegistrationSettings.secret;
 
