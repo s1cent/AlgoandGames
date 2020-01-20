@@ -1,4 +1,6 @@
+package algo.src;
 
+import algo.src.inGame;
 import java.util.Scanner;
 
 

@@ -1,6 +1,8 @@
-import jdk.internal.net.http.common.Pair;
+package algo.src;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class inGame {
 
@@ -39,6 +41,8 @@ public class inGame {
             System.out.println("looking out for points");
             System.out.println(moves);
 
+            /*
+            Broken
             for (Map<Integer, Integer> value : entry.getValue()) {
                 System.out.println(value);
                 if(moves.containsKey(value))
@@ -46,6 +50,7 @@ public class inGame {
                     System.out.println("found something!");
                 }
             }
+            */
 
 
         }
