@@ -10,4 +10,5 @@
 /.idea/libraries/*
 /.idea/libraries/
 /.idea/codeStyles/*
+/game/src/algo.src.main/java/algo/src/UserToken.java
 /game/src/main/java/algo/src/UserToken.java
