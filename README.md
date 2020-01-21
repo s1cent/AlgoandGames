@@ -17,11 +17,10 @@ Im game Odner: Kompilieren mit "mvn clean install" und zum ausführen können ".
 **Setup (jeder muss das machen):**
 * Verbinden mit Tu Graz VPN: https://tugnet.tugraz.at/zugang/vpn/
 * UserRegistrationSettings.java mit persönlichen Daten befüllen
-* Kopie von UserTokenExample.java mit Namen UserToken.java erstellen
 * mvn clean install
 * Run registration ausführen
 * 'Error_code: OK' sollte vom server zurückkommen
 * UserToken merken/aufschreiben
 * Eigenen User Token in UserToken datei einfügen
 * UserToken in die UserTokens Textdatei einfügen
-* Commit und Push (**Aber bitte nicht UserRegistrationSettings**)
+* Commit und Push (**Aber bitte nicht UserRegistrationSettings und UserToken**)
