@@ -14,6 +14,8 @@ public class Playfield {
     private int fixedLines = 0;
     private int maxLines = 0;
 
+    private BoardValue boardValue = null;   // TODO: NOTE: EXPERIMENTAL! Do not rely on this for algorithm
+
     private CurrentPlayer currentPlayer; // Player who is allowed to play next half move
 
     Boolean[][] horizontalGaps;
@@ -67,6 +69,10 @@ public class Playfield {
         return playerBPoints;
     }
 
+    public BoardValue getBoardValue() {
+        return boardValue;
+    }
+
     private Playfield(int width_, int height_, CurrentPlayer startingPlayer) {
         width = width_;
         height = height_;
@@ -84,6 +90,8 @@ public class Playfield {
         for (Boolean[] verticalGap : verticalGaps) {
             Arrays.fill(verticalGap, false);
         }
+
+        calculateBoardValue(); // all values will be 0
     }
 
     // Used to initialize a new playfield.
@@ -211,6 +219,8 @@ public class Playfield {
             changePlayer();
         }
 
+        calculateBoardValue();
+
         return currentPlayer;
     }
 
@@ -337,6 +347,53 @@ public class Playfield {
         System.out.println("Total number of lines: " + maxLines);
         System.out.println("Current number of lines: " + fixedLines);
         System.out.println("Half moves remaining: " + (maxLines - fixedLines));
+    }
+
+    private void calculateBoardValue() {
+        BoardValue currentBoardValue = new BoardValue();
+
+        // check all horizontal lines
+        for(int i = 0; i <= height; i++) {
+            for(int j = 0; j < width; j++) {
+                HalfMove move = HalfMove.newHalfMove(i, j, HalfMove.LineOrientation.HORIZONTAL);
+                if(move == null) {
+                    continue;
+                }
+                if(!horizontalGaps[i][j]) {
+                    int points = doesMoveCloseABox(move);
+                    if(points == 1) {
+                        currentBoardValue.closingMoves++;
+                        currentBoardValue.singleCloseMoves++;
+                    }
+                    else if(points == 2) {
+                        currentBoardValue.closingMoves++;
+                        currentBoardValue.doubleCloseMoves++;
+                    }
+                }
+            }
+        }
+
+        for(int i = 0; i <= width; i++) {
+            for(int j = 0; j < height; j++) {
+                HalfMove move = HalfMove.newHalfMove(i, j, HalfMove.LineOrientation.VERTICAL);
+                if(move == null) {
+                    continue;
+                }
+                if(verticalGaps[i][j]) {
+                    int points = doesMoveCloseABox(move);
+                    if(points == 1) {
+                        currentBoardValue.closingMoves++;
+                        currentBoardValue.singleCloseMoves++;
+                    }
+                    else if(points == 2) {
+                        currentBoardValue.closingMoves++;
+                        currentBoardValue.doubleCloseMoves++;
+                    }
+                }
+            }
+        }
+
+        boardValue = currentBoardValue;
     }
 
 }
