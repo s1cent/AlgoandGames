@@ -344,9 +344,11 @@ public class Playfield {
         System.out.println("Player A points: " + playerAPoints);
         System.out.println("Player B points: " + playerBPoints);
         System.out.println("Current player: " + currentPlayer.toString());
-        System.out.println("Total number of lines: " + maxLines);
-        System.out.println("Current number of lines: " + fixedLines);
+        System.out.println("Total number of lines(half moves): " + maxLines);
+        System.out.println("Current number of lines(half moves): " + fixedLines);
         System.out.println("Half moves remaining: " + (maxLines - fixedLines));
+        System.out.println("Possible total closing half moves: " + boardValue.closingMoves);
+        System.out.println("Of those that can double close: " + boardValue.doubleCloseMoves);
     }
 
     private void calculateBoardValue() {
@@ -379,7 +381,7 @@ public class Playfield {
                 if(move == null) {
                     continue;
                 }
-                if(verticalGaps[i][j]) {
+                if(!verticalGaps[i][j]) {
                     int points = doesMoveCloseABox(move);
                     if(points == 1) {
                         currentBoardValue.closingMoves++;
