@@ -398,4 +398,34 @@ public class Playfield {
         boardValue = currentBoardValue;
     }
 
+    // Returns an index for a flattened 1d array that is equivalent to the 2d board array
+    public int TwoDimIndexToOneDimIndex(int columnIndex, int gapIndex, HalfMove.LineOrientation orientation) {
+        int index = -1;
+        if(orientation == HalfMove.LineOrientation.VERTICAL) {
+            index = columnIndex * height + gapIndex;
+        }
+        else {
+            index = columnIndex * width + gapIndex;
+        }
+        return index;
+    }
+
+    // Returns an array of 2 indices {column, gap} that is equivalent an index of a flattened 1d array
+    public int[] OneDimIndexToTwoDimIndex(int index, HalfMove.LineOrientation orientation) {
+        int columnIndex = -1;
+        int gapIndex = -1;
+        if(orientation == HalfMove.LineOrientation.VERTICAL) {
+            gapIndex = index % height;
+            columnIndex = (index - gapIndex) / height;
+        }
+        else {
+            gapIndex = index % width;
+            columnIndex = (index - gapIndex) / width;
+        }
+        int[] retvalue = new int[2];
+        retvalue[0] = columnIndex;
+        retvalue[1] = gapIndex;
+        return retvalue;
+    }
+
 }
