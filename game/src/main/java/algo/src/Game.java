@@ -135,6 +135,11 @@ public class Game {
             networkManager.abortMatch();
             return;
         }
+        if(state.getGameStatus().getNumber() == Netcode.GameStatus.MATCH_NOT_STARTED_VALUE) {
+            System.out.println("No player/bot could be found. Try again later");
+            networkManager.abortMatch();
+            return;
+        }
 
         int width = state.getDabGameState().getVerticalColumns() - 1;
         int height = state.getDabGameState().getHorizontalColumns() - 1;
@@ -145,6 +150,7 @@ public class Game {
         else {
             player = Playfield.CurrentPlayer.PLAYER_B;
         }
+        System.out.println("Starting network game with width: " + width + ", height: " + height + " and us being " + player.toString());
 
         playfield = Playfield.initPlayfield(width, height, Playfield.CurrentPlayer.PLAYER_A);
 
@@ -152,30 +158,54 @@ public class Game {
         playNetworkGame();
     }
 
-    // Returns true if it is our turn to play
-    private boolean isOurTurn() {
-        if(playfield.getCurrentPlayer() == player) {
-            return true;
-        }
+    // Returns 1 if it is our turn to play
+    // Returns 0 if it is opponents turn to play
+    // Returns -1 if game is over
+    private int isOurTurn() {
         try {
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.SECONDS.sleep(5);
 
             Netcode.GameStateResponse state = networkManager.getGameState();
             if(state == null) {
                 System.out.println("isOurTurn getGameState failed");
-                return false;
+                return 0;
+            }
+            System.out.println("Game status: " + state.getGameStatus());
+
+            if(state.getGameStatus().getNumber() == Netcode.GameStatus.MATCH_ABORTED_VALUE) {
+                System.out.println("Match was aborted");
+                return -1;
+            }
+            else if(state.getGameStatus().getNumber() == Netcode.GameStatus.MATCH_LOST_VALUE) {
+                System.out.println("Match was lost");
+                losses++;
+                return -1;
+            }
+            else if(state.getGameStatus().getNumber() == Netcode.GameStatus.MATCH_WON_VALUE) {
+                System.out.println("Match was won");
+                wins++;
+                return -1;
+            }
+            else if(state.getGameStatus().getNumber() == Netcode.GameStatus.DRAW_VALUE) {
+                System.out.println("Match was a draw");
+                draws++;
+                return -1;
+            }
+            else if(state.getGameStatus().getNumber() == Netcode.GameStatus.YOUR_TURN_VALUE) {
+                playfield.playOpponentMoves(state.getDabGameState());
+                return 1;
+            }
+            else if(state.getGameStatus().getNumber() == Netcode.GameStatus.OPPONENTS_TURN_VALUE) {
+                playfield.playOpponentMoves(state.getDabGameState());
+                return 0;
             }
 
-            if(playfield.playOpponentMoves(state.getDabGameState())) {
-                return true;
-            }
-            else {
-                return false;
-            }
+            return 0;
         }
         catch (Exception ex) {
             System.out.println("isOurTurn exception: " + ex);
-            return false;
+            ex.printStackTrace();
+            return 0;
         }
     }
 
@@ -183,6 +213,7 @@ public class Game {
     private void playNetworkGame() {
         while (true) {
 
+            /*
             // Check if game is over
             if(playfield.isGameOver()) {
                 Playfield.GameResult result = playfield.getWinner();
@@ -210,14 +241,24 @@ public class Game {
                 }
                 return;
             }
+             */
 
             long startWaitTime  = System.currentTimeMillis();
-            boolean timeout = false;
             // Waits for opponent to play
-            while (!isOurTurn())
+            while (true)
             {
-                if(System.currentTimeMillis() >= startWaitTime + (10 * 60 * 1000)) {
-                    // Wait for 10 minutes for next move
+                int retvalue = isOurTurn();
+                if(retvalue == 1) {
+                    // our turn
+                    break;
+                }
+                else if(retvalue == -1) {
+                    // game is over
+                    return;
+                }
+
+                if(System.currentTimeMillis() >= startWaitTime + (6 * 60 * 1000)) {
+                    // Wait for 6 minutes for next move
                     abortNetworkGame(true);
                     return;
                 }
@@ -225,20 +266,47 @@ public class Game {
             }
 
             // Blocks until our move has been played
-            playMove();
+            if(!playMove()) {
+                return;
+            }
         }
     }
 
     // Plays our own move
-    private void playMove() {
+    // Returns true if played and false if we aborted
+    private boolean playMove() {
+        System.out.println("Playing move number: " + (playfield.movesPlayed.size() + 1));
         // TODO: Play the game
-        HalfMove move = HalfMove.newHalfMove(1, 1, HalfMove.LineOrientation.HORIZONTAL, player);
+        HalfMove move = HalfMove.newHalfMove(0, 1, HalfMove.LineOrientation.HORIZONTAL, player);
+        if(move == null) {
+            System.out.println("Illegal move was created");
+            playfield.printPlayfield();
+            playfield.printStatus();
+            abortNetworkGame(false);
+            return false;
+        }
         if(playfield.playHalfMove(move) == null) {
             System.out.println("Illegal move was tried.... Check the algorithm and playfield");
             playfield.printPlayfield();
             playfield.printStatus();
             abortNetworkGame(false);
+            return false;
         }
+
+        long startWaitTime  = System.currentTimeMillis();
+        while(true) {
+            if(networkManager.submitTurn(move) != null) {
+                break;
+            }
+
+            if(System.currentTimeMillis() >= startWaitTime + (30 * 1000)) {
+                // Repeat move for 30 seconds and abort if still doesnt work
+                System.out.println("Own move timeout. Server did not accept move. THIS SHOULD NEVER HAPPEN!");
+                abortNetworkGame(true);
+                return false;
+            }
+        }
+        return true;
     }
 
     private void startGame() {
