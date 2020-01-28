@@ -135,7 +135,7 @@ public class Playfield {
 
     // Prints the whole playfield into the console
     public void printPlayfield() {
-        for(int i = 0; i <= height; i++) {
+        for(int i = 0; i < height; i++) {
             for(int j = 0; j < width; j++) {
                 System.out.print("+");
                 if(horizontalGaps[i][j]) {
@@ -145,19 +145,19 @@ public class Playfield {
                     System.out.print("  ");
                 }
             }
-            System.out.print("+\n");
+            System.out.print("\n");
 
             if(i >= height) {
                 break;
             }
-            for(int j = 0; j <= width; j++) {
+            for(int j = 0; j < width; j++) {
                 if(verticalGaps[j][i]) {
                     System.out.print("|");
                 }
                 else {
                     System.out.print(" ");
                 }
-                if(j == width) {
+                if(j == width - 1) {
                     System.out.print("\n");
                 }
                 else {
@@ -176,23 +176,28 @@ public class Playfield {
     public boolean isHalfMoveValid(HalfMove move, boolean checkCurrentPlayerMatch) {
         if(checkCurrentPlayerMatch) {
             if(currentPlayer != move.getPlayer()){
+                System.out.println(currentPlayer + " " + move.getPlayer());
+                System.out.println("Wrong Player");
                 return false;
             }
         }
 
         if(fixedLines >= maxLines) {
             // Game is over
+            System.out.println("Game Over");
             return false;
         }
 
         // Check if line is already in place
         if(move.isVertical()) {
             if(verticalGaps[move.getColumnIndex()][move.getGapIndex()]) {
+                System.out.println("Already Set Vertical");
                 return false;
             }
         }
         else {
             if(horizontalGaps[move.getColumnIndex()][move.getGapIndex()]) {
+                System.out.println("Already Set Horizontal");
                 return false;
             }
         }
@@ -367,7 +372,7 @@ public class Playfield {
         BoardValue currentBoardValue = new BoardValue();
 
         // check all horizontal lines
-        for(int i = 0; i <= height; i++) {
+        for(int i = 0; i < height; i++) {
             for(int j = 0; j < width; j++) {
                 HalfMove move = HalfMove.newHalfMove(i, j, HalfMove.LineOrientation.HORIZONTAL);
                 if(move == null) {
@@ -387,7 +392,7 @@ public class Playfield {
             }
         }
 
-        for(int i = 0; i <= width; i++) {
+        for(int i = 0; i < width; i++) {
             for(int j = 0; j < height; j++) {
                 HalfMove move = HalfMove.newHalfMove(i, j, HalfMove.LineOrientation.VERTICAL);
                 if(move == null) {

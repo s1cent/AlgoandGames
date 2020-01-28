@@ -4,6 +4,9 @@ import com.google.protobuf.ByteString;
 import dab.DotsAndBoxes;
 import netcode.Netcode;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +23,8 @@ public class Game {
     private NetworkManager networkManager;
 
     private boolean networkGameInProgress = false;
+
+    private List<HalfMove> moveList = new ArrayList<>();
 
     public Game() {
         networkManager = new NetworkManager();
@@ -61,9 +66,10 @@ public class Game {
             }
             else if(option.equals("offline")) {
                 System.out.println("Starting offline game against our bot...");
-                resetGame();
+                System.out.println("Set a width and height!");
 
-                System.out.println("Offline games not implemented yet");
+                resetGame();
+                startGame(scanner.nextInt(), scanner.nextInt(), scanner);
                 // TODO:
                 continue;
             }
@@ -232,62 +238,103 @@ public class Game {
     // Plays our own move
     private void playMove() {
         // TODO: Play the game
-        HalfMove move = HalfMove.newHalfMove(1, 1, HalfMove.LineOrientation.HORIZONTAL, player);
-        if(playfield.playHalfMove(move) == null) {
+        HalfMove move;
+        Random r = new Random();
+
+        while (true){
+            int vertical = r.nextInt(1);
+
+            if (vertical == 0) {
+                move = HalfMove.newHalfMove(r.nextInt(playfield.getWidth() - 1),
+                        r.nextInt(playfield.getWidth() - 1), HalfMove.LineOrientation.VERTICAL, player);
+
+                if(checkIfmove(move))
+                {
+                    move.setOrientation(HalfMove.LineOrientation.HORIZONTAL);
+                }
+            }
+            else
+            {
+                move = HalfMove.newHalfMove(r.nextInt(playfield.getWidth() - 1),
+                        r.nextInt(playfield.getWidth() - 2), HalfMove.LineOrientation.HORIZONTAL, player);
+
+                if(checkIfmove(move))
+                {
+                    move.setOrientation(HalfMove.LineOrientation.VERTICAL);
+                }
+            }
+
+
+            if(!checkIfmove(move))
+                break;
+        }
+
+        moveList.add(move);
+        if((player = playfield.playHalfMove(move)) == null) {
+            System.out.println(move.getColumnIndex() + " " + move.getGapIndex());
             System.out.println("Illegal move was tried.... Check the algorithm and playfield");
             playfield.printPlayfield();
             playfield.printStatus();
             abortNetworkGame(false);
         }
+        playfield.printPlayfield();
+        playfield.printStatus();
     }
 
-    private void startGame() {
+    private void startGame(int width, int height, Scanner scanner) {
         try {
             // Example of a simple game situation
-            TimeUnit.SECONDS.sleep(2);
+            player = Playfield.CurrentPlayer.PLAYER_A;
 
-            HalfMove move = HalfMove.newHalfMove(0, 0, HalfMove.LineOrientation.HORIZONTAL, player);
-            Playfield.CurrentPlayer currentPlayer = playfield.playHalfMove(move);
+            playfield = Playfield.initPlayfield(width, height, player);
             playfield.printPlayfield();
-            playfield.printStatus();
+            System.out.println("First column then gab and than if horizontal or vertical!");
 
-            TimeUnit.SECONDS.sleep(2);
+            while (true)
+            {
+                System.out.println("Your Turn!");
 
-            move = HalfMove.newHalfMove(0, 0, HalfMove.LineOrientation.VERTICAL, currentPlayer);
-            currentPlayer = playfield.playHalfMove(move);
-            playfield.printPlayfield();
-            playfield.printStatus();
+                if(player != Playfield.CurrentPlayer.PLAYER_B)
+                    offlineMove(scanner);
 
-            TimeUnit.SECONDS.sleep(2);
-
-            move = HalfMove.newHalfMove(1, 0, HalfMove.LineOrientation.VERTICAL, currentPlayer);
-            currentPlayer = playfield.playHalfMove(move);
-            playfield.printPlayfield();
-            playfield.printStatus();
-
-            TimeUnit.SECONDS.sleep(2);
-
-            // this move closes box
-            move = HalfMove.newHalfMove(1, 0, HalfMove.LineOrientation.HORIZONTAL, currentPlayer);
-            Playfield.CurrentPlayer closePlayer = playfield.playHalfMove(move);
-            playfield.printPlayfield();
-            playfield.printStatus();
-
-            assert(closePlayer == currentPlayer);
-
-            currentPlayer = closePlayer;
-
-            TimeUnit.SECONDS.sleep(2);
-
-            move = HalfMove.newHalfMove(1, 1, HalfMove.LineOrientation.HORIZONTAL, currentPlayer);
-            currentPlayer = playfield.playHalfMove(move);
-            playfield.printPlayfield();
-            playfield.printStatus();
+                if(player != Playfield.CurrentPlayer.PLAYER_A)
+                    playMove();
+            }
 
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void offlineMove(Scanner scanner) {
+        int column = scanner.nextInt();
+        int gap = scanner.nextInt();
+        int vertical = scanner.nextInt();
+
+        HalfMove move;
+        if(vertical == 0)
+            move = HalfMove.newHalfMove(column, gap, HalfMove.LineOrientation.VERTICAL, player);
+        else
+            move = HalfMove.newHalfMove(column, gap, HalfMove.LineOrientation.HORIZONTAL, player);
+
+
+        moveList.add(move);
+        player = playfield.playHalfMove(move);
+        playfield.printPlayfield();
+        playfield.printStatus();
+    }
+
+    public boolean checkIfmove (HalfMove move)
+    {
+        for(HalfMove old_move : moveList)
+        {
+            if(old_move.getGapIndex() == move.getGapIndex()
+                    && old_move.getColumnIndex() == move.getColumnIndex()
+            && old_move.getOrientation() == move.getOrientation())
+                return true;
+        }
+        return false;
     }
 
     private void printStatistics() {
