@@ -1,6 +1,12 @@
 package algo.src;
 
+import com.google.protobuf.ByteString;
+import dab.DotsAndBoxes;
+import netcode.Netcode;
+
 import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
 
 // This class does not (and should not) handle server communication (sending moves, etc..)
 public class Playfield {
@@ -47,6 +53,12 @@ public class Playfield {
     public enum CurrentPlayer {
         PLAYER_A,
         PLAYER_B
+    }
+
+    public enum GameResult {
+        WIN_PLAYER_A,
+        WIN_PLAYER_B,
+        DRAW
     }
 
     public int getWidth() {
@@ -426,6 +438,79 @@ public class Playfield {
         retvalue[0] = columnIndex;
         retvalue[1] = gapIndex;
         return retvalue;
+    }
+
+    // Plays the turns of the opponent since the last update (possibly no moves if nothing happened)
+    // If it is your turn afterwards returns true otherwise false
+    public boolean playOpponentMoves(DotsAndBoxes.GameState dabGameState) {
+
+        byte[] horizontalLines = dabGameState.getHorizontalLines().toByteArray();
+        byte[] verticalLines = dabGameState.getVerticalLines().toByteArray();
+
+        // Stores indices of new moves
+        Vector<Integer> newHorizontalLines = new Vector<>();
+        Vector<Integer> newVerticalLines = new Vector<>();
+
+        // Find differences
+        for(int i = 0; i < horizontalLines.length; i++) {
+            if(!horizontalGaps[i % width][i / width] && horizontalLines[i] == 1) {
+                newHorizontalLines.add(i);
+            }
+        }
+        for(int i = 0; i < horizontalLines.length; i++) {
+            if(!verticalGaps[i % height][i / height] && verticalLines[i] == 1) {
+                newVerticalLines.add(i);
+            }
+        }
+
+        // Create half moves for all new moves
+        Vector<HalfMove> halfMoves = new Vector<>();
+
+        for(Integer integer : newHorizontalLines) {
+            halfMoves.add(HalfMove.newHalfMove(integer % width, integer / width, HalfMove.LineOrientation.HORIZONTAL, currentPlayer));
+        }
+        for(Integer integer : newVerticalLines) {
+            halfMoves.add(HalfMove.newHalfMove(integer % height, integer / height, HalfMove.LineOrientation.VERTICAL, currentPlayer));
+        }
+
+        CurrentPlayer startPlayer = currentPlayer;
+
+        // Plays the half moves
+        // Order of moves LIKELY!!! does not matter
+        // TODO: Check the likely part
+        while(!halfMoves.isEmpty()) {
+            for(HalfMove halfMove : halfMoves) {
+                if(isHalfMoveValid(halfMove)) {
+                    playHalfMove(halfMove);
+                    halfMoves.remove(halfMove);
+                    break;
+                }
+            }
+        }
+
+        if(startPlayer == currentPlayer) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    // Returns the winner of the game if it is over otherwise null
+    public GameResult getWinner() {
+        if(!isGameOver()){
+            return null;
+        }
+
+        if(playerAPoints > playerBPoints) {
+            return GameResult.WIN_PLAYER_A;
+        }
+        else if(playerBPoints > playerAPoints) {
+            return GameResult.WIN_PLAYER_B;
+        }
+        else {
+            return GameResult.DRAW;
+        }
     }
 
 }

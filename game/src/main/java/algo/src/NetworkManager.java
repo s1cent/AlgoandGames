@@ -36,6 +36,14 @@ public class NetworkManager {
         ready = true;
     }
 
+    public String getMatchToken() {
+        return matchToken;
+    }
+
+    public boolean isReady() {
+        return ready;
+    }
+
 
     // Returns MatchResponse if rpc call was valid, null otherwise
     // Blocks until finished
@@ -106,6 +114,9 @@ public class NetworkManager {
         try {
             stub.newMatch(request, observer);
             latch.await();
+            if(responses[0] == null) {
+                return null;
+            }
             matchToken = responses[0].getMatchToken();
         }
         catch (Exception e) {
@@ -234,6 +245,7 @@ public class NetworkManager {
     // Returns TurnResponse if rpc call was valid, null otherwise
     // Blocks until finished
     // You can get the information by using .get... on the Response
+    // TODO: NOTE: NEVER EVER!!! SUBMIT A TURN BEFORE PLAYING IT IN THE PLAYFIELD OR CHECKING IT FOR VALIDTY FIRST!!!
     public Netcode.TurnResponse submitTurn(int column, int gap, Orientation orientation) {
         if(!ready) {
             System.out.println("Something went wrong during initialization");
