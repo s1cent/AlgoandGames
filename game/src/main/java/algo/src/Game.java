@@ -21,7 +21,8 @@ public class Game {
 
     private boolean networkGameInProgress = false;
 
-    private List<HalfMove> moveList = new ArrayList<>();
+
+    boolean soloGame = false;
 
     public Game() {
         networkManager = new NetworkManager();
@@ -66,6 +67,7 @@ public class Game {
                 System.out.println("Set a width and height!");
 
                 resetGame();
+                soloGame = true;
                 startGame(scanner.nextInt(), scanner.nextInt(), scanner);
                 // TODO:
                 continue;
@@ -92,7 +94,7 @@ public class Game {
         if(networkGameInProgress) {
             abortNetworkGame(true);
         }
-        moveList.clear();
+
         playfield = null;
         player = null;
     }
@@ -282,22 +284,19 @@ public class Game {
         // TODO: Play the game
 
         HalfMove move;
+        System.out.println(playfield.getHeight() + " - " + playfield.getWidth());
         int index = 0;
         while (true){
             Random r = new Random();
-            System.out.println("Find a move!");
             int vertical = r.nextInt(2);
 
             if (vertical == 0) {
-                System.out.println("vertical");
                 move = HalfMove.newHalfMove(r.nextInt(playfield.getWidth()),
                         r.nextInt(playfield.getHeight() - 1), HalfMove.LineOrientation.VERTICAL, player);
 
             }
             else
             {
-                System.out.println("horizontal");
-
                 move = HalfMove.newHalfMove(r.nextInt(playfield.getHeight() ),
                         r.nextInt(playfield.getWidth() - 1), HalfMove.LineOrientation.HORIZONTAL, player);
 
@@ -313,24 +312,26 @@ public class Game {
                 break;
         }
 
-        moveList.add(move);
         if((player = playfield.playHalfMove(move)) == null) {
             System.out.println(move.getColumnIndex() + " " + move.getGapIndex());
         }
+        if(!soloGame)
+        {
+            long startWaitTime  = System.currentTimeMillis();
+            while(true) {
+                if(networkManager.submitTurn(move) != null) {
+                    break;
+                }
 
-        //long startWaitTime  = System.currentTimeMillis();
-//        while(true) {
-//            if(networkManager.submitTurn(move) != null) {
-//                break;
-//            }
-//
-//            if(System.currentTimeMillis() >= startWaitTime + (30 * 1000)) {
-//                // Repeat move for 30 seconds and abort if still doesnt work
-//                System.out.println("Own move timeout. Server did not accept move. THIS SHOULD NEVER HAPPEN!");
-//                abortNetworkGame(true);
-//                return false;
-//            }
-//        }
+                if(System.currentTimeMillis() >= startWaitTime + (30 * 1000)) {
+                    // Repeat move for 30 seconds and abort if still doesnt work
+                    System.out.println("Own move timeout. Server did not accept move. THIS SHOULD NEVER HAPPEN!");
+                    abortNetworkGame(true);
+                    return false;
+                }
+            }
+
+        }
         playfield.printStatus();
         return true;
 
@@ -343,7 +344,6 @@ public class Game {
             for(int j = 0; j < playfield.getWidth()- 1; j++)
             {
                 HalfMove move = HalfMove.newHalfMove(i,j, HalfMove.LineOrientation.HORIZONTAL, player);
-                System.out.println("Search in Horizontal!");
                 if(!checkIfmove(move))
                     return move;
             }
@@ -354,7 +354,6 @@ public class Game {
             for(int j = 0; j < playfield.getHeight() - 1; j++)
             {
                 HalfMove move = HalfMove.newHalfMove(i,j, HalfMove.LineOrientation.VERTICAL, player);
-                System.out.println("Search in Vertical!");
 
                 if(!checkIfmove(move))
                     return move;
@@ -416,15 +415,13 @@ public class Game {
         else
             move = HalfMove.newHalfMove(column, gap, HalfMove.LineOrientation.HORIZONTAL, player);
 
-
-        moveList.add(move);
         player = playfield.playHalfMove(move);
         playfield.printStatus();
     }
 
     public boolean checkIfmove (HalfMove move)
     {
-        for(HalfMove old_move : moveList)
+        for(HalfMove old_move : playfield.movesPlayed)
         {
             if(old_move.getGapIndex() == move.getGapIndex()
                     && old_move.getColumnIndex() == move.getColumnIndex()

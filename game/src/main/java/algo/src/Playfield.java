@@ -276,7 +276,6 @@ public class Playfield {
         }
 
         movesPlayed.add(move);
-
         if(points == 0) {
             // player did not manage to close a box so the other player is next
             changePlayer();
