@@ -92,7 +92,7 @@ public class Game {
         if(networkGameInProgress) {
             abortNetworkGame(true);
         }
-
+        moveList.clear();
         playfield = null;
         player = null;
     }
