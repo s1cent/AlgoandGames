@@ -290,25 +290,17 @@ public class Game {
 
             if (vertical == 0) {
                 System.out.println("vertical");
-                move = HalfMove.newHalfMove(r.nextInt(playfield.getHeight()),
+                move = HalfMove.newHalfMove(r.nextInt(playfield.getWidth()),
                         r.nextInt(playfield.getHeight() - 1), HalfMove.LineOrientation.VERTICAL, player);
 
-                if(checkIfmove(move))
-                {
-                    move.setOrientation(HalfMove.LineOrientation.HORIZONTAL);
-                }
             }
             else
             {
                 System.out.println("horizontal");
 
-                move = HalfMove.newHalfMove(r.nextInt(playfield.getWidth()),
+                move = HalfMove.newHalfMove(r.nextInt(playfield.getHeight() ),
                         r.nextInt(playfield.getWidth() - 1), HalfMove.LineOrientation.HORIZONTAL, player);
 
-                if(checkIfmove(move))
-                {
-                    move.setOrientation(HalfMove.LineOrientation.VERTICAL);
-                }
             }
 
             if(index == 10)
