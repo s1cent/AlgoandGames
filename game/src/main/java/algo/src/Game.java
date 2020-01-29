@@ -290,8 +290,8 @@ public class Game {
 
             if (vertical == 0) {
                 System.out.println("vertical");
-                move = HalfMove.newHalfMove(r.nextInt(playfield.getHeight() - 1),
-                        r.nextInt(playfield.getHeight() - 2), HalfMove.LineOrientation.VERTICAL, player);
+                move = HalfMove.newHalfMove(r.nextInt(playfield.getHeight()),
+                        r.nextInt(playfield.getHeight() - 1), HalfMove.LineOrientation.VERTICAL, player);
 
                 if(checkIfmove(move))
                 {
@@ -302,8 +302,8 @@ public class Game {
             {
                 System.out.println("horizontal");
 
-                move = HalfMove.newHalfMove(r.nextInt(playfield.getWidth() - 1),
-                        r.nextInt(playfield.getWidth() - 2), HalfMove.LineOrientation.HORIZONTAL, player);
+                move = HalfMove.newHalfMove(r.nextInt(playfield.getWidth()),
+                        r.nextInt(playfield.getWidth() - 1), HalfMove.LineOrientation.HORIZONTAL, player);
 
                 if(checkIfmove(move))
                 {
