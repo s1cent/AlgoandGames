@@ -24,8 +24,10 @@ public class Playfield {
 
     private CurrentPlayer currentPlayer; // Player who is allowed to play next half move
 
-    Boolean[][] horizontalGaps;
-    Boolean[][] verticalGaps;
+    boolean[][] horizontalGaps;
+    boolean[][] verticalGaps;
+
+    List<HalfMove> movesPlayed = null; // list of all half moves played starting at 0 (first halfmove)
 
     /*
     e.g.: 3x2 (width x height) boxes field
@@ -85,25 +87,64 @@ public class Playfield {
         return boardValue;
     }
 
+    public List<HalfMove> getMovesPlayed() {
+        return movesPlayed;
+    }
+
     private Playfield(int width_, int height_, CurrentPlayer startingPlayer) {
         width = width_;
         height = height_;
         currentPlayer = startingPlayer;
-        horizontalGaps = new Boolean[height_ + 1][width_];
-        verticalGaps = new Boolean[width_ + 1][height_];
+        horizontalGaps = new boolean[height_ + 1][width_];
+        verticalGaps = new boolean[width_ + 1][height_];
 
-        maxLines = ((width_ + 1) * height_) + (width_ * (height_ + 1));
+        maxLines = ((width_ - 1 ) * height_) + (width_ * (height_ - 1));
 
         // Initialize gaps with false
-        for (Boolean[] horizontalGap : horizontalGaps) {
+        for (boolean[] horizontalGap : horizontalGaps) {
             Arrays.fill(horizontalGap, false);
         }
 
-        for (Boolean[] verticalGap : verticalGaps) {
+        for (boolean[] verticalGap : verticalGaps) {
             Arrays.fill(verticalGap, false);
         }
 
+        movesPlayed = new Vector<>();
+
         calculateBoardValue(); // all values will be 0
+    }
+
+    // Copy constructor
+    private Playfield(Playfield toCopyFrom) {
+        if(toCopyFrom == null) {
+            return;
+        }
+
+        width = toCopyFrom.width;
+        height = toCopyFrom.height;
+        currentPlayer = toCopyFrom.currentPlayer;
+        playerAPoints = toCopyFrom.playerAPoints;
+        playerBPoints = toCopyFrom.playerBPoints;
+        fixedLines = toCopyFrom.fixedLines;
+        maxLines = toCopyFrom.maxLines;
+        boardValue = toCopyFrom.boardValue;
+
+        horizontalGaps = new boolean[height + 1][width];
+        verticalGaps = new boolean[width + 1][height];
+
+        for(int i = 0; i < horizontalGaps.length; i++) {
+            for(int j = 0; j < horizontalGaps[i].length; j++) {
+                horizontalGaps[i][j] = toCopyFrom.horizontalGaps[i][j];
+            }
+        }
+        for(int i = 0; i < verticalGaps.length; i++) {
+            for(int j = 0; j < verticalGaps[i].length; j++) {
+                verticalGaps[i][j] = toCopyFrom.verticalGaps[i][j];
+            }
+        }
+
+        movesPlayed = new Vector<>();
+        movesPlayed.addAll(toCopyFrom.movesPlayed);
     }
 
     // Used to initialize a new playfield.
@@ -174,10 +215,15 @@ public class Playfield {
     }
 
     public boolean isHalfMoveValid(HalfMove move, boolean checkCurrentPlayerMatch) {
+        if(move == null) {
+            return false;
+        }
+
         if(checkCurrentPlayerMatch) {
             if(currentPlayer != move.getPlayer()){
                 System.out.println(currentPlayer + " " + move.getPlayer());
                 System.out.println("Wrong Player");
+                System.out.println("Move invalid: player mismatch");
                 return false;
             }
         }
@@ -231,12 +277,19 @@ public class Playfield {
             playerBPoints += points;
         }
 
+        movesPlayed.add(move);
+
         if(points == 0) {
             // player did not manage to close a box so the other player is next
             changePlayer();
         }
 
         calculateBoardValue();
+
+        System.out.println(move.getPlayer() + " player move: " + move.getOrientation()
+                + " on column: " + move.getColumnIndex() + " and gap: " + move.getGapIndex());
+
+        printPlayfield();
 
         return currentPlayer;
     }
@@ -458,12 +511,12 @@ public class Playfield {
 
         // Find differences
         for(int i = 0; i < horizontalLines.length; i++) {
-            if(!horizontalGaps[i % width][i / width] && horizontalLines[i] == 1) {
+            if(!horizontalGaps[i / width][i % width] && horizontalLines[i] == 1) {
                 newHorizontalLines.add(i);
             }
         }
-        for(int i = 0; i < horizontalLines.length; i++) {
-            if(!verticalGaps[i % height][i / height] && verticalLines[i] == 1) {
+        for(int i = 0; i < verticalLines.length; i++) {
+            if(!verticalGaps[i / height][i % height] && verticalLines[i] == 1) {
                 newVerticalLines.add(i);
             }
         }
@@ -472,10 +525,10 @@ public class Playfield {
         Vector<HalfMove> halfMoves = new Vector<>();
 
         for(Integer integer : newHorizontalLines) {
-            halfMoves.add(HalfMove.newHalfMove(integer % width, integer / width, HalfMove.LineOrientation.HORIZONTAL, currentPlayer));
+            halfMoves.add(HalfMove.newHalfMove(integer / width, integer % width, HalfMove.LineOrientation.HORIZONTAL, currentPlayer));
         }
         for(Integer integer : newVerticalLines) {
-            halfMoves.add(HalfMove.newHalfMove(integer % height, integer / height, HalfMove.LineOrientation.VERTICAL, currentPlayer));
+            halfMoves.add(HalfMove.newHalfMove(integer / height, integer % height, HalfMove.LineOrientation.VERTICAL, currentPlayer));
         }
 
         CurrentPlayer startPlayer = currentPlayer;
@@ -515,6 +568,16 @@ public class Playfield {
         }
         else {
             return GameResult.DRAW;
+        }
+    }
+
+    // Returns a deep copy of the given playfield
+    public Playfield getCopyOfPlayfield(Playfield toCopyFrom) {
+        if(toCopyFrom == null) {
+            return null;
+        }
+        else {
+            return new Playfield(toCopyFrom);
         }
     }
 

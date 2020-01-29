@@ -28,6 +28,13 @@ public class HalfMove {
         return player;
     }
 
+    public void setPlayer(Playfield.CurrentPlayer player_ ) {
+        player = player_;
+    }
+    public void setOrientation(LineOrientation orientation_) {
+        orientation = orientation_;
+    }
+
     public boolean isVertical() {
         return orientation == LineOrientation.VERTICAL;
     }
@@ -78,5 +85,6 @@ public class HalfMove {
 
         return new HalfMove(columnIndex_, gapIndex_, orientation_, player_);
     }
+
 
 }
