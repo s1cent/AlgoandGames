@@ -221,8 +221,6 @@ public class Playfield {
 
         if(checkCurrentPlayerMatch) {
             if(currentPlayer != move.getPlayer()){
-                System.out.println(currentPlayer + " " + move.getPlayer());
-                System.out.println("Wrong Player");
                 System.out.println("Move invalid: player mismatch");
                 return false;
             }

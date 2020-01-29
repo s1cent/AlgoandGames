@@ -211,7 +211,7 @@ public class NetworkManager {
         StreamObserver<Netcode.GameStateResponse> observer = new StreamObserver<Netcode.GameStateResponse>() {
             @Override
             public void onNext(Netcode.GameStateResponse gameStateResponse) {
-                System.out.println("gameStateResponse: " + gameStateResponse);
+                //System.out.println("gameStateResponse: " + gameStateResponse);
                 responses[0] = gameStateResponse;
             }
 
@@ -259,7 +259,7 @@ public class NetworkManager {
             System.out.println("No user token found. Did you do the setup?");
             return null;
         }
-        if(column <= 0) {
+        if(column < 0) {
             System.out.println("Column cannot be smaller than 0");
             return null;
         }
@@ -267,7 +267,7 @@ public class NetworkManager {
             System.out.println("Max field size is 10 so column cannot be larger than 9");
             return null;
         }
-        if(gap <= 0) {
+        if(gap < 0) {
             System.out.println("Gap cannot be smaller than 0");
             return null;
         }
@@ -296,7 +296,7 @@ public class NetworkManager {
         StreamObserver<Netcode.TurnResponse> observer = new StreamObserver<Netcode.TurnResponse>() {
             @Override
             public void onNext(Netcode.TurnResponse turnResponse) {
-                System.out.println("turnResponse: " + turnResponse);
+                //System.out.println("turnResponse: " + turnResponse);
                 responses[0] = turnResponse;
             }
 
@@ -324,6 +324,15 @@ public class NetworkManager {
         }
 
         return responses[0];
+    }
+
+    public Netcode.TurnResponse submitTurn(HalfMove halfMove) {
+        if(halfMove.getOrientation() == HalfMove.LineOrientation.VERTICAL) {
+            return submitTurn(halfMove.getColumnIndex(), halfMove.getGapIndex(), Orientation.VERTICAL);
+        }
+        else {
+            return submitTurn(halfMove.getColumnIndex(), halfMove.getGapIndex(), Orientation.HORIZONTAL);
+        }
     }
 }
 
