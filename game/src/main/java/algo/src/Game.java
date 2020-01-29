@@ -27,24 +27,47 @@ public class Game {
     public Game() {
         networkManager = new NetworkManager();
 
-        playGames();
-
-        /*
-        player = Playfield.CurrentPlayer.PLAYER_A;
-        currentPlayer = player;
-        playfield = Playfield.initPlayfield(3, 3, player);
-        if(playfield == null) {
-            System.out.println("Playfield initialization failed");
-            return;
+        System.out.println("Do you want the bot to auto play against network players?");
+        System.out.println("Doing so will prevent you from interacting with the game until you exit it.");
+        System.out.println("Write 1 for true, 0 for false");
+        Scanner scanner = new Scanner(System.in);
+        int option = -1;
+        if(scanner.hasNextInt()) {
+            option = scanner.nextInt();
         }
 
-        playfield.printPlayfield();
+        boolean continousPlay = false;
 
-        startGame();
-         */
+        if(option == 1) {
+            continousPlay = true;
+        }
+        else {
+            continousPlay = false;
+        }
+
+        playGames(continousPlay);
     }
 
-    private void playGames() {
+    private void playGames(boolean continousNetworkPlaying) {
+        if(continousNetworkPlaying) {
+            while(true) {
+                try {
+                    TimeUnit.SECONDS.sleep(5);
+                }
+                catch(Exception ex) {}
+
+                System.out.println("Searching for an online game...");
+                resetGame();
+                startNetworkGame();
+
+                printStatistics();
+
+                // Should abort network game if it is not finished
+                if (networkGameInProgress) {
+                    abortNetworkGame(true);
+                }
+            }
+        }
         while(true) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter which type of game you want to play:");
@@ -69,7 +92,6 @@ public class Game {
                 resetGame();
                 soloGame = true;
                 startGame(scanner.nextInt(), scanner.nextInt(), scanner);
-                // TODO:
                 continue;
             }
             else if(option.equals("exit")) {
@@ -122,8 +144,10 @@ public class Game {
             return;
         }
 
-        int prefWidth = ThreadLocalRandom.current().nextInt(2, 8 + 1);
-        int prefHeight = ThreadLocalRandom.current().nextInt(2, 8 + 1);
+        // TODO: Reset to higher number after testing
+        int prefWidth = ThreadLocalRandom.current().nextInt(2, 3 + 1); // in columns
+        int prefHeight = ThreadLocalRandom.current().nextInt(2, 5 + 1);
+        System.out.println("Trying to start a game with size: width: " + prefWidth + "(columns) and height: " + prefHeight + "(columns)");
         Netcode.MatchResponse response = networkManager.newMatch(prefWidth, prefHeight);
         if(response == null) {
             System.out.println("Starting a new network game failed....");
@@ -146,7 +170,7 @@ public class Game {
             return;
         }
 
-        int width = state.getDabGameState().getVerticalColumns() - 1;
+        int width = state.getDabGameState().getVerticalColumns() - 1; // in boxes
         int height = state.getDabGameState().getHorizontalColumns() - 1;
         boolean startingPlayer = state.getBeginningPlayer();
         if(startingPlayer) {
@@ -155,7 +179,7 @@ public class Game {
         else {
             player = Playfield.CurrentPlayer.PLAYER_B;
         }
-        System.out.println("Starting network game with width: " + width + ", height: " + height + " and us being " + player.toString());
+        System.out.println("Starting network game with width: " + (width + 1) + "(columns), height: " + (height + 1)+ "(columns) and us being " + player.toString());
 
         playfield = Playfield.initPlayfield(width, height, Playfield.CurrentPlayer.PLAYER_A);
 
@@ -168,7 +192,7 @@ public class Game {
     // Returns -1 if game is over
     private int isOurTurn() {
         try {
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(3);
 
             Netcode.GameStateResponse state = networkManager.getGameState();
             if(state == null) {
@@ -183,16 +207,19 @@ public class Game {
             }
             else if(state.getGameStatus().getNumber() == Netcode.GameStatus.MATCH_LOST_VALUE) {
                 System.out.println("Match was lost");
+                playfield.printStatus();
                 losses++;
                 return -1;
             }
             else if(state.getGameStatus().getNumber() == Netcode.GameStatus.MATCH_WON_VALUE) {
                 System.out.println("Match was won");
+                playfield.printStatus();
                 wins++;
                 return -1;
             }
             else if(state.getGameStatus().getNumber() == Netcode.GameStatus.DRAW_VALUE) {
                 System.out.println("Match was a draw");
+                playfield.printStatus();
                 draws++;
                 return -1;
             }
@@ -264,6 +291,7 @@ public class Game {
 
                 if(System.currentTimeMillis() >= startWaitTime + (6 * 60 * 1000)) {
                     // Wait for 6 minutes for next move
+                    System.out.println("Opponent did not play fast enough. Aborting....");
                     abortNetworkGame(true);
                     return;
                 }
@@ -281,39 +309,17 @@ public class Game {
     // Returns true if played and false if we aborted
     private boolean playMove() {
         System.out.println("Playing move number: " + (playfield.movesPlayed.size() + 1));
-        // TODO: Play the game
 
-        HalfMove move;
-        System.out.println(playfield.getHeight() + " - " + playfield.getWidth());
-        int index = 0;
-        while (true){
-            Random r = new Random();
-            int vertical = r.nextInt(2);
+        HalfMove move = playfield.getValidRandomHalfMove(player);
 
-            if (vertical == 0) {
-                move = HalfMove.newHalfMove(r.nextInt(playfield.getWidth()),
-                        r.nextInt(playfield.getHeight() - 1), HalfMove.LineOrientation.VERTICAL, player);
-
+        if(playfield.playHalfMove(move, true) == -1) {
+            System.out.println("Illegal move was tried");
+            playfield.printPlayfield();;
+            playfield.printStatus();
+            if(!soloGame) {
+                abortNetworkGame(false);
             }
-            else
-            {
-                move = HalfMove.newHalfMove(r.nextInt(playfield.getHeight() ),
-                        r.nextInt(playfield.getWidth() - 1), HalfMove.LineOrientation.HORIZONTAL, player);
-
-            }
-
-            if(index == 10)
-            {
-                move = findValidmove();
-            }
-            index++;
-
-            if(!checkIfmove(move))
-                break;
-        }
-
-        if((player = playfield.playHalfMove(move)) == null) {
-            System.out.println(move.getColumnIndex() + " " + move.getGapIndex());
+            return false;
         }
         if(!soloGame)
         {
@@ -335,33 +341,6 @@ public class Game {
         playfield.printStatus();
         return true;
 
-    }
-
-    private HalfMove findValidmove() {
-
-        for(int i = 0; i < playfield.getWidth(); i++)
-        {
-            for(int j = 0; j < playfield.getWidth()- 1; j++)
-            {
-                HalfMove move = HalfMove.newHalfMove(i,j, HalfMove.LineOrientation.HORIZONTAL, player);
-                if(!checkIfmove(move))
-                    return move;
-            }
-        }
-
-        for (int i = 0; i < playfield.getHeight(); i++)
-        {
-            for(int j = 0; j < playfield.getHeight() - 1; j++)
-            {
-                HalfMove move = HalfMove.newHalfMove(i,j, HalfMove.LineOrientation.VERTICAL, player);
-
-                if(!checkIfmove(move))
-                    return move;
-            }
-        }
-
-        System.out.println("Nothing found!");
-        return null;
     }
 
     private void startGame(int width, int height, Scanner scanner) {
@@ -415,7 +394,8 @@ public class Game {
         else
             move = HalfMove.newHalfMove(column, gap, HalfMove.LineOrientation.HORIZONTAL, player);
 
-        player = playfield.playHalfMove(move);
+        //TODO: Needs fixing but dont bother
+        //player = playfield.playHalfMove(move, true);
         playfield.printStatus();
     }
 

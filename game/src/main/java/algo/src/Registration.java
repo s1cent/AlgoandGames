@@ -13,7 +13,7 @@ import java.util.concurrent.CountDownLatch;
 public class Registration {
 
     public static void main(String[] args) {
-        userRegistration();
+        System.out.println("Registrations complete");
         getUserToken();
     }
 

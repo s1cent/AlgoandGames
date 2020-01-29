@@ -86,5 +86,22 @@ public class HalfMove {
         return new HalfMove(columnIndex_, gapIndex_, orientation_, player_);
     }
 
+    // Checks if the move are the same ignoring player playing it
+    public static boolean areMovesEquivalent(HalfMove move1, HalfMove move2) {
+        if(move1 == move2) {
+            return true;
+        }
+        if(move1.getGapIndex() != move2.getGapIndex()) {
+            return false;
+        }
+        if(move1.getColumnIndex() != move2.getColumnIndex()) {
+            return false;
+        }
+        if(move1.getOrientation() != move2.getOrientation()) {
+            return false;
+        }
+        return true;
+    }
+
 
 }

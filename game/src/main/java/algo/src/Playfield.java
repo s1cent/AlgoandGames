@@ -4,15 +4,16 @@ import com.google.protobuf.ByteString;
 import dab.DotsAndBoxes;
 import netcode.Netcode;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 // This class does not (and should not) handle server communication (sending moves, etc..)
 public class Playfield {
 
-    private int width = 0;
+    private int width = 0; // horizontal boxes: e.g: 2 == 2 boxes on horizontal row
     private int height = 0;
+    private int widthInColumns = 0;
+    private int heigthInColumns = 0;
 
     private int playerAPoints = 0;
     private int playerBPoints = 0;
@@ -28,6 +29,8 @@ public class Playfield {
     boolean[][] verticalGaps;
 
     List<HalfMove> movesPlayed = null; // list of all half moves played starting at 0 (first halfmove)
+
+    List<HalfMove> remainingValidMoves = null; // list of all half moves that can still be played (do not contain player)
 
     /*
     e.g.: 3x2 (width x height) boxes field
@@ -71,6 +74,14 @@ public class Playfield {
         return height;
     }
 
+    public int getWidthInColumns() {
+        return widthInColumns;
+    }
+
+    public int getHeigthInColumns() {
+        return heigthInColumns;
+    }
+
     public CurrentPlayer getCurrentPlayer() {
         return currentPlayer;
     }
@@ -94,11 +105,13 @@ public class Playfield {
     private Playfield(int width_, int height_, CurrentPlayer startingPlayer) {
         width = width_;
         height = height_;
+        widthInColumns = width_ + 1;
+        heigthInColumns = height_ + 1;
         currentPlayer = startingPlayer;
         horizontalGaps = new boolean[height_ + 1][width_];
         verticalGaps = new boolean[width_ + 1][height_];
 
-        maxLines = ((width_ - 1 ) * height_) + (width_ * (height_ - 1));
+        maxLines = ((width_ + 1 ) * height_) + (width_ * (height_ + 1));
 
         // Initialize gaps with false
         for (boolean[] horizontalGap : horizontalGaps) {
@@ -110,6 +123,24 @@ public class Playfield {
         }
 
         movesPlayed = new Vector<>();
+
+        remainingValidMoves = new ArrayList<>();
+
+        for(int i = 0; i < horizontalGaps.length; i++) {
+            for(int j = 0; j < horizontalGaps[0].length; j++) {
+                HalfMove move = HalfMove.newHalfMove(i, j, HalfMove.LineOrientation.HORIZONTAL);
+                remainingValidMoves.add(move);
+            }
+        }
+
+        for(int i = 0; i < verticalGaps.length; i++) {
+            for(int j = 0; j < verticalGaps[0].length; j++) {
+                HalfMove move = HalfMove.newHalfMove(i, j, HalfMove.LineOrientation.VERTICAL);
+                remainingValidMoves.add(move);
+            }
+        }
+
+        Collections.shuffle(remainingValidMoves);
 
         calculateBoardValue(); // all values will be 0
     }
@@ -176,7 +207,7 @@ public class Playfield {
 
     // Prints the whole playfield into the console
     public void printPlayfield() {
-        for(int i = 0; i < height; i++) {
+        for(int i = 0; i <= height; i++) {
             for(int j = 0; j < width; j++) {
                 System.out.print("+");
                 if(horizontalGaps[i][j]) {
@@ -186,19 +217,19 @@ public class Playfield {
                     System.out.print("  ");
                 }
             }
-            System.out.print("\n");
+            System.out.print("+\n");
 
             if(i >= height) {
                 break;
             }
-            for(int j = 0; j < width; j++) {
+            for(int j = 0; j <= width; j++) {
                 if(verticalGaps[j][i]) {
                     System.out.print("|");
                 }
                 else {
                     System.out.print(" ");
                 }
-                if(j == width - 1) {
+                if(j == width) {
                     System.out.print("\n");
                 }
                 else {
@@ -248,13 +279,23 @@ public class Playfield {
         return true;
     }
 
-    // Plays a half move if legal and returns the player playing the next half move
+    // Plays a half move if legal and returns the player playing the next half move (0 == A, 1 == B)
     // You should check if the game is over before sending moves
-    // Returns null if illegal move was tried
-    public CurrentPlayer playHalfMove(HalfMove move) {
+    // Returns -1 if illegal move was tried
+    public int playHalfMove(HalfMove move, boolean ourMove) {
+        if(ourMove) {
+            System.out.print("We are ");
+        }
+        else {
+            System.out.print("Opponent is ");
+        }
+        System.out.println("trying to play move: " + move.getPlayer() + ", "
+                + move.getOrientation() + ", on column: " + move.getColumnIndex() + " and gap: " + move.getGapIndex());
+
         if(!isHalfMoveValid(move, true)) {
             System.out.println("Tried to place invalid line");
-            return null;
+            System.exit(-99); // TODO: Remove this maybe
+            return -1;
         }
 
         fixedLines++;
@@ -288,7 +329,19 @@ public class Playfield {
 
         printPlayfield();
 
-        return currentPlayer;
+        for(HalfMove validMove : remainingValidMoves) {
+            if(HalfMove.areMovesEquivalent(move, validMove)) {
+                remainingValidMoves.remove(validMove);
+                break;
+            }
+        }
+
+        if(currentPlayer == CurrentPlayer.PLAYER_A) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
     }
 
     // Checks if a move will close a box and returns the number of points that move would generate
@@ -407,12 +460,12 @@ public class Playfield {
     }
 
     public void printStatus() {
-        System.out.println("Width: " + width + ", Height: " + height);
+        //System.out.println("Width: " + width + ", Height: " + height);
         System.out.println("Player A points: " + playerAPoints);
         System.out.println("Player B points: " + playerBPoints);
         System.out.println("Current player: " + currentPlayer.toString());
-        System.out.println("Total number of lines(half moves): " + maxLines);
-        System.out.println("Current number of lines(half moves): " + fixedLines);
+        //System.out.println("Total number of lines(half moves): " + maxLines);
+        //System.out.println("Current number of lines(half moves): " + fixedLines);
         System.out.println("Half moves remaining: " + (maxLines - fixedLines));
         System.out.println("Possible total closing half moves: " + boardValue.closingMoves);
         System.out.println("Of those that can double close: " + boardValue.doubleCloseMoves);
@@ -422,7 +475,7 @@ public class Playfield {
         BoardValue currentBoardValue = new BoardValue();
 
         // check all horizontal lines
-        for(int i = 0; i < height; i++) {
+        for(int i = 0; i <= height; i++) {
             for(int j = 0; j < width; j++) {
                 HalfMove move = HalfMove.newHalfMove(i, j, HalfMove.LineOrientation.HORIZONTAL);
                 if(move == null) {
@@ -442,7 +495,7 @@ public class Playfield {
             }
         }
 
-        for(int i = 0; i < width; i++) {
+        for(int i = 0; i <= width; i++) {
             for(int j = 0; j < height; j++) {
                 HalfMove move = HalfMove.newHalfMove(i, j, HalfMove.LineOrientation.VERTICAL);
                 if(move == null) {
@@ -531,15 +584,32 @@ public class Playfield {
         CurrentPlayer startPlayer = currentPlayer;
 
         // Plays the half moves
-        // Order of moves LIKELY!!! does not matter
-        // TODO: Check the likely part
         while(!halfMoves.isEmpty()) {
+            boolean lastMove = true;
             for(HalfMove halfMove : halfMoves) {
                 if(isHalfMoveValid(halfMove)) {
-                    playHalfMove(halfMove);
-                    halfMoves.remove(halfMove);
-                    break;
+                    if(doesMoveCloseABox(halfMove) > 0) {
+                        playHalfMove(halfMove, false);
+                        halfMoves.remove(halfMove);
+                        lastMove = false;
+                        break;
+                    }
                 }
+                else {
+                    assert false;
+                }
+            }
+            if(halfMoves.isEmpty()) {
+                // when the absolute last move is played it will also close a box
+                break;
+            }
+
+            // only the non closing move remained
+            if(lastMove) {
+                assert(halfMoves.size() == 1);
+                playHalfMove(halfMoves.firstElement(), false);
+                halfMoves.remove(halfMoves.firstElement());
+                break;
             }
         }
 
@@ -576,6 +646,17 @@ public class Playfield {
         else {
             return new Playfield(toCopyFrom);
         }
+    }
+
+
+    public HalfMove getValidRandomHalfMove(CurrentPlayer player) {
+        if(remainingValidMoves.isEmpty()) {
+            return null;
+        }
+        int index = ThreadLocalRandom.current().nextInt(0, remainingValidMoves.size());
+        HalfMove move = remainingValidMoves.get(index);
+        move.setPlayer(player);
+        return move;
     }
 
 }
