@@ -68,6 +68,11 @@ public class Game {
                 }
             }
         }
+        else {
+            System.out.println("Remove this line and the comments below if you know what you are doing");
+            return;
+        }
+        /*
         while(true) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter which type of game you want to play:");
@@ -109,6 +114,7 @@ public class Game {
         if(networkGameInProgress) {
             abortNetworkGame(true);
         }
+         */
     }
 
     // Resets the member variables so we dont leave anything behind
@@ -133,6 +139,8 @@ public class Game {
             player = null;
         }
 
+        networkManager.closeChannel();
+
         networkManager = new NetworkManager();
         networkGameInProgress = false;
     }
@@ -144,9 +152,8 @@ public class Game {
             return;
         }
 
-        // TODO: Reset to higher number after testing
-        int prefWidth = ThreadLocalRandom.current().nextInt(2, 3 + 1); // in columns
-        int prefHeight = ThreadLocalRandom.current().nextInt(2, 5 + 1);
+        int prefWidth = ThreadLocalRandom.current().nextInt(2, 8 + 1); // in columns
+        int prefHeight = ThreadLocalRandom.current().nextInt(2, 8 + 1);
         System.out.println("Trying to start a game with size: width: " + prefWidth + "(columns) and height: " + prefHeight + "(columns)");
         Netcode.MatchResponse response = networkManager.newMatch(prefWidth, prefHeight);
         if(response == null) {
@@ -245,36 +252,6 @@ public class Game {
     private void playNetworkGame() {
         while (true) {
 
-            /*
-            // Check if game is over
-            if(playfield.isGameOver()) {
-                Playfield.GameResult result = playfield.getWinner();
-                if(player == Playfield.CurrentPlayer.PLAYER_A) {
-                    if(result == Playfield.GameResult.WIN_PLAYER_A) {
-                        wins++;
-                    }
-                    else if(result == Playfield.GameResult.WIN_PLAYER_B) {
-                        losses++;
-                    }
-                    else {
-                        draws++;
-                    }
-                }
-                else {
-                    if(result == Playfield.GameResult.WIN_PLAYER_A) {
-                        losses++;
-                    }
-                    else if(result == Playfield.GameResult.WIN_PLAYER_B) {
-                        wins++;
-                    }
-                    else {
-                        draws++;
-                    }
-                }
-                return;
-            }
-             */
-
             long startWaitTime  = System.currentTimeMillis();
             // Waits for opponent to play
             while (true)
@@ -305,12 +282,41 @@ public class Game {
         }
     }
 
+    // Generates a good random move if possible otherwise gets a random one
+    // TODO: Algorithm goes here and only here. Unless you ABSOLUTELYX know what you are doing dont touch anything else
+    private HalfMove generateMove() {
+        List<HalfMove> remainingValidMoves = playfield.getAllRemainingValidMoves();
+        if(remainingValidMoves.isEmpty()) {
+            assert false;
+            return null;
+        }
+
+        // See if any move closes 2 boxes
+        for(HalfMove move : remainingValidMoves) {
+            if(playfield.doesMoveCloseABox(move) == 2) {
+                move.setPlayer(player);
+                return move;
+            }
+        }
+
+        // See if any move closes 1 box
+        for(HalfMove move : remainingValidMoves) {
+            if(playfield.doesMoveCloseABox(move) == 1) {
+                move.setPlayer(player);
+                return move;
+            }
+        }
+
+        // Just get any move then
+        return playfield.getValidRandomHalfMove(player);
+    }
+
     // Plays our own move
     // Returns true if played and false if we aborted
     private boolean playMove() {
         System.out.println("Playing move number: " + (playfield.movesPlayed.size() + 1));
 
-        HalfMove move = playfield.getValidRandomHalfMove(player);
+        HalfMove move = generateMove();
 
         if(playfield.playHalfMove(move, true) == -1) {
             System.out.println("Illegal move was tried");

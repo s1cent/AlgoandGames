@@ -21,7 +21,7 @@ public class Playfield {
     private int fixedLines = 0;
     private int maxLines = 0;
 
-    private BoardValue boardValue = null;   // TODO: NOTE: EXPERIMENTAL! Do not rely on this for algorithm
+    private BoardValue boardValue = null;
 
     private CurrentPlayer currentPlayer; // Player who is allowed to play next half move
 
@@ -30,7 +30,8 @@ public class Playfield {
 
     List<HalfMove> movesPlayed = null; // list of all half moves played starting at 0 (first halfmove)
 
-    List<HalfMove> remainingValidMoves = null; // list of all half moves that can still be played (do not contain player)
+    private List<HalfMove> remainingValidMoves = null;  // list of all half moves that can still be played (do not contain player)
+                                                        // TODO: Do NOT add/delete anything here from outside sources
 
     /*
     e.g.: 3x2 (width x height) boxes field
@@ -100,6 +101,10 @@ public class Playfield {
 
     public List<HalfMove> getMovesPlayed() {
         return movesPlayed;
+    }
+
+    public List<HalfMove> getAllRemainingValidMoves() {
+        return remainingValidMoves;
     }
 
     private Playfield(int width_, int height_, CurrentPlayer startingPlayer) {

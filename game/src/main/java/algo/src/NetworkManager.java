@@ -334,5 +334,9 @@ public class NetworkManager {
             return submitTurn(halfMove.getColumnIndex(), halfMove.getGapIndex(), Orientation.HORIZONTAL);
         }
     }
+
+    public void closeChannel() {
+        channel.shutdownNow();
+    }
 }
 
