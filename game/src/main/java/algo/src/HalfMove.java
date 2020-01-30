@@ -43,7 +43,7 @@ public class HalfMove {
         columnIndex = columnIndex_;
         gapIndex = gapIndex_;
         orientation = orientation_;
-        player = null;
+        player = Playfield.CurrentPlayer.PLAYER_A;
     }
 
     private HalfMove(int columnIndex_, int gapIndex_, LineOrientation orientation_, Playfield.CurrentPlayer player_) {
@@ -103,5 +103,12 @@ public class HalfMove {
         return true;
     }
 
+    public void print() {
+        System.out.println("Move: " + player + ", " + orientation + ", on column: " + columnIndex + " and gap: " + gapIndex);
+    }
+
+    public static HalfMove copyHalfMove(HalfMove move) {
+        return new HalfMove(move.columnIndex, move.gapIndex, move.orientation, move.player);
+    }
 
 }

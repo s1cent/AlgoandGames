@@ -4,9 +4,12 @@ import com.google.protobuf.ByteString;
 import dab.DotsAndBoxes;
 import netcode.Netcode;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class Game {
 
@@ -21,8 +24,14 @@ public class Game {
 
     private boolean networkGameInProgress = false;
 
-
     boolean soloGame = false;
+
+    enum Algorithm {
+        GREEDY,
+        DEPTH
+    }
+
+    private static final String logFile = "moveCalculationSpeed.txt";
 
     public Game() {
         networkManager = new NetworkManager();
@@ -153,7 +162,7 @@ public class Game {
         }
 
         int prefWidth = ThreadLocalRandom.current().nextInt(2, 8 + 1); // in columns
-        int prefHeight = ThreadLocalRandom.current().nextInt(2, 8 + 1);
+        int prefHeight = ThreadLocalRandom.current().nextInt(2, 7 + 1);
         System.out.println("Trying to start a game with size: width: " + prefWidth + "(columns) and height: " + prefHeight + "(columns)");
         Netcode.MatchResponse response = networkManager.newMatch(prefWidth, prefHeight);
         if(response == null) {
@@ -231,11 +240,11 @@ public class Game {
                 return -1;
             }
             else if(state.getGameStatus().getNumber() == Netcode.GameStatus.YOUR_TURN_VALUE) {
-                playfield.playOpponentMoves(state.getDabGameState());
+                playfield.playOpponentMoves(state.getDabGameState(), true);
                 return 1;
             }
             else if(state.getGameStatus().getNumber() == Netcode.GameStatus.OPPONENTS_TURN_VALUE) {
-                playfield.playOpponentMoves(state.getDabGameState());
+                playfield.playOpponentMoves(state.getDabGameState(), true);
                 return 0;
             }
 
@@ -282,8 +291,9 @@ public class Game {
         }
     }
 
+
     // Generates a good random move if possible otherwise gets a random one
-    // TODO: Algorithm goes here and only here. Unless you ABSOLUTELYX know what you are doing dont touch anything else
+    // TODO: Algorithm goes here and only here. Unless you ABSOLUTELY know what you are doing dont touch anything else
     private HalfMove generateMove() {
         List<HalfMove> remainingValidMoves = playfield.getAllRemainingValidMoves();
         if(remainingValidMoves.isEmpty()) {
@@ -291,24 +301,275 @@ public class Game {
             return null;
         }
 
+        // TODO: Change this for algorithm selection
+        Algorithm algorithm = Algorithm.DEPTH;
+
+        if(algorithm == Algorithm.GREEDY) {
+            // Confirmed to be working
+            return getGreedyMove(playfield, true);
+        }
+        else if(algorithm == Algorithm.DEPTH) {
+            int maxDepth;
+            int remainingMoves = playfield.getAllRemainingValidMoves().size();
+
+            // Calculate how deep we can search in 1 minute or less
+            long calculationSpeed; // moves per second
+            boolean usingWeakMachine = false; // TODO: SET TO TRUE IF YOU ARE RUNNING ON LAPTOP OR WEAK HARDWARE
+            if(usingWeakMachine) {
+                calculationSpeed = 50000;
+            }
+            else {
+                calculationSpeed = 125000; // (Around a fourth of what an i5 4670k OCd to 4.3GHz can calculate)
+            }
+            long maximumMoveChecks = calculationSpeed * 60; // How many moves we can check in 1 minute // TODO: Increase to 90 seconds during competition
+
+            int possibleDepth;
+            long possibleChecks = remainingMoves;
+            for(possibleDepth = 1; possibleChecks < maximumMoveChecks; possibleDepth++) {
+                if(remainingMoves - possibleDepth == 0) {
+                    break;
+                }
+                possibleChecks *= (remainingMoves - possibleDepth);
+            }
+            maxDepth = possibleDepth - 1;
+
+            // Performance debugging
+            if(remainingMoves < maxDepth) {
+                maxDepth = remainingMoves - 1;
+            }
+
+            long totalChecks = remainingMoves;
+            for(int i = 1; i < maxDepth; i++) {
+                totalChecks *= (remainingMoves - i);
+            }
+            if(maxDepth == 0) {
+                totalChecks = 1;
+            }
+            System.out.println("Depth: " + maxDepth + ", expected moves to check: " + totalChecks + " expected time: "
+                    + (totalChecks / calculationSpeed) + " seconds");
+            long startTime = System.nanoTime();
+
+            System.out.println("Getting best move with depth " + maxDepth);
+            HalfMove move = getBestFutureMove(playfield, true, 0, maxDepth, 0).getHalfMove();
+
+            long endTime = System.nanoTime();
+            long differenceInMillis = (endTime - startTime) / 1000000;
+            System.out.println("Algorithm took " + differenceInMillis + "ms for " + totalChecks + " checked moves");
+
+            try {
+                FileWriter fileWriter = new FileWriter(logFile, true);
+                PrintWriter printWriter = new PrintWriter(fileWriter);
+                printWriter.println(totalChecks + " in " + differenceInMillis + "ms");
+                printWriter.close();
+            }
+            catch(Exception ex) {
+                System.out.println("Could not write to file: " + ex);
+            }
+
+            if(!playfield.isHalfMoveValid(move, true)) {
+                // Fallback to greedy
+                System.out.println("Depth algorithm failed");
+                move = getGreedyMove(playfield, true);
+            }
+            return move;
+        }
+        else {
+            System.out.println("Algorithm not set");
+            System.exit(-100);
+        }
+
+        return null;
+    }
+
+    public HalfMove getGreedyMove(final Playfield playfield_, boolean ourMove) {
+        List<HalfMove> remainingValidMoves = playfield.getAllRemainingValidMoves();
+
+        Playfield.CurrentPlayer currentPlayer;
+
+        if(ourMove) {
+            currentPlayer = player;
+        }
+        else {
+            if(player == Playfield.CurrentPlayer.PLAYER_A) {
+                currentPlayer = Playfield.CurrentPlayer.PLAYER_B;
+            }
+            else {
+                currentPlayer = Playfield.CurrentPlayer.PLAYER_A;
+            }
+        }
+
         // See if any move closes 2 boxes
         for(HalfMove move : remainingValidMoves) {
-            if(playfield.doesMoveCloseABox(move) == 2) {
-                move.setPlayer(player);
+            if(playfield_.doesMoveCloseABox(move) == 2) {
+                move.setPlayer(currentPlayer);
                 return move;
             }
         }
 
         // See if any move closes 1 box
         for(HalfMove move : remainingValidMoves) {
-            if(playfield.doesMoveCloseABox(move) == 1) {
-                move.setPlayer(player);
+            if(playfield_.doesMoveCloseABox(move) == 1) {
+                move.setPlayer(currentPlayer);
                 return move;
             }
         }
 
         // Just get any move then
-        return playfield.getValidRandomHalfMove(player);
+        return playfield_.getValidRandomHalfMove(currentPlayer);
+    }
+
+    /*
+    I dont know what is even going on here
+    Dont bother trying to fix it
+    public FutureMove getBestFutureMove(final Playfield playfield_, boolean ourMove, int depth, int maxDepth) {
+        // Do not change the playfield parameter that is passed
+
+        if(depth == maxDepth) {
+            Playfield playfieldCopy = Playfield.getCopyOfPlayfield(playfield_);
+            int value = playfieldCopy.getBoardValue().doubleCloseMoves * 2 + playfieldCopy.getBoardValue().singleCloseMoves;
+            HalfMove move = getGreedyMove(playfieldCopy, ourMove); //Basically does nothing expect when maxDepth = 0
+            return new FutureMove(move, value);
+        }
+
+        Map<HalfMove, Integer> moveResults = new HashMap<>();
+        List<HalfMove> moves = new Vector<>(playfield_.getAllRemainingValidMoves());
+        for(HalfMove move : moves) {
+            Playfield playfieldCopy = Playfield.getCopyOfPlayfield(playfield_);
+            boolean isNextTurnOurs = !ourMove;
+            if(playfieldCopy.doesMoveCloseABox(move) > 0) {
+                isNextTurnOurs = ourMove;
+            }
+            playfieldCopy.playHalfMove(move, ourMove, false);
+
+
+
+            int futureValue = getBestFutureMove(playfieldCopy, isNextTurnOurs, depth++, maxDepth).getBoardValue();
+
+            //BoardValue boardValue = playfieldCopy.getBoardValue();
+            //int value = boardValue.doubleCloseMoves * 2 + boardValue.singleCloseMoves;
+            moveResults.put(move, futureValue);
+        }
+
+        Map<HalfMove, Integer> sortedResults = null;
+
+        // if it is our turn we want best board value
+        // if it is opponent we want lowest board value
+        if(ourMove) {
+            sortedResults = moveResults.entrySet().stream()
+                    .sorted(Map.Entry.comparingByValue(Comparator.naturalOrder()))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        }
+        else {
+            sortedResults = moveResults.entrySet().stream()
+                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        }
+
+        Map.Entry<HalfMove, Integer> result = sortedResults.entrySet().iterator().next();
+
+        FutureMove futureMove = new FutureMove(result.getKey(), result.getValue());
+
+        return futureMove;
+    }
+    */
+
+    // Gets the best future move that can close as many boxes as possible
+    public FutureMove getBestFutureMove(final Playfield playfield_, boolean ourMove, int depth, int maxDepth, int boxesClosed) {
+        // Do not change the playfield parameter that is passed
+
+        if(depth == maxDepth) {
+            Playfield playfieldCopy = Playfield.getCopyOfPlayfield(playfield_);
+            HalfMove move = getGreedyMove(playfieldCopy, ourMove); //Basically does nothing expect when maxDepth = 0
+            move = HalfMove.copyHalfMove(move);
+            if(ourMove) {
+                move.setPlayer(player);
+            }
+            else {
+                if(player == Playfield.CurrentPlayer.PLAYER_A) {
+                    move.setPlayer(Playfield.CurrentPlayer.PLAYER_B);
+                }
+                else {
+                    move.setPlayer(Playfield.CurrentPlayer.PLAYER_A);
+                }
+            }
+            return new FutureMove(move, boxesClosed);
+        }
+
+        int index = 0;
+
+        Map<HalfMove, Integer> moveResults = new HashMap<>();
+        List<HalfMove> moves = new Vector<>(playfield_.getAllRemainingValidMoves());
+        for(HalfMove move : moves) {
+            move = HalfMove.copyHalfMove(move);
+            Playfield playfieldCopy = Playfield.getCopyOfPlayfield(playfield_);
+            boolean isNextTurnOurs = !ourMove;
+            int closes = playfieldCopy.doesMoveCloseABox(move);
+            if(closes > 0) {
+                isNextTurnOurs = ourMove;
+            }
+            if(ourMove) {
+                move.setPlayer(player);
+            }
+            else {
+                if(player == Playfield.CurrentPlayer.PLAYER_A) {
+                    move.setPlayer(Playfield.CurrentPlayer.PLAYER_B);
+                }
+                else {
+                    move.setPlayer(Playfield.CurrentPlayer.PLAYER_A);
+                }
+            }
+
+            //System.out.print(index);
+            //move.print();
+
+            playfieldCopy.playHalfMove(move, ourMove, false);
+
+            int resultingValue;
+
+            if(ourMove) {
+                resultingValue = getBestFutureMove(playfieldCopy, isNextTurnOurs, depth + 1, maxDepth, boxesClosed + closes).getValue();
+            }
+            else {
+                resultingValue = getBestFutureMove(playfieldCopy, isNextTurnOurs, depth + 1, maxDepth, boxesClosed - closes).getValue();
+            }
+
+            //System.out.print(index);
+            //move.print();
+            //index++;
+
+            moveResults.put(move, resultingValue);
+        }
+
+        /*
+        index = 0;
+        for(HalfMove move : moveResults.keySet()) {
+            System.out.print(index);
+            move.print();
+            index++;
+        }
+         */
+
+        Map<HalfMove, Integer> sortedResults = null;
+
+        // if it is our turn we want highest value
+        // if it is opponent we want lowest value
+        if(ourMove) {
+            sortedResults = moveResults.entrySet().stream()
+                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        }
+        else {
+            sortedResults = moveResults.entrySet().stream()
+                    .sorted(Map.Entry.comparingByValue(Comparator.naturalOrder()))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        }
+
+        Map.Entry<HalfMove, Integer> result = sortedResults.entrySet().iterator().next();
+
+        //System.out.print("depth: " + depth + ", value: " + result.getValue() + " ");
+        //result.getKey().print();
+
+        return new FutureMove(result.getKey(), result.getValue());
     }
 
     // Plays our own move
@@ -318,7 +579,7 @@ public class Game {
 
         HalfMove move = generateMove();
 
-        if(playfield.playHalfMove(move, true) == -1) {
+        if(playfield.playHalfMove(move, true, true) == -1) {
             System.out.println("Illegal move was tried");
             playfield.printPlayfield();;
             playfield.printStatus();
@@ -344,6 +605,7 @@ public class Game {
             }
 
         }
+        System.out.println("We are " + player);
         playfield.printStatus();
         return true;
 
