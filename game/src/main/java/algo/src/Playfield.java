@@ -158,12 +158,17 @@ public class Playfield {
 
         width = toCopyFrom.width;
         height = toCopyFrom.height;
-        currentPlayer = toCopyFrom.currentPlayer;
+        heigthInColumns = toCopyFrom.heigthInColumns;
+        widthInColumns = toCopyFrom.widthInColumns;
         playerAPoints = toCopyFrom.playerAPoints;
         playerBPoints = toCopyFrom.playerBPoints;
         fixedLines = toCopyFrom.fixedLines;
         maxLines = toCopyFrom.maxLines;
-        boardValue = toCopyFrom.boardValue;
+        boardValue = new BoardValue();
+        boardValue.closingMoves = toCopyFrom.boardValue.closingMoves;
+        boardValue.doubleCloseMoves = toCopyFrom.boardValue.doubleCloseMoves;
+        boardValue.singleCloseMoves = toCopyFrom.boardValue.singleCloseMoves;
+        currentPlayer = toCopyFrom.currentPlayer;
 
         horizontalGaps = new boolean[height + 1][width];
         verticalGaps = new boolean[width + 1][height];
@@ -181,6 +186,9 @@ public class Playfield {
 
         movesPlayed = new Vector<>();
         movesPlayed.addAll(toCopyFrom.movesPlayed);
+
+        remainingValidMoves = new ArrayList<>();
+        remainingValidMoves.addAll(toCopyFrom.remainingValidMoves);
     }
 
     // Used to initialize a new playfield.
@@ -258,6 +266,9 @@ public class Playfield {
         if(checkCurrentPlayerMatch) {
             if(currentPlayer != move.getPlayer()){
                 System.out.println("Move invalid: player mismatch");
+                System.out.println("Was checking move: " + move.getPlayer() + ", "
+                        + move.getOrientation() + ", on column: " + move.getColumnIndex() + " and gap: " + move.getGapIndex());
+                System.exit(-11); // TODO: REMOVE THIS
                 return false;
             }
         }
@@ -287,15 +298,16 @@ public class Playfield {
     // Plays a half move if legal and returns the player playing the next half move (0 == A, 1 == B)
     // You should check if the game is over before sending moves
     // Returns -1 if illegal move was tried
-    public int playHalfMove(HalfMove move, boolean ourMove) {
-        if(ourMove) {
-            System.out.print("We are ");
+    public int playHalfMove(HalfMove move, boolean ourMove, boolean printOutput) {
+        if(printOutput) {
+            if (ourMove) {
+                System.out.print("We are ");
+            } else {
+                System.out.print("Opponent is ");
+            }
+            System.out.println("trying to play move: " + move.getPlayer() + ", "
+                    + move.getOrientation() + ", on column: " + move.getColumnIndex() + " and gap: " + move.getGapIndex());
         }
-        else {
-            System.out.print("Opponent is ");
-        }
-        System.out.println("trying to play move: " + move.getPlayer() + ", "
-                + move.getOrientation() + ", on column: " + move.getColumnIndex() + " and gap: " + move.getGapIndex());
 
         if(!isHalfMoveValid(move, true)) {
             System.out.println("Tried to place invalid line");
@@ -329,10 +341,12 @@ public class Playfield {
 
         calculateBoardValue();
 
-        System.out.println(move.getPlayer() + " player move: " + move.getOrientation()
-                + " on column: " + move.getColumnIndex() + " and gap: " + move.getGapIndex());
+        if(printOutput) {
+            System.out.println(move.getPlayer() + " player move: " + move.getOrientation()
+                    + " on column: " + move.getColumnIndex() + " and gap: " + move.getGapIndex());
 
-        printPlayfield();
+            printPlayfield();
+        }
 
         for(HalfMove validMove : remainingValidMoves) {
             if(HalfMove.areMovesEquivalent(move, validMove)) {
@@ -555,7 +569,7 @@ public class Playfield {
 
     // Plays the turns of the opponent since the last update (possibly no moves if nothing happened)
     // If it is your turn afterwards returns true otherwise false
-    public boolean playOpponentMoves(DotsAndBoxes.GameState dabGameState) {
+    public boolean playOpponentMoves(DotsAndBoxes.GameState dabGameState, boolean printOutput) {
 
         byte[] horizontalLines = dabGameState.getHorizontalLines().toByteArray();
         byte[] verticalLines = dabGameState.getVerticalLines().toByteArray();
@@ -594,7 +608,7 @@ public class Playfield {
             for(HalfMove halfMove : halfMoves) {
                 if(isHalfMoveValid(halfMove)) {
                     if(doesMoveCloseABox(halfMove) > 0) {
-                        playHalfMove(halfMove, false);
+                        playHalfMove(halfMove, false, printOutput);
                         halfMoves.remove(halfMove);
                         lastMove = false;
                         break;
@@ -612,7 +626,7 @@ public class Playfield {
             // only the non closing move remained
             if(lastMove) {
                 assert(halfMoves.size() == 1);
-                playHalfMove(halfMoves.firstElement(), false);
+                playHalfMove(halfMoves.firstElement(), false, printOutput);
                 halfMoves.remove(halfMoves.firstElement());
                 break;
             }
@@ -644,7 +658,7 @@ public class Playfield {
     }
 
     // Returns a deep copy of the given playfield
-    public Playfield getCopyOfPlayfield(Playfield toCopyFrom) {
+    public static Playfield getCopyOfPlayfield(Playfield toCopyFrom) {
         if(toCopyFrom == null) {
             return null;
         }
