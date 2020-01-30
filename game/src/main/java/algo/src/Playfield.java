@@ -42,7 +42,6 @@ public class Playfield {
     verticalGaps.length == 4 == width + 1
     verticalGaps[0].length == 2 == height
 
-    //TODO: Figure out how to address the gaps before making changes
 
                     verticalRow
                         v
@@ -268,7 +267,6 @@ public class Playfield {
                 System.out.println("Move invalid: player mismatch");
                 System.out.println("Was checking move: " + move.getPlayer() + ", "
                         + move.getOrientation() + ", on column: " + move.getColumnIndex() + " and gap: " + move.getGapIndex());
-                System.exit(-11); // TODO: REMOVE THIS
                 return false;
             }
         }
@@ -311,7 +309,7 @@ public class Playfield {
 
         if(!isHalfMoveValid(move, true)) {
             System.out.println("Tried to place invalid line");
-            System.exit(-99); // TODO: Remove this maybe
+            System.exit(-99);
             return -1;
         }
 

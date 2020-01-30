@@ -162,7 +162,7 @@ public class Game {
         }
 
         int prefWidth = ThreadLocalRandom.current().nextInt(2, 8 + 1); // in columns
-        int prefHeight = ThreadLocalRandom.current().nextInt(2, 8 + 1);
+        int prefHeight = ThreadLocalRandom.current().nextInt(2, 7 + 1);
         System.out.println("Trying to start a game with size: width: " + prefWidth + "(columns) and height: " + prefHeight + "(columns)");
         Netcode.MatchResponse response = networkManager.newMatch(prefWidth, prefHeight);
         if(response == null) {
@@ -291,6 +291,7 @@ public class Game {
         }
     }
 
+
     // Generates a good random move if possible otherwise gets a random one
     // TODO: Algorithm goes here and only here. Unless you ABSOLUTELY know what you are doing dont touch anything else
     private HalfMove generateMove() {
@@ -301,29 +302,26 @@ public class Game {
         }
 
         // TODO: Change this for algorithm selection
-        Algorithm algorithm = Algorithm.GREEDY;
+        Algorithm algorithm = Algorithm.DEPTH;
 
         if(algorithm == Algorithm.GREEDY) {
             // Confirmed to be working
             return getGreedyMove(playfield, true);
         }
         else if(algorithm == Algorithm.DEPTH) {
-            // TODO: check which max depths are viable
-
             int maxDepth;
-
             int remainingMoves = playfield.getAllRemainingValidMoves().size();
 
             // Calculate how deep we can search in 1 minute or less
             long calculationSpeed; // moves per second
-            boolean usingWeakMachine = true; // TODO: SET TO TRUE IF YOU ARE RUNNING ON LAPTOP OR WEAK HARDWARE
+            boolean usingWeakMachine = false; // TODO: SET TO TRUE IF YOU ARE RUNNING ON LAPTOP OR WEAK HARDWARE
             if(usingWeakMachine) {
-                calculationSpeed = 25000;
+                calculationSpeed = 50000;
             }
             else {
-                calculationSpeed = 110000; // (Around half of what an i5 4670k OCd to 4.3GHz can calculate)
+                calculationSpeed = 125000; // (Around a fourth of what an i5 4670k OCd to 4.3GHz can calculate)
             }
-            long maximumMoveChecks = calculationSpeed * 60; // How many moves we can check in 1 minute
+            long maximumMoveChecks = calculationSpeed * 60; // How many moves we can check in 1 minute // TODO: Increase to 90 seconds during competition
 
             int possibleDepth;
             long possibleChecks = remainingMoves;
@@ -347,7 +345,8 @@ public class Game {
             if(maxDepth == 0) {
                 totalChecks = 1;
             }
-            System.out.println("Expected moves to check: " + totalChecks);
+            System.out.println("Depth: " + maxDepth + ", expected moves to check: " + totalChecks + " expected time: "
+                    + (totalChecks / calculationSpeed) + " seconds");
             long startTime = System.nanoTime();
 
             System.out.println("Getting best move with depth " + maxDepth);
@@ -481,6 +480,7 @@ public class Game {
         if(depth == maxDepth) {
             Playfield playfieldCopy = Playfield.getCopyOfPlayfield(playfield_);
             HalfMove move = getGreedyMove(playfieldCopy, ourMove); //Basically does nothing expect when maxDepth = 0
+            move = HalfMove.copyHalfMove(move);
             if(ourMove) {
                 move.setPlayer(player);
             }
@@ -495,9 +495,12 @@ public class Game {
             return new FutureMove(move, boxesClosed);
         }
 
+        int index = 0;
+
         Map<HalfMove, Integer> moveResults = new HashMap<>();
         List<HalfMove> moves = new Vector<>(playfield_.getAllRemainingValidMoves());
         for(HalfMove move : moves) {
+            move = HalfMove.copyHalfMove(move);
             Playfield playfieldCopy = Playfield.getCopyOfPlayfield(playfield_);
             boolean isNextTurnOurs = !ourMove;
             int closes = playfieldCopy.doesMoveCloseABox(move);
@@ -516,6 +519,9 @@ public class Game {
                 }
             }
 
+            //System.out.print(index);
+            //move.print();
+
             playfieldCopy.playHalfMove(move, ourMove, false);
 
             int resultingValue;
@@ -527,8 +533,21 @@ public class Game {
                 resultingValue = getBestFutureMove(playfieldCopy, isNextTurnOurs, depth + 1, maxDepth, boxesClosed - closes).getValue();
             }
 
+            //System.out.print(index);
+            //move.print();
+            //index++;
+
             moveResults.put(move, resultingValue);
         }
+
+        /*
+        index = 0;
+        for(HalfMove move : moveResults.keySet()) {
+            System.out.print(index);
+            move.print();
+            index++;
+        }
+         */
 
         Map<HalfMove, Integer> sortedResults = null;
 
@@ -546,6 +565,9 @@ public class Game {
         }
 
         Map.Entry<HalfMove, Integer> result = sortedResults.entrySet().iterator().next();
+
+        //System.out.print("depth: " + depth + ", value: " + result.getValue() + " ");
+        //result.getKey().print();
 
         return new FutureMove(result.getKey(), result.getValue());
     }
@@ -583,6 +605,7 @@ public class Game {
             }
 
         }
+        System.out.println("We are " + player);
         playfield.printStatus();
         return true;
 
