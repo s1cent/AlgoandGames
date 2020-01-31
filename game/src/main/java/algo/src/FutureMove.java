@@ -16,4 +16,9 @@ public class FutureMove {
         halfMove = HalfMove.newHalfMove(move.getColumnIndex(), move.getGapIndex(), move.getOrientation(), move.getPlayer());
         value = value_;
     }
+
+    public FutureMove(int value_) {
+        halfMove = null;
+        value = value_;
+    }
 }

@@ -208,7 +208,7 @@ public class Game {
     // Returns -1 if game is over
     private int isOurTurn() {
         try {
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(5);
 
             Netcode.GameStateResponse state = networkManager.getGameState();
             if(state == null) {
@@ -316,12 +316,12 @@ public class Game {
             long calculationSpeed; // moves per second
             boolean usingWeakMachine = false; // TODO: SET TO TRUE IF YOU ARE RUNNING ON LAPTOP OR WEAK HARDWARE
             if(usingWeakMachine) {
-                calculationSpeed = 50000;
+                calculationSpeed = 150000;
             }
             else {
-                calculationSpeed = 125000; // (Around a fourth of what an i5 4670k OCd to 4.3GHz can calculate)
+                calculationSpeed = 300000; // (Around a half of what an i5 4670k OCd to 4.3GHz can calculate at least)
             }
-            long maximumMoveChecks = calculationSpeed * 60; // How many moves we can check in 1 minute // TODO: Increase to 90 seconds during competition
+            long maximumMoveChecks = calculationSpeed * 90; // How many moves we can calculate in 90 seconds
 
             int possibleDepth;
             long possibleChecks = remainingMoves;
@@ -359,7 +359,7 @@ public class Game {
             try {
                 FileWriter fileWriter = new FileWriter(logFile, true);
                 PrintWriter printWriter = new PrintWriter(fileWriter);
-                printWriter.println(totalChecks + " in " + differenceInMillis + "ms");
+                printWriter.println(totalChecks + " in " + differenceInMillis + " ms");
                 printWriter.close();
             }
             catch(Exception ex) {
@@ -478,27 +478,13 @@ public class Game {
         // Do not change the playfield parameter that is passed
 
         if(depth == maxDepth) {
-            Playfield playfieldCopy = Playfield.getCopyOfPlayfield(playfield_);
-            HalfMove move = getGreedyMove(playfieldCopy, ourMove); //Basically does nothing expect when maxDepth = 0
-            move = HalfMove.copyHalfMove(move);
-            if(ourMove) {
-                move.setPlayer(player);
-            }
-            else {
-                if(player == Playfield.CurrentPlayer.PLAYER_A) {
-                    move.setPlayer(Playfield.CurrentPlayer.PLAYER_B);
-                }
-                else {
-                    move.setPlayer(Playfield.CurrentPlayer.PLAYER_A);
-                }
-            }
-            return new FutureMove(move, boxesClosed);
+            return new FutureMove(boxesClosed);
         }
 
-        int index = 0;
+        //int index = 0;
 
         Map<HalfMove, Integer> moveResults = new HashMap<>();
-        List<HalfMove> moves = new Vector<>(playfield_.getAllRemainingValidMoves());
+        List<HalfMove> moves = new ArrayList<>(playfield_.getAllRemainingValidMoves());
         for(HalfMove move : moves) {
             move = HalfMove.copyHalfMove(move);
             Playfield playfieldCopy = Playfield.getCopyOfPlayfield(playfield_);
