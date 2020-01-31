@@ -139,9 +139,12 @@ public class Game {
     // Aborts the currently active network game
     private void abortNetworkGame(boolean resetPlayfield) {
         System.out.println("Aborting match with token: " + networkManager.getMatchToken());
+        /*
         if(!networkManager.abortMatch()) {
             System.out.println("Aborting match failed....");
         }
+
+         */
 
         if(resetPlayfield) {
             playfield = null;
@@ -278,7 +281,19 @@ public class Game {
                 if(System.currentTimeMillis() >= startWaitTime + (6 * 60 * 1000)) {
                     // Wait for 6 minutes for next move
                     System.out.println("Opponent did not play fast enough. Aborting....");
-                    abortNetworkGame(true);
+                    if(!networkManager.abortMatch()) {
+                        System.out.println("Aborting match failed....");
+                    }
+
+                    if(true) {
+                        playfield = null;
+                        player = null;
+                    }
+
+                    networkManager.closeChannel();
+
+                    networkManager = new NetworkManager();
+                    networkGameInProgress = false;
                     return;
                 }
                 // Opponent playing....
@@ -314,7 +329,7 @@ public class Game {
 
             // Calculate how deep we can search in 1 minute or less
             long calculationSpeed; // moves per second
-            boolean usingWeakMachine = false; // TODO: SET TO TRUE IF YOU ARE RUNNING ON LAPTOP OR WEAK HARDWARE
+            boolean usingWeakMachine = true; // TODO: SET TO TRUE IF YOU ARE RUNNING ON LAPTOP OR WEAK HARDWARE
             if(usingWeakMachine) {
                 calculationSpeed = 150000;
             }
