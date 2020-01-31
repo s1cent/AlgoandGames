@@ -1,6 +1,8 @@
 package algo.src;
 
-public class FutureMove {
+import java.util.Comparator;
+
+public class FutureMove{
     private HalfMove halfMove;
     private int value;
 
@@ -20,5 +22,14 @@ public class FutureMove {
     public FutureMove(int value_) {
         halfMove = null;
         value = value_;
+    }
+
+
+}
+
+class FutureMoveComparator implements Comparator<FutureMove> {
+    @Override
+    public int compare(FutureMove firstMove, FutureMove secondMove) {
+        return (firstMove.getValue() - secondMove.getValue());
     }
 }
